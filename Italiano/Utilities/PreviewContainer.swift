@@ -19,6 +19,12 @@ struct PreviewContainer {
         self.container = try! ModelContainer(for: schema, configurations: [configuration])
     }
     
+    init(schema: VersionedSchema.Type, isStoredInMemoryOnly: Bool = true) {
+        let schema = Schema(versionedSchema: schema)
+        let configuration = ModelConfiguration(isStoredInMemoryOnly: isStoredInMemoryOnly)
+        self.container = try! ModelContainer(for: schema, configurations: [configuration])
+    }
+    
     /// Adding any Persistent Model to the container
     func add(_ items: [any PersistentModel]) {
         Task { @MainActor in

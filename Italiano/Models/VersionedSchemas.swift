@@ -7,11 +7,12 @@
 
 import Foundation
 import SwiftData
+import MapKit
 
 enum SchemaV1: VersionedSchema {
     
     static var models: [any PersistentModel.Type] {
-        [Offer.self]
+        [Offer.self, Location.self]
     }
     
     static var versionIdentifier: Schema.Version = .init(1, 0, 0)
@@ -64,6 +65,33 @@ extension SchemaV1 {
             self.image = image
         }
         
-        static let dummy = Offer(title: "Taste of Tuscany", text: "Transport your taste buds to Tuscany with our rustic antipasto platter. Enjoy olives, cured meats, and fresh mozzarella, perfectly complemented by a bottle of red wine.", offerText: "Special Offer: Free bottle of wine with orders over $50!", badge: "50% OFF", promoCode: "1DIA4N49", image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/taste_of_tuscany.png?raw=true")!)
+        static var dummy: Offer { 
+            Offer(title: "Taste of Tuscany", text: "Transport your taste buds to Tuscany with our rustic antipasto platter. Enjoy olives, cured meats, and fresh mozzarella, perfectly complemented by a bottle of red wine.", offerText: "Special Offer: Free bottle of wine with orders over $50!", badge: "50% OFF", promoCode: "1DIA4N49", image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/taste_of_tuscany.png?raw=true")!)
+        }
+    }
+    
+    @Model
+    final class Location: Decodable {
+        @Attribute(.unique)
+        let id: UUID = UUID()
+        let name: String
+        let coordinate: CLLocationCoordinate2D
+        
+        init(name: String, coordinate: CLLocationCoordinate2D) {
+            self.name = name
+            self.coordinate = coordinate
+        }
+        
+        enum CodingKeys: String, CodingKey {
+            case name
+            case coordinate
+        }
+        
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.name = try container.decode(String.self, forKey: .name)
+            self.coordinate = try container.decode(CLLocationCoordinate2D.self, forKey: .coordinate)
+        }
+        
     }
 }

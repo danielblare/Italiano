@@ -24,6 +24,12 @@ actor DataContainer {
                 }
             }
             
+            if let locations = try? JSONDecoder.decode(from: "Locations", type: [Location].self) {
+                locations.forEach { location in
+                    container.mainContext.insert(location)
+                }
+            }
+            
             createDefaults = false
         }
         

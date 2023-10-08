@@ -9,14 +9,16 @@ import XCTest
 @testable import Italiano
 
 final class JSONTests: XCTestCase {
-
-    override func setUpWithError() throws {
-    }
-
-    override func tearDownWithError() throws {
+    
+    override func setUp() {
+        
     }
     
-    func test_successfull_decoding_offers_list() {
+    override class func tearDown() {
+        
+    }
+
+    func testSuccessfullDecodingOffersList() {
         let fileName = "JSONOffersTests"
         var result: [Offer] = []
         
@@ -25,7 +27,7 @@ final class JSONTests: XCTestCase {
         XCTAssertEqual(result.count, 5, "Data was not decoded correctly")
     }
 
-    func test_failing_decoding_offers_list() {
+    func testFailingDecodingOffersList() {
         XCTAssertThrowsError(try JSONDecoder.decode(from: "WrongName", type: [Offer].self), "Decoding from wrong file doesn't fail")
         
         XCTAssertThrowsError(try JSONDecoder.decode(from: "JSONOffersTests", type: [Int].self), "Decoding wrong type doesn't fail")

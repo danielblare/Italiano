@@ -40,7 +40,6 @@ struct OfferCellView: View {
             .clipShape(RoundedRectangle(cornerRadius: 6))
 
             Text(offer.title)
-                .foregroundStyle(Color.palette.dark)
                 .font(.asset.mainText)
                 .lineLimit(2, reservesSpace: true)
                 .multilineTextAlignment(.center)

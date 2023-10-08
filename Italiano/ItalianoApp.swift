@@ -8,25 +8,19 @@
 import SwiftUI
 import SwiftData
 
+// MARK: SwiftData Models
+typealias Offer = SchemaV1.Offer
+
 @main
 struct ItalianoApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
-
+    
+    /// Indicates whether user launched app first time
+    @AppStorage("firstLaunch") private var firstLaunch: Bool = true
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(try! DataContainer.create(createDefaults: &firstLaunch))
     }
 }

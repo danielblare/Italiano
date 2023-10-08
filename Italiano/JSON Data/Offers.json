@@ -1,0 +1,42 @@
+[
+    {
+        "title": "Pasta Perfection",
+        "text": "Indulge in the irresistible flavors of freshly cooked spaghetti carbonara, garnished with grated parmesan cheese and crispy bacon bits. Served with a side of garlic bread.",
+        "offer_text": "Special Offer: 15% off your first order!",
+        "badge": "15% OFF",
+        "promo_code": "TASTYDEAL15",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/pasta_perfection.png?raw=true"
+    },
+    {
+        "title": "Pizza Delight",
+        "text": "Experience the classic Margherita pizza with hot, melted cheese, vibrant tomato, and basil leaves. It's a slice of pizza heaven.",
+        "offer_text": "Special Offer: Buy one, get one 50% off on all pizzas!",
+        "badge": "50% OFF",
+        "promo_code": "SAVE50NOW",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/pizza_delight.png?raw=true"
+    },
+    {
+        "title": "Taste of Tuscany",
+        "text": "Transport your taste buds to Tuscany with our rustic antipasto platter. Enjoy olives, cured meats, and fresh mozzarella, perfectly complemented by a bottle of red wine.",
+        "offer_text": "Special Offer: Free bottle of wine with orders over $50!",
+        "badge": "$50",
+        "promo_code": "YUMMYPROMO50",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/taste_of_tuscany.png?raw=true"
+    },
+    {
+        "title": "Gelato Delights",
+        "text": "Savor the sweetness of Italian gelato with a variety of flavors like pistachio, strawberry, and chocolate. Topped with delightful sprinkles and chocolate chips.",
+        "offer_text": "Special Offer: Buy two scoops, get one free!",
+        "badge": "FREE",
+        "promo_code": "FLAVORFUL50",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/gelato_delights.png?raw=true"
+    },
+    {
+        "title": "Family Feast",
+        "text": "Share a hearty Italian family meal with a bowl of spaghetti and meatballs at the center. Accompanied by salad, garlic knots, and homemade marinara sauce.",
+        "offer_text": "Special Offer: Family-sized meal for the price of a regular meal!",
+        "badge": "PRICE",
+        "promo_code": "EATWELL10",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/family_feast.png?raw=true"
+    }
+]

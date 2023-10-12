@@ -93,5 +93,9 @@ extension SchemaV1 {
             self.coordinate = try container.decode(CLLocationCoordinate2D.self, forKey: .coordinate)
         }
         
+        static var dummy: Location {
+            Location(name: "Apex Business Cntr, Blackthorn Rd", coordinate: CLLocationCoordinate2D(latitude: 53.342025, longitude: -6.267628))
+        }
+        
     }
 }

@@ -18,6 +18,7 @@
 		<string>MKDirectionsModeBike</string>
 		<string>MKDirectionsModeBus</string>
 		<string>MKDirectionsModeCar</string>
+		<string>MKDirectionsModeOther</string>
 		<string>MKDirectionsModePedestrian</string>
 		<string>MKDirectionsModeSubway</string>
 		<string>MKDirectionsModeTaxi</string>

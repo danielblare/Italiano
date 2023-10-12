@@ -11,14 +11,17 @@ import Observation
 
 struct ContentView: View {
     
-    @Bindable var routeManager: RouteManager
-        
+    @Environment(RouteManager.self) var routeManager: RouteManager
+    
     var body: some View {
+        @Bindable var routeManager = routeManager
         NavigationStack(path: $routeManager.routes) {
-            TabView {
-//                HomeView(routeManager: routeManager)
-
+            TabView(selection: .constant(1)) {
+                HomeView()
+                    .tabItem { Label("Home", systemImage: "house") }
+                    .tag(0)
                 MapView()
+                    .tag(1)
                     .tabItem { Label("Map", systemImage: "map") }
                 Text("Menu View")
                     .tabItem { Label("Menu", systemImage: "list.clipboard") }
@@ -34,9 +37,12 @@ struct ContentView: View {
 
 #Preview {
     @State var routeManager: RouteManager = RouteManager()
-    
+    @State var cacheManager: CacheManager = CacheManager()
+
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self),
                             items: try! JSONDecoder.decode(from: "Offers", type: [Offer].self) + (try! JSONDecoder.decode(from: "Locations", type: [Location].self))) {
-        ContentView(routeManager: routeManager)
+        ContentView()
+            .environment(routeManager)
+            .environment(cacheManager)
     }
 }

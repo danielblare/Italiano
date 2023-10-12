@@ -10,11 +10,10 @@ import SwiftData
 
 struct HomeView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
+    @Environment(RouteManager.self) var routeManager: RouteManager
 
     @Query private var offers: [Offer]
     
-    @Bindable var routeManager: RouteManager
-
     var body: some View {
         ScrollView {
             if !offers.isEmpty {
@@ -26,19 +25,21 @@ struct HomeView: View {
     }
     
     var OffersSection: some View {
-        VStack(alignment: .leading) {
+        VStack {
             Text("Special offers")
                 .foregroundStyle(Color.palette.oliveGreen)
                 .font(.asset.heading2)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
             
             ScrollView(.horizontal) {
-                HStack(spacing: 15) {
+                let spacing: CGFloat = 15
+                HStack(spacing: spacing) {
                     ForEach(offers) { offer in
                         NavigationLink(value: Route.offer(offer)) {
                             if UIDevice.current.userInterfaceIdiom == .phone {
                                 OfferCellView(offer: offer)
-                                    .containerRelativeFrame(.horizontal, count: verticalSizeClass == .regular ? 3 : 6, spacing: 15)
+                                    .containerRelativeFrame(.horizontal, count: verticalSizeClass == .regular ? 3 : 6, spacing: spacing)
                             } else {
                                 OfferCellView(offer: offer)
                                     .frame(width: 100)
@@ -53,6 +54,7 @@ struct HomeView: View {
             .scrollTargetBehavior(.viewAligned)
             .scrollIndicators(.hidden)
         }
+        .padding(.vertical)
     }
 }
 
@@ -62,9 +64,10 @@ struct HomeView: View {
     return SwiftDataPreview(preview: PreviewContainer([Offer.self]),
                      items: try! JSONDecoder.decode(from: "Offers", type: [Offer].self)) {
         NavigationStack {
-            HomeView(routeManager: routeManager)
+            HomeView()
                 .navigationTitle("Home")
                 .navigationBarTitleDisplayMode(.inline)
         }
+        .environment(routeManager)
     }
 }

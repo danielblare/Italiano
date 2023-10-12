@@ -20,11 +20,14 @@ struct ItalianoApp: App {
     @AppStorage("firstLaunch") private var firstLaunch: Bool = true
     
     @State private var routeManager: RouteManager = RouteManager()
+    @State private var cacheManager: CacheManager = CacheManager()
 
     var body: some Scene {
         WindowGroup {
-            ContentView(routeManager: routeManager)
+            ContentView()
         }
+        .environment(routeManager)
+        .environment(cacheManager)
         .modelContainer(try! DataContainer.create(createDefaults: &firstLaunch))
     }
 }

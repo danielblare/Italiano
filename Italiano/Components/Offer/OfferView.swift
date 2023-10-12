@@ -20,28 +20,24 @@ struct OfferView: View {
         VStack {
             ScrollView {
                 VStack {
-                    AsyncImage(url: offer.image) { image in
-                        image
-                            .resizable()
-                            .scaledToFill()
-                    } placeholder: {
-                        ProgressView()
-                    }
+                    CachedImage(url: offer.image)
+                        .scaledToFill()
                     .frame(width: 300, height: 300)
-                    .background(.gray.opacity(0.3))
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .padding(.top)
                     
-                    Text(offer.text)
-                        .font(.asset.custom(size: 18))
+                    Text(offer.offerText)
+                        .font(.asset.custom(size: 24))
+                        .foregroundStyle(Color.palette.oliveGreen)
+                        .fontWeight(.bold)
                         .padding(.vertical)
                     
-                    Text(offer.offerText)
-                        .font(.asset.custom(size: 20))
-                        .fontWeight(.bold)
+                    Text(offer.text)
+                        .font(.asset.custom(size: 18))
                     
                 }
                 .multilineTextAlignment(.center)
+                .padding(.horizontal)
                 .padding(.horizontal)
             }
             
@@ -56,7 +52,7 @@ struct OfferView: View {
                 .fontWeight(.bold)
             
                 .padding()
-                .background(Color.palette.lightGreen.opacity(0.5))
+                .background(Color.palette.tomatoRed.opacity(0.5))
                 .overlay {
                     if isCopied {
                         ZStack {

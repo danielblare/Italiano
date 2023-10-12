@@ -15,30 +15,22 @@ struct OfferCellView: View {
     
     var body: some View {
         VStack {
-            AsyncImage(url: offer.image) { image in
-                image
-                    .resizable()
-                    .scaledToFill()
-            } placeholder: {
-                Image("")
-                    .resizable()
-                    .scaledToFill()
-            }
-            .background(.gray.opacity(0.3))
-            .overlay(alignment: .topTrailing) { // Displaying badge if there is one
-                if let badge = offer.badge {
-                    Text(badge)
-                        .foregroundStyle(.white)
-                        .font(.footnote)
-                        .fontWeight(.bold)
-                    
-                        .padding(2)
-                        .background(.red)
-                        .clipShape(UnevenRoundedRectangle(bottomLeadingRadius: 5))
+            CachedImage(url: offer.image)
+                .scaledToFill()
+                .overlay(alignment: .topTrailing) { // Displaying badge if there is one
+                    if let badge = offer.badge {
+                        Text(badge)
+                            .foregroundStyle(.white)
+                            .font(.footnote)
+                            .fontWeight(.bold)
+                        
+                            .padding(2)
+                            .background(.red)
+                            .clipShape(UnevenRoundedRectangle(bottomLeadingRadius: 5))
+                    }
                 }
-            }
-            .clipShape(RoundedRectangle(cornerRadius: 6))
-
+                .clipShape(RoundedRectangle(cornerRadius: 6))
+            
             Text(offer.title)
                 .font(.asset.mainText)
                 .lineLimit(2, reservesSpace: true)

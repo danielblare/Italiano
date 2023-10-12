@@ -35,7 +35,7 @@
         "title": "Family Feast",
         "text": "Share a hearty Italian family meal with a bowl of spaghetti and meatballs at the center. Accompanied by salad, garlic knots, and homemade marinara sauce.",
         "offer_text": "Special Offer: Family-sized meal for the price of a regular meal!",
-        "badge": "PRICE",
+        "badge": "DEAL",
         "promo_code": "EATWELL10",
         "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/family_feast.png?raw=true"
     }

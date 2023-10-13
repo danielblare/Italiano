@@ -10,16 +10,17 @@ import MapKit
 import SwiftData
 import Observation
 
+/// Map tab view
 struct MapView: View {
     @State private var viewModel: MapViewModel = MapViewModel()
     @Query private var locations: [Location]
-    
+     
+    /// Location selected by user on the map
     @State var selectedLocation: Location?
     
-    @State private var cameraPosition: MapCameraPosition = .region(MKCoordinateRegion(center: CLLocationCoordinate2DMake(53.3498, -6.2603), latitudinalMeters: 2000, longitudinalMeters: 2000))
-    
-    @State private var showMore: Bool = false
-    
+    /// Default map camera position
+    @State private var cameraPosition: MapCameraPosition = .region(MKCoordinateRegion(center: CLLocationCoordinate2DMake(53.3498, -6.2603), latitudinalMeters: 20000, longitudinalMeters: 20000))
+        
     var body: some View {
         ScrollView {
             VStack {
@@ -41,37 +42,29 @@ struct MapView: View {
                     .font(.asset.heading2)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                let sortedLocations = viewModel.sortedByDistance(locations)
-                ForEach(showMore ? sortedLocations : Array(sortedLocations.prefix(3))) {
-                    LocationRowView(location: $0)
-                        .environment(viewModel)
-                        .padding(.vertical, 4)
+                let sortedLocations = sortedByDistance(locations)
+                if sortedLocations.isEmpty {
+                    ContentUnavailableView("No Locations", systemImage: "mappin.slash")
+                        .padding()
+                } else {
+                    ForEach(sortedLocations) { location in
+                        LocationRowView(location: location, isSelected: selectedLocation == location)
+                            .padding(.vertical, 4)
+                            .onTapGesture {
+                                DirectionManager.shared.openInMaps(location)
+                            }
+                    }
                 }
-                
-                ShowMoreButton
-                    .padding()
-                
             }
             .padding()
         }
-        .animation(.snappy, value: showMore)
+        .animation(.interactiveSpring, value: selectedLocation)
         .onAppear {
             viewModel.checkLocationAuthorization()
         }
     }
     
-    var ShowMoreButton: some View {
-        Button {
-            showMore.toggle()
-        } label: {
-            HStack {
-                Text(showMore ? "Show Less" : "Show More")
-                
-                Image(systemName: showMore ? "chevron.up" : "chevron.down")
-            }
-        }
-    }
-    
+    /// Map View
     var MapView: some View {
         Map(initialPosition: cameraPosition, selection: $selectedLocation) {
             UserAnnotation()
@@ -86,13 +79,20 @@ struct MapView: View {
             MapUserLocationButton()
         }
     }
+    
+    /// Sorts locations by distance
+    private func sortedByDistance(_ locations: [Location]) -> [Location] {
+        guard let userLocation = viewModel.locationManager.location else { return locations }
+        return locations.sorted {
+            if let selectedLocation {
+                return $0 == selectedLocation
+            } else {
+                return userLocation.distance(from: CLLocation(from: $0.coordinate)) < userLocation.distance(from: CLLocation(from: $1.coordinate))
+            }
+        }
+    }
+
 }
-
-
-
-
-
-
 
 
 #Preview {

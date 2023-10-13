@@ -1,6 +1,8 @@
 [
     {
         "name": "Apex Business Cntr, Blackthorn Rd",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/apex_business_cntr.png?raw=true",
+        "schedule": "10am - 11pm",
         "coordinate": {
             "latitude": 53.342025,
             "longitude": -6.267628
@@ -8,6 +10,8 @@
     },
     {
         "name": "O'Connell Street",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/oconnell_street.png?raw=true",
+        "schedule": "10am - 11pm",
         "coordinate": {
             "latitude": 53.349805,
             "longitude": -6.26031
@@ -15,6 +19,8 @@
     },
     {
         "name": "Temple Bar",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/temple_bar.png?raw=true",
+        "schedule": "10am - 11pm",
         "coordinate": {
             "latitude": 53.345272,
             "longitude": -6.263286
@@ -22,6 +28,8 @@
     },
     {
         "name": "Merrion Square",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/merrion_square.png?raw=true",
+        "schedule": "10am - 11pm",
         "coordinate": {
             "latitude": 53.340693,
             "longitude": -6.248712
@@ -29,6 +37,8 @@
     },
     {
         "name": "St. Stephen's Green",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/st_stephens_green.png?raw=true",
+        "schedule": "10am - 11pm",
         "coordinate": {
             "latitude": 53.337621,
             "longitude": -6.259627
@@ -36,6 +46,8 @@
     },
     {
         "name": "Ranelagh",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/ranelagh.png?raw=true",
+        "schedule": "10am - 8pm",
         "coordinate": {
             "latitude": 53.325944,
             "longitude": -6.252547
@@ -43,13 +55,17 @@
     },
     {
         "name": "Drumcondra",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/drumcondra.png?raw=true",
+        "schedule": "4pm - 11pm",
         "coordinate": {
-            "latitude": 53.372692,
-            "longitude": -6.253292
+            "latitude": 53.372382,
+            "longitude": -6.253179
         }
     },
     {
         "name": "Sandyford",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/sandyford.png?raw=true",
+        "schedule": "10am - 11pm",
         "coordinate": {
             "latitude": 53.27422,
             "longitude": -6.216703
@@ -57,6 +73,8 @@
     },
     {
         "name": "Blanchardstown",
+        "schedule": "2pm - 11pm",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/blanchardstown.png?raw=true",
         "coordinate": {
             "latitude": 53.390208,
             "longitude": -6.395439
@@ -64,6 +82,8 @@
     },
     {
         "name": "Tallaght",
+        "schedule": "2pm - 11pm",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/tallaght.png?raw=true",
         "coordinate": {
             "latitude": 53.287732,
             "longitude": -6.369242

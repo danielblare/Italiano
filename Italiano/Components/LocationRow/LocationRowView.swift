@@ -8,17 +8,23 @@
 import SwiftUI
 import Observation
 
+/// Row view representing location on the map with description and ETA travel distance/time
 struct LocationRowView: View {
-    @Environment(MapViewModel.self) private var viewModel
+    
+    /// Passed in location
     let location: Location
     
+    /// Whether location is selected on the map
+    let isSelected: Bool
+    
+    /// ETA distance
     @State private var distance: String?
+    /// ETA travel time
     @State private var travelTime: String?
     
     var body: some View {
         HStack {
-            Image("test")
-                .resizable()
+            CachedImage(url: location.image)
                 .scaledToFill()
                 .frame(width: 80, height: 60)
                 .clipped()
@@ -28,7 +34,7 @@ struct LocationRowView: View {
                 Text(location.name)
                     .lineLimit(2)
                 
-                Text("Closed - Opens 3pm")
+                Text(location.schedule)
                     .lineLimit(1)
             }
             
@@ -45,27 +51,25 @@ struct LocationRowView: View {
         .padding()
         .background {
             RoundedRectangle(cornerRadius: 16)
-                .fill(Color.palette.lightGreen.gradient.opacity(0.3))
+                .fill(Color.palette.lightGreen.gradient.opacity(isSelected ? 0.5 : 0.3))
                 .strokeBorder(Color.palette.oliveGreen, lineWidth: 0.5, antialiased: true)
                 .shadow(color: .palette.lightGreen.opacity(1), radius: 3, x: 1, y: 1)
         }
         .task {
-            guard let ETA = try? await viewModel.getETA(to: location.coordinate) else { return }
-            distance = viewModel.formattedDistance(value: ETA.distance)
-            travelTime = viewModel.formattedTravelTime(value: ETA.expectedTravelTime)
+            guard let ETA = try? await DirectionManager.shared.getETA(to: location.coordinate) else { return }
+            distance = ETA.distance.formattedDistance()
+            travelTime = ETA.expectedTravelTime.formattedTravelTime()
         }
     }
 }
 
 #Preview {
     @State var routeManager: RouteManager = RouteManager()
-    @State var viewModel: MapViewModel = MapViewModel()
 
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self),
                             items: try! JSONDecoder.decode(from: "Offers", type: [Offer].self) + (try! JSONDecoder.decode(from: "Locations", type: [Location].self))) {
         NavigationStack {
-            LocationRowView(location: .dummy)
-                .environment(viewModel)
+            LocationRowView(location: .dummy, isSelected: false)
                 .padding()
         }
     }

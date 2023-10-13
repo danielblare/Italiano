@@ -53,16 +53,12 @@ extension SchemaV1 {
         
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
-            
-            let urlString = try container.decode(String.self, forKey: .image)
-            guard let image = URL(string: urlString) else { throw URLError(.badURL) }
-            
             self.title = try container.decode(String.self, forKey: .title)
             self.text = try container.decode(String.self, forKey: .text)
             self.offerText = try container.decode(String.self, forKey: .offerText)
             self.badge = try container.decodeIfPresent(String.self, forKey: .badge)
             self.promoCode = try container.decode(String.self, forKey: .promoCode)
-            self.image = image
+            self.image = try container.decode(URL.self, forKey: .image)
         }
         
         static var dummy: Offer { 
@@ -75,27 +71,35 @@ extension SchemaV1 {
         @Attribute(.unique)
         let id: UUID = UUID()
         let name: String
+        let image: URL
+        let schedule: String
+
         let coordinate: CLLocationCoordinate2D
         
-        init(name: String, coordinate: CLLocationCoordinate2D) {
+        init(name: String, schedule: String, image: URL, coordinate: CLLocationCoordinate2D) {
             self.name = name
+            self.schedule = schedule
             self.coordinate = coordinate
+            self.image = image
         }
         
         enum CodingKeys: String, CodingKey {
             case name
+            case schedule
+            case image
             case coordinate
         }
         
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             self.name = try container.decode(String.self, forKey: .name)
+            self.schedule = try container.decode(String.self, forKey: .schedule)
+            self.image = try container.decode(URL.self, forKey: .image)
             self.coordinate = try container.decode(CLLocationCoordinate2D.self, forKey: .coordinate)
         }
         
         static var dummy: Location {
-            Location(name: "Apex Business Cntr, Blackthorn Rd", coordinate: CLLocationCoordinate2D(latitude: 53.342025, longitude: -6.267628))
+            Location(name: "Apex Business Cntr, Blackthorn Rd", schedule: "10am - 8pm", image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/taste_of_tuscany.png?raw=true")!, coordinate: CLLocationCoordinate2D(latitude: 53.342025, longitude: -6.267628))
         }
-        
     }
 }

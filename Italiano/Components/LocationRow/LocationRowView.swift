@@ -11,6 +11,8 @@ import Observation
 /// Row view representing location on the map with description and ETA travel distance/time
 struct LocationRowView: View {
     
+    let directionManager: DirectionManager
+    
     /// Passed in location
     let location: Location
     
@@ -23,37 +25,62 @@ struct LocationRowView: View {
     @State private var travelTime: String?
     
     var body: some View {
-        HStack {
-            CachedImage(url: location.image)
-                .scaledToFill()
-                .frame(width: 80, height: 60)
-                .clipped()
-                .clipShape(RoundedRectangle(cornerRadius: 6))
-            
-            VStack(alignment: .leading, spacing: 5) {
-                Text(location.name)
-                    .lineLimit(2)
+        VStack {
+            HStack {
+                CachedImage(url: location.image)
+                    .scaledToFill()
+                    .frame(width: 80, height: 60)
+                    .clipped()
+                    .clipShape(RoundedRectangle(cornerRadius: 6))
                 
-                Text(location.schedule)
-                    .lineLimit(1)
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(location.name)
+                        .lineLimit(2)
+                    
+                    Text(location.schedule)
+                        .lineLimit(1)
+                }
+                
+                Spacer(minLength: 0)
+                
+                
+                VStack(alignment: .trailing, spacing: 5) {
+                    Text(distance ?? "--")
+                    
+                    Label(travelTime ?? "--", systemImage: "car")
+                }
+            }
+            .font(.asset.mainText)
+            .padding()
+            .background {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color.palette.lightGreen.gradient.opacity(0.3))
+                    .strokeBorder(Color.palette.oliveGreen, lineWidth: 0.6)
             }
             
-            Spacer(minLength: 0)
-
-            
-            VStack(alignment: .trailing, spacing: 5) {
-                Text(distance ?? "--")
-                
-                Label(travelTime ?? "--", systemImage: "car")
+            if isSelected {
+                Group {
+                    Text(location.info)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Button {
+                        directionManager.openInMaps(location)
+                    } label: {
+                        Text("Open in Maps")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .padding(.bottom)
+                }
+                .font(.asset.menuItem)
+                .padding(.horizontal)
             }
         }
-        .font(.asset.mainText)
-        .padding()
         .background {
             RoundedRectangle(cornerRadius: 16)
-                .fill(Color.palette.lightGreen.gradient.opacity(isSelected ? 0.5 : 0.3))
-                .strokeBorder(Color.palette.oliveGreen, lineWidth: 0.5, antialiased: true)
-                .shadow(color: .palette.lightGreen.opacity(1), radius: 3, x: 1, y: 1)
+                .strokeBorder(Color.palette.oliveGreen, lineWidth: 0.5)
+//                .shadow(color: .palette.lightGreen.opacity(1), radius: 3, x: 1, y: 1)
         }
         .task {
             guard let ETA = try? await DirectionManager.shared.getETA(to: location.coordinate) else { return }
@@ -69,7 +96,7 @@ struct LocationRowView: View {
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self),
                             items: try! JSONDecoder.decode(from: "Offers", type: [Offer].self) + (try! JSONDecoder.decode(from: "Locations", type: [Location].self))) {
         NavigationStack {
-            LocationRowView(location: .dummy, isSelected: false)
+            LocationRowView(directionManager: DirectionManager.shared, location: .dummy, isSelected: false)
                 .padding()
         }
     }

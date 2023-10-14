@@ -1,0 +1,102 @@
+[
+    {
+        "name": "Apex Business Cntr, Blackthorn Rd",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/apex_business_cntr.png?raw=true",
+        "schedule": "10am - 11pm",
+        "coordinate": {
+            "latitude": 53.342025,
+            "longitude": -6.267628
+        },
+        "description": "Nestled in the heart of the business district, our Apex location offers a modern Italian dining experience with a stunning view of the city skyline."
+    },
+    {
+        "name": "O'Connell Street",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/oconnell_street.png?raw=true",
+        "schedule": "10am - 11pm",
+        "coordinate": {
+            "latitude": 53.349805,
+            "longitude": -6.26031
+        },
+        "description": "Dine in style on one of Dublin's most iconic streets. Our O'Connell Street location combines the rich history of the city with delectable Italian cuisine."
+    },
+    {
+        "name": "Temple Bar",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/temple_bar.png?raw=true",
+        "schedule": "10am - 11pm",
+        "coordinate": {
+            "latitude": 53.345272,
+            "longitude": -6.263286
+        },
+        "description": "Immerse yourself in the vibrant culture of Temple Bar while savoring the flavors of Italy. Our Temple Bar restaurant offers a lively and delicious experience."
+    },
+    {
+        "name": "Merrion Square",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/merrion_square.png?raw=true",
+        "schedule": "10am - 11pm",
+        "coordinate": {
+            "latitude": 53.340693,
+            "longitude": -6.248712
+        },
+        "description": "Located near the scenic Merrion Square, our restaurant is a serene oasis in the heart of the city, offering a peaceful Italian dining experience."
+    },
+    {
+        "name": "St. Stephen's Green",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/st_stephens_green.png?raw=true",
+        "schedule": "10am - 11pm",
+        "coordinate": {
+            "latitude": 53.337621,
+            "longitude": -6.259627
+        },
+        "description": "Indulge in the lush beauty of St. Stephen's Green as you enjoy Italian cuisine in a relaxing atmosphere, making it the perfect urban escape."
+    },
+    {
+        "name": "Ranelagh",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/ranelagh.png?raw=true",
+        "schedule": "10am - 8pm",
+        "coordinate": {
+            "latitude": 53.325944,
+            "longitude": -6.252547
+        },
+        "description": "Experience Italiano in the charming neighborhood of Ranelagh. Our cozy restaurant is a hub for delicious food and great conversations."
+    },
+    {
+        "name": "Drumcondra",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/drumcondra.png?raw=true",
+        "schedule": "4pm - 11pm",
+        "coordinate": {
+            "latitude": 53.372382,
+            "longitude": -6.253179
+        },
+        "description": "Join us for a delightful evening in Drumcondra, where you can savor Italian cuisine under the starry Dublin sky."
+    },
+    {
+        "name": "Sandyford",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/sandyford.png?raw=true",
+        "schedule": "10am - 11pm",
+        "coordinate": {
+            "latitude": 53.27422,
+            "longitude": -6.216703
+        },
+        "description": "Escape the hustle and bustle at our Sandyford location, a serene haven for Italian food enthusiasts, offering a tranquil dining experience."
+    },
+    {
+        "name": "Blanchardstown",
+        "schedule": "2pm - 11pm",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/blanchardstown.png?raw=true",
+        "coordinate": {
+            "latitude": 53.390208,
+            "longitude": -6.395439
+        },
+        "description": "Blanchardstown welcomes you to savor the finest Italian dishes in a contemporary setting, making it a destination for culinary indulgence."
+    },
+    {
+        "name": "Tallaght",
+        "schedule": "2pm - 11pm",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/tallaght.png?raw=true",
+        "coordinate": {
+            "latitude": 53.287732,
+            "longitude": -6.369242
+        },
+        "description": "Explore the diverse flavors of Italy in the vibrant community of Tallaght. Our restaurant offers an exciting culinary journey through Italian cuisine."
+    }
+]

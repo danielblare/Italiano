@@ -41,7 +41,7 @@ struct OfferCellView: View {
 }
 
 #Preview {
-    SwiftDataPreview(preview: PreviewContainer([Offer.self])) {
+    SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
         OfferCellView(offer: .dummy)
     }
     .frame(width: 100, height: 100)

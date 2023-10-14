@@ -89,10 +89,15 @@ struct OfferView: View {
 }
 
 #Preview {
-    NavigationStack {
-        SwiftDataPreview(preview: PreviewContainer([Offer.self])) {
+    @State var routeManager: RouteManager = RouteManager()
+    @State var cacheManager: CacheManager = CacheManager()
+
+    return NavigationStack {
+        SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
             OfferView(offer: .dummy)
         }
+        .environment(routeManager)
+        .environment(cacheManager)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

@@ -18,7 +18,7 @@ final class JSONTests: XCTestCase {
         
     }
 
-    func testSuccessfullDecodingOffersList() {
+    func testSuccessfulDecodingOffersList() {
         let fileName = "JSONOffersTests"
         var result: [Offer] = []
         
@@ -32,5 +32,21 @@ final class JSONTests: XCTestCase {
         
         XCTAssertThrowsError(try JSONDecoder.decode(from: "JSONOffersTests", type: [Int].self), "Decoding wrong type doesn't fail")
     }
+    
+    func testSuccessfulDecodingLocationsList() {
+        let fileName = "JSONLocationsTests"
+        var result: [Location] = []
+        
+        
+        XCTAssertNoThrow(result = try JSONDecoder.decode(from: fileName, type: [Location].self), "Function shouldn't throw")
+        XCTAssertEqual(result.count, 10, "Data was not decoded correctly")
+    }
+
+    func testFailingDecodingLocationsList() {
+        XCTAssertThrowsError(try JSONDecoder.decode(from: "WrongName", type: [Location].self), "Decoding from wrong file doesn't fail")
+        
+        XCTAssertThrowsError(try JSONDecoder.decode(from: "JSONLocationsTests", type: [Int].self), "Decoding wrong type doesn't fail")
+    }
+
 
 }

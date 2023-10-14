@@ -12,6 +12,7 @@ import Observation
 // MARK: SwiftData Models
 typealias Offer = SchemaV1.Offer
 typealias Location = SchemaV1.Location
+typealias MenuSection = SchemaV1.MenuSection
 
 @main
 struct ItalianoApp: App {
@@ -19,14 +20,12 @@ struct ItalianoApp: App {
     /// Indicates whether user launched app first time
     @AppStorage("firstLaunch") private var firstLaunch: Bool = true
     
-    @State private var routeManager: RouteManager = RouteManager()
     @State private var cacheManager: CacheManager = CacheManager()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .environment(routeManager)
         .environment(cacheManager)
         .modelContainer(try! DataContainer.create(createDefaults: &firstLaunch))
     }

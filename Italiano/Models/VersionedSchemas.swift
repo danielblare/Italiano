@@ -12,7 +12,7 @@ import MapKit
 enum SchemaV1: VersionedSchema {
     
     static var models: [any PersistentModel.Type] {
-        [Offer.self, Location.self]
+        [Offer.self, Location.self, MenuSection.self]
     }
     
     static var versionIdentifier: Schema.Version = .init(1, 0, 0)
@@ -23,7 +23,6 @@ extension SchemaV1 {
     @Model
     final class Offer: Decodable {
         @Attribute(.unique)
-        let id: UUID = UUID()
         let title: String
         let text: String
         
@@ -69,7 +68,6 @@ extension SchemaV1 {
     @Model
     final class Location: Decodable {
         @Attribute(.unique)
-        let id: UUID = UUID()
         let name: String
         let info: String
         let image: URL
@@ -104,6 +102,33 @@ extension SchemaV1 {
         
         static var dummy: Location {
             Location(name: "Apex Business Cntr, Blackthorn Rd", info: "Nestled in the heart of the business district, our Apex location offers a modern Italian dining experience with a stunning view of the city skyline", schedule: "10am - 8pm", image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/taste_of_tuscany.png?raw=true")!, coordinate: CLLocationCoordinate2D(latitude: 53.342025, longitude: -6.267628))
+        }
+    }
+    
+    @Model
+    final class MenuSection: Decodable {
+        @Attribute(.unique)
+        let name: String
+        let image: URL
+        
+        init(name: String, image: URL) {
+            self.name = name
+            self.image = image
+        }
+        
+        enum CodingKeys: String, CodingKey {
+            case name
+            case image
+        }
+        
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.name = try container.decode(String.self, forKey: .name)
+            self.image = try container.decode(URL.self, forKey: .image)
+        }
+        
+        static var dummy: MenuSection {
+            MenuSection(name: "Pizza", image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/section_image.png?raw=true")!)
         }
     }
 }

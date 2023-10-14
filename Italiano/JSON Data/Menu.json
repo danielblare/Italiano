@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Pizza",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/section_image.png?raw=true"
+    },
+    {
+        "name": "Pasta",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/section_image.png?raw=true"
+    },
+    {
+        "name": "Drinks",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/section_image.png?raw=true"
+    },
+    {
+        "name": "Desserts",
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/section_image.png?raw=true"
+    }
+]

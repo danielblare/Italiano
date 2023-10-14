@@ -30,6 +30,13 @@ actor DataContainer {
                 }
             }
             
+            if let menuSections = try? JSONDecoder.decode(from: "Menu", type: [MenuSection].self) {
+                menuSections.forEach { section in
+                    container.mainContext.insert(section)
+                }
+            }
+
+            
             createDefaults = false
         }
         

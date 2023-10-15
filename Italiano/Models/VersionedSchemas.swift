@@ -106,7 +106,7 @@ extension SchemaV1 {
     }
     
     @Model
-    final class MenuSection: Decodable {
+    final class MenuSection: Decodable, Identifiable {
         @Attribute(.unique)
         let name: String
         let image: URL

@@ -10,23 +10,15 @@ import SwiftData
 
 struct HomeView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    @State private var routeManager: RouteManager = RouteManager()
+    @Environment(RouteManager.self) private var routeManager
 
     @Query private var offers: [Offer]
     
     var body: some View {
-        @Bindable var routeManager = routeManager
-        NavigationStack(path: $routeManager.routes) {
-            ScrollView {
-                if !offers.isEmpty {
-                    OffersSection
-                }
-                
+        ScrollView {
+            if !offers.isEmpty {
+                OffersSection
             }
-            .navigationTitle("Home")
-            .navigationBarTitleDisplayMode(.inline)
-            .environment(self.routeManager)
-            .navigationDestination(for: Route.self) { $0 }
         }
     }
     
@@ -66,10 +58,16 @@ struct HomeView: View {
 
 #Preview {
     @State var cacheManager: CacheManager = CacheManager()
+    @State var routeManager: RouteManager = RouteManager()
+    @Bindable var man = routeManager
 
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self),
                      items: try! JSONDecoder.decode(from: "Offers", type: [Offer].self)) {
+        NavigationStack(path: $man.routes) {
             HomeView()
+                .navigationDestination(for: Route.self) { $0 }
+        }
         .environment(cacheManager)
+        .environment(routeManager)
     }
 }

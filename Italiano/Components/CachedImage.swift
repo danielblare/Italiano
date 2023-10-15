@@ -32,13 +32,7 @@ struct CachedImage: View {
             }
         }
         .task {
-            guard let key = url.pathComponents.last else {
-                if let data = try? await URLSession.shared.data(from: url).0,
-                   let image = UIImage(data: data) {
-                    self.image = image
-                }
-                return
-            }
+            let key = url.relativePath
             
             if let savedImage = manager.getFrom(manager.imagesCache, forKey: key) {
                 self.image = savedImage

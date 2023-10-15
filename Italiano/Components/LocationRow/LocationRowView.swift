@@ -30,7 +30,6 @@ struct LocationRowView: View {
                 CachedImage(url: location.image)
                     .scaledToFill()
                     .frame(width: 80, height: 60)
-                    .clipped()
                     .clipShape(RoundedRectangle(cornerRadius: 6))
                 
                 VStack(alignment: .leading, spacing: 5) {
@@ -92,12 +91,15 @@ struct LocationRowView: View {
 
 #Preview {
     @State var routeManager: RouteManager = RouteManager()
+    @State var cacheManager: CacheManager = CacheManager()
 
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self),
-                            items: try! JSONDecoder.decode(from: "Offers", type: [Offer].self) + (try! JSONDecoder.decode(from: "Locations", type: [Location].self))) {
+                            items: try! JSONDecoder.decode(from: "Locations", type: [Location].self)) {
         NavigationStack {
             LocationRowView(directionManager: DirectionManager.shared, location: .dummy, isSelected: false)
                 .padding()
         }
+        .environment(routeManager)
+        .environment(cacheManager)
     }
 }

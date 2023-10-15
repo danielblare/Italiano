@@ -1,18 +1,116 @@
 [
     {
         "name": "Pizza",
-        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/section_image.png?raw=true"
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/section_image.png?raw=true",
+        "items": [
+            {
+                "name": "Margherita",
+                "price": 10.99,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/margherita.png?raw=true"
+            },
+            {
+                "name": "Pepperoni",
+                "price": 12.99,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/pepperoni.png?raw=true"
+            },
+            {
+                "name": "Vegetarian",
+                "price": 11.99,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/vegetarian.png?raw=true"
+            },
+            {
+                "name": "Supreme",
+                "price": 14.99,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/supreme.png?raw=true"
+            },
+            {
+                "name": "Mushroom",
+                "price": 11.99,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/mushroom.png?raw=true"
+            }
+        ]
     },
     {
         "name": "Pasta",
-        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/section_image.png?raw=true"
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/section_image.png?raw=true",
+        "items": [
+            {
+                "name": "Spaghetti Carbonara",
+                "price": 13.99,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/items/spaghetti_carbonara.png?raw=true"
+            },
+            {
+                "name": "Fettuccine Alfredo",
+                "price": 14.99,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/items/fettuccine_alfredo.png?raw=true"
+            },
+            {
+                "name": "Lasagna",
+                "price": 15.99,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/items/lasagna.png?raw=true"
+            },
+            {
+                "name": "Spaghetti Bolognese",
+                "price": 12.99,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/items/spaghetti_bolognese.png?raw=true"
+            }
+        ]
     },
     {
         "name": "Drinks",
-        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/section_image.png?raw=true"
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/section_image.png?raw=true",
+        "items": [
+            {
+                "name": "Soda",
+                "price": 1.99,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/soda.png?raw=true"
+            },
+            {
+                "name": "Water",
+                "price": 0.99,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/water.png?raw=true"
+            },
+            {
+                "name": "Wine",
+                "price": 15.99,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/wine.png?raw=true"
+            },
+            {
+                "name": "Iced Tea",
+                "price": 2.49,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/iced_tea.png?raw=true"
+            },
+            {
+                "name": "Lemonade",
+                "price": 2.49,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/lemonade.png?raw=true"
+            }
+        ]
     },
     {
         "name": "Desserts",
-        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/section_image.png?raw=true"
+        "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/section_image.png?raw=true",
+        "items": [
+            {
+                "name": "Tiramisu",
+                "price": 7.99,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/items/tiramisu.png?raw=true"
+            },
+            {
+                "name": "Cannoli",
+                "price": 6.99,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/items/cannoli.png?raw=true"
+            },
+            {
+                "name": "Cheesecake",
+                "price": 6.99,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/items/cheesecake.png?raw=true"
+            },
+            {
+                "name": "Panna Cotta",
+                "price": 8.99,
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/items/panna_cotta.png?raw=true"
+            }
+        ]
     }
 ]

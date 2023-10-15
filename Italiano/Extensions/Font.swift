@@ -1,4 +1,4 @@
-//
+//d
 //  Font.swift
 //  Italiano
 //
@@ -18,9 +18,11 @@ extension Font {
         let subHeading = Font.custom("Aleo", size: 24)
         let buttonText = Font.custom("Aleo", size: 22)
         let extra = Font.custom("Aleo", size: 20)
+        let offerText = Font.custom("Aleo", size: 18)
         let menuItem = Font.custom("Aleo", size: 16)
         let mainText = Font.custom("Aleo", size: 14)
-        
+        let smallText = Font.custom("Aleo", size: 12)
+
         func custom(size: CGFloat) -> Font {
             .custom("Aleo", fixedSize: size)
         }

@@ -12,7 +12,7 @@ import MapKit
 enum SchemaV1: VersionedSchema {
     
     static var models: [any PersistentModel.Type] {
-        [Offer.self, Location.self, MenuSection.self]
+        [Offer.self, Location.self, MenuSection.self, MenuItem.self]
     }
     
     static var versionIdentifier: Schema.Version = .init(1, 0, 0)
@@ -111,24 +111,60 @@ extension SchemaV1 {
         let name: String
         let image: URL
         
-        init(name: String, image: URL) {
+        let items: [MenuItem]
+        
+        init(name: String, image: URL, items: [MenuItem]) {
             self.name = name
             self.image = image
+            self.items = items
         }
         
         enum CodingKeys: String, CodingKey {
             case name
             case image
+            case items
         }
         
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             self.name = try container.decode(String.self, forKey: .name)
             self.image = try container.decode(URL.self, forKey: .image)
+            self.items = try container.decode([MenuItem].self, forKey: .items)
         }
         
         static var dummy: MenuSection {
-            MenuSection(name: "Pizza", image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/section_image.png?raw=true")!)
+            MenuSection(name: "Pizza", image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/section_image.png?raw=true")!, items: [.dummy])
+        }
+    }
+    
+    @Model
+    final class MenuItem: Decodable, Identifiable {
+        @Attribute(.unique)
+        let name: String
+        let price: Double
+        let image: URL
+        
+        init(name: String, price: Double, image: URL) {
+            self.name = name
+            self.price = price
+            self.image = image
+        }
+        
+        enum CodingKeys: CodingKey {
+            case name
+            case price
+            case image
+        }
+        
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.name = try container.decode(String.self, forKey: .name)
+            self.price = try container.decode(Double.self, forKey: .price)
+            self.image = try container.decode(URL.self, forKey: .image)
+        }
+        
+        static var dummy: MenuItem {
+            MenuItem(name: "Margherita", price: 10.99, image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/margherita.png?raw=true")!)
         }
     }
 }

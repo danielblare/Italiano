@@ -1,12 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "a-man-holding-a-camera-with-image-filter.jpg",
+      "filename" : "build_your_own.svg",
       "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
   }
 }

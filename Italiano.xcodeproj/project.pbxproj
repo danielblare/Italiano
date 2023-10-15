@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB03F27E2ADC6A35005238C5 /* MenuItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB03F27D2ADC6A35005238C5 /* MenuItemRowView.swift */; };
+		BB03F2802ADC6C6C005238C5 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB03F27F2ADC6C6C005238C5 /* Double.swift */; };
 		BB0419682AD895090016D51C /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0419672AD895090016D51C /* MapViewModel.swift */; };
 		BB04196A2AD895290016D51C /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0419692AD895290016D51C /* CLLocation.swift */; };
 		BB54B1482AD48920006151A6 /* CachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB54B1472AD48920006151A6 /* CachedImage.swift */; };
@@ -63,6 +65,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB03F27D2ADC6A35005238C5 /* MenuItemRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemRowView.swift; sourceTree = "<group>"; };
+		BB03F27F2ADC6C6C005238C5 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		BB0419672AD895090016D51C /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		BB0419692AD895290016D51C /* CLLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocation.swift; sourceTree = "<group>"; };
 		BB54B1472AD48920006151A6 /* CachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImage.swift; sourceTree = "<group>"; };
@@ -215,6 +219,7 @@
 				BB830B772AD1D827009CA51A /* JSONDecoder.swift */,
 				BB0419692AD895290016D51C /* CLLocation.swift */,
 				BBF8962D2AD9E26F0076B476 /* TimeInterval.swift */,
+				BB03F27F2ADC6C6C005238C5 /* Double.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -307,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				BBA1D9172ADB1D4600941988 /* MenuSectionCellView.swift */,
+				BB03F27D2ADC6A35005238C5 /* MenuItemRowView.swift */,
 			);
 			path = MenuSection;
 			sourceTree = "<group>";
@@ -468,7 +474,9 @@
 			files = (
 				BB830B762AD1CCEB009CA51A /* DataContainer.swift in Sources */,
 				BBA1D9182ADB1D4600941988 /* MenuSectionCellView.swift in Sources */,
+				BB03F27E2ADC6A35005238C5 /* MenuItemRowView.swift in Sources */,
 				BB6976042ACF32E000FD0753 /* ContentView.swift in Sources */,
+				BB03F2802ADC6C6C005238C5 /* Double.swift in Sources */,
 				BB830B692AD1AD4F009CA51A /* HomeView.swift in Sources */,
 				BB54B14A2AD48A09006151A6 /* CacheManager.swift in Sources */,
 				BBA1D91A2ADB205000941988 /* MenuSectionView.swift in Sources */,

@@ -27,13 +27,12 @@ struct OfferView: View {
                     .padding(.top)
                     
                     Text(offer.offerText)
-                        .font(.asset.custom(size: 24))
+                        .font(.asset.heading2)
                         .foregroundStyle(Color.palette.oliveGreen)
-                        .fontWeight(.bold)
                         .padding(.vertical)
                     
                     Text(offer.text)
-                        .font(.asset.custom(size: 18))
+                        .font(.asset.offerText)
                     
                 }
                 .multilineTextAlignment(.center)
@@ -43,7 +42,7 @@ struct OfferView: View {
             
             let promoCode = offer.promoCode.uppercased()
             Text("Promo Code")
-                .font(.asset.custom(size: 20))
+                .font(.asset.extra)
                 .fontWeight(.semibold)
             
             Text(promoCode)
@@ -79,7 +78,7 @@ struct OfferView: View {
                 }
             
             Text("Click to copy")
-                .font(.asset.custom(size: 16))
+                .font(.asset.menuItem)
                 .foregroundStyle(.secondary)
 
 

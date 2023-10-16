@@ -12,7 +12,7 @@ import MapKit
 enum SchemaV1: VersionedSchema {
     
     static var models: [any PersistentModel.Type] {
-        [Offer.self, Location.self, MenuSection.self, MenuItem.self]
+        [Offer.self, Location.self, MenuSection.self, MenuItem.self, Ingredient.self]
     }
     
     static var versionIdentifier: Schema.Version = .init(1, 0, 0)
@@ -141,30 +141,62 @@ extension SchemaV1 {
     final class MenuItem: Decodable, Identifiable {
         @Attribute(.unique)
         let name: String
+        let text: String
         let price: Double
         let image: URL
+        let ingredients: [Ingredient]
         
-        init(name: String, price: Double, image: URL) {
+        init(name: String, description: String, price: Double, image: URL, ingredients: [Ingredient]) {
             self.name = name
+            self.text = description
             self.price = price
             self.image = image
+            self.ingredients = ingredients
         }
         
-        enum CodingKeys: CodingKey {
+        enum CodingKeys: String, CodingKey {
             case name
             case price
             case image
+            case description
+            case ingredients
         }
         
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             self.name = try container.decode(String.self, forKey: .name)
+            self.text = try container.decode(String.self, forKey: .description)
             self.price = try container.decode(Double.self, forKey: .price)
             self.image = try container.decode(URL.self, forKey: .image)
+            self.ingredients = try container.decode([Ingredient].self, forKey: .ingredients)
         }
         
         static var dummy: MenuItem {
-            MenuItem(name: "Margherita", price: 10.99, image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/margherita.png?raw=true")!)
+            MenuItem(name: "Margherita", description: "30 cm, 8 pcs", price: 10.99, image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/margherita.png?raw=true")!, ingredients: [Ingredient(name: "Pork"), Ingredient(name: "Cheese")])
         }
     }
+    
+    @Model
+    final class Ingredient: Decodable, Identifiable {
+        let name: String
+        
+        init(name: String) {
+            self.name = name
+        }
+        
+        enum CodingKeys: String, CodingKey {
+            case name
+        }
+        
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.name = try container.decode(String.self, forKey: .name)
+        }
+    }
+    
+//    @Model
+//    final class Option: Decodable, Identifiable {
+//        let text: String
+//        var value: Bool = false
+//    }
 }

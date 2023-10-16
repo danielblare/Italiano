@@ -45,6 +45,7 @@
 		BBF8962C2AD9E2380076B476 /* DirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF8962B2AD9E2380076B476 /* DirectionManager.swift */; };
 		BBF8962E2AD9E26F0076B476 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF8962D2AD9E26F0076B476 /* TimeInterval.swift */; };
 		BBF8A6B12ADA8FAA005CA357 /* JSONLocationsTests.json in Resources */ = {isa = PBXBuildFile; fileRef = BBF8A6AF2ADA8DE5005CA357 /* JSONLocationsTests.json */; };
+		BBFAF0E42ADDC237003C52CF /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFAF0E32ADDC237003C52CF /* MenuItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		BBF8962B2AD9E2380076B476 /* DirectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionManager.swift; sourceTree = "<group>"; };
 		BBF8962D2AD9E26F0076B476 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		BBF8A6AF2ADA8DE5005CA357 /* JSONLocationsTests.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = JSONLocationsTests.json; sourceTree = "<group>"; };
+		BBFAF0E32ADDC237003C52CF /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,17 +250,9 @@
 			isa = PBXGroup;
 			children = (
 				BB7436B52ADABC3C008FC984 /* MenuView.swift */,
-				BBA1D9192ADB205000941988 /* MenuSectionView.swift */,
+				BBFAF0E12ADDC1FB003C52CF /* Components */,
 			);
 			path = MenuTab;
-			sourceTree = "<group>";
-		};
-		BB7D80462AD8925C0019E911 /* LocationRow */ = {
-			isa = PBXGroup;
-			children = (
-				BB7D80472AD8926C0019E911 /* LocationRowView.swift */,
-			);
-			path = LocationRow;
 			sourceTree = "<group>";
 		};
 		BB830B672AD1AD3C009CA51A /* HomeTab */ = {
@@ -291,8 +285,6 @@
 		BB830B7B2AD1DC98009CA51A /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				BBA1D9162ADB1D3200941988 /* MenuSection */,
-				BB7D80462AD8925C0019E911 /* LocationRow */,
 				BB830B7E2AD1FAC6009CA51A /* Offer */,
 				BB54B1472AD48920006151A6 /* CachedImage.swift */,
 			);
@@ -308,15 +300,6 @@
 			path = Offer;
 			sourceTree = "<group>";
 		};
-		BBA1D9162ADB1D3200941988 /* MenuSection */ = {
-			isa = PBXGroup;
-			children = (
-				BBA1D9172ADB1D4600941988 /* MenuSectionCellView.swift */,
-				BB03F27D2ADC6A35005238C5 /* MenuItemRowView.swift */,
-			);
-			path = MenuSection;
-			sourceTree = "<group>";
-		};
 		BBD19F852AD2D7AD00EFAB2A /* JSON */ = {
 			isa = PBXGroup;
 			children = (
@@ -330,10 +313,30 @@
 		BBDF3E002AD314A900DD56D5 /* MapTab */ = {
 			isa = PBXGroup;
 			children = (
+				BBFAF0E22ADDC213003C52CF /* Components */,
 				BBDF3E012AD314B400DD56D5 /* MapView.swift */,
 				BB0419672AD895090016D51C /* MapViewModel.swift */,
 			);
 			path = MapTab;
+			sourceTree = "<group>";
+		};
+		BBFAF0E12ADDC1FB003C52CF /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				BBA1D9172ADB1D4600941988 /* MenuSectionCellView.swift */,
+				BB03F27D2ADC6A35005238C5 /* MenuItemRowView.swift */,
+				BBA1D9192ADB205000941988 /* MenuSectionView.swift */,
+				BBFAF0E32ADDC237003C52CF /* MenuItemView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		BBFAF0E22ADDC213003C52CF /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				BB7D80472AD8926C0019E911 /* LocationRowView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -479,6 +482,7 @@
 				BB03F2802ADC6C6C005238C5 /* Double.swift in Sources */,
 				BB830B692AD1AD4F009CA51A /* HomeView.swift in Sources */,
 				BB54B14A2AD48A09006151A6 /* CacheManager.swift in Sources */,
+				BBFAF0E42ADDC237003C52CF /* MenuItemView.swift in Sources */,
 				BBA1D91A2ADB205000941988 /* MenuSectionView.swift in Sources */,
 				BB6976022ACF32E000FD0753 /* ItalianoApp.swift in Sources */,
 				BB830B782AD1D827009CA51A /* JSONDecoder.swift in Sources */,

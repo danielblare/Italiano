@@ -11,6 +11,7 @@ import Observation
 enum Route: Hashable {
     case offer(_ offer: Offer)
     case menuSection(_ section: MenuSection)
+    case menuItem(_ item: MenuItem)
 }
 
 // MARK: Route View
@@ -21,6 +22,8 @@ extension Route: View {
             OfferView(offer: offer)
         case .menuSection(let section):
             MenuSectionView(section: section)
+        case .menuItem(let item):
+            MenuItemView(item: item)
         }
     }
 }

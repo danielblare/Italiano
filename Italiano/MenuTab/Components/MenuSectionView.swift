@@ -37,7 +37,10 @@ struct MenuSectionView: View {
                     .foregroundStyle(Color.palette.oliveGreen)
                 
                 ForEach(section.items.sorted(by: { $0.price < $1.price })) { item in
-                    MenuItemRowView(item: item)
+                    NavigationLink(value: Route.menuItem(item)) {
+                        MenuItemRowView(item: item)
+                    }
+                    .buttonStyle(.plain)
                 }
                 .padding(.horizontal)
                 

@@ -5,28 +5,63 @@
         "items": [
             {
                 "name": "Margherita",
+                "description": "30 cm, 8 pcs",
                 "price": 10.99,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/margherita.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/margherita.png?raw=true",
+                "ingredients": [
+                    {"name": "Tomato Sauce"},
+                    {"name": "Mozzarella Cheese"},
+                    {"name": "Basil"}
+                ]
             },
             {
                 "name": "Pepperoni",
+                "description": "30 cm, 8 pcs",
                 "price": 12.99,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/pepperoni.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/pepperoni.png?raw=true",
+                "ingredients": [
+                    {"name": "Tomato Sauce"},
+                    {"name": "Mozzarella Cheese"},
+                    {"name": "Pepperoni"}
+                ]
             },
             {
                 "name": "Vegetarian",
+                "description": "30 cm, 8 pcs",
                 "price": 11.99,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/vegetarian.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/vegetarian.png?raw=true",
+                "ingredients": [
+                    {"name": "Tomato Sauce"},
+                    {"name": "Mozzarella Cheese"},
+                    {"name": "Bell Peppers"},
+                    {"name": "Mushrooms"},
+                    {"name": "Olives"}
+                ]
             },
             {
                 "name": "Supreme",
+                "description": "30 cm, 8 pcs",
                 "price": 14.99,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/supreme.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/supreme.png?raw=true",
+                "ingredients": [
+                    {"name": "Tomato Sauce"},
+                    {"name": "Mozzarella Cheese"},
+                    {"name": "Pepperoni"},
+                    {"name": "Bell Peppers"},
+                    {"name": "Mushrooms"},
+                    {"name": "Olives"}
+                ]
             },
             {
                 "name": "Mushroom",
+                "description": "30 cm, 8 pcs",
                 "price": 11.99,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/mushroom.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/mushroom.png?raw=true",
+                "ingredients": [
+                    {"name": "Tomato Sauce"},
+                    {"name": "Mozzarella Cheese"},
+                    {"name": "Mushrooms"}
+                ]
             }
         ]
     },
@@ -36,23 +71,51 @@
         "items": [
             {
                 "name": "Spaghetti Carbonara",
+                "description": "170g",
                 "price": 13.99,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/items/spaghetti_carbonara.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/items/spaghetti_carbonara.png?raw=true",
+                "ingredients": [
+                    {"name": "Spaghetti"},
+                    {"name": "Eggs"},
+                    {"name": "Pancetta"},
+                    {"name": "Parmesan Cheese"}
+                ]
             },
             {
                 "name": "Fettuccine Alfredo",
+                "description": "170g",
                 "price": 14.99,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/items/fettuccine_alfredo.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/items/fettuccine_alfredo.png?raw=true",
+                "ingredients": [
+                    {"name": "Fettuccine"},
+                    {"name": "Heavy Cream"},
+                    {"name": "Butter"},
+                    {"name": "Parmesan Cheese"}
+                ]
             },
             {
                 "name": "Lasagna",
+                "description": "170g",
                 "price": 15.99,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/items/lasagna.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/items/lasagna.png?raw=true",
+                "ingredients": [
+                    {"name": "Lasagna Noodles"},
+                    {"name": "Ground Beef"},
+                    {"name": "Tomato Sauce"},
+                    {"name": "Ricotta Cheese"},
+                    {"name": "Mozzarella Cheese"}
+                ]
             },
             {
                 "name": "Spaghetti Bolognese",
+                "description": "170g",
                 "price": 12.99,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/items/spaghetti_bolognese.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/items/spaghetti_bolognese.png?raw=true",
+                "ingredients": [
+                    {"name": "Spaghetti"},
+                    {"name": "Ground Beef"},
+                    {"name": "Tomato Sauce"}
+                ]
             }
         ]
     },
@@ -62,28 +125,53 @@
         "items": [
             {
                 "name": "Soda",
+                "description": "500ml",
                 "price": 1.99,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/soda.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/soda.png?raw=true",
+                "ingredients": [
+                    {"name": "Soda"}
+                ]
             },
             {
                 "name": "Water",
+                "description": "500ml",
                 "price": 0.99,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/water.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/water.png?raw=true",
+                "ingredients": [
+                    {"name": "Water"}
+                ]
             },
             {
                 "name": "Wine",
+                "description": "1.5L",
                 "price": 15.99,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/wine.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/wine.png?raw=true",
+                "ingredients": [
+                    {"name": "Wine"}
+                ]
             },
             {
                 "name": "Iced Tea",
+                "description": "500ml",
                 "price": 2.49,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/iced_tea.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/iced_tea.png?raw=true",
+                "ingredients": [
+                    {"name": "Green Tea"},
+                    {"name": "Ice"},
+                    {"name": "Lemon"}
+                ]
             },
             {
                 "name": "Lemonade",
+                "description": "500ml",
                 "price": 2.49,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/lemonade.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/lemonade.png?raw=true",
+                "ingredients": [
+                    {"name": "Water"},
+                    {"name": "Lemon"},
+                    {"name": "Ice"},
+                    {"name": "Sugar"}
+                ]
             }
         ]
     },
@@ -93,23 +181,48 @@
         "items": [
             {
                 "name": "Tiramisu",
+                "description": "150g",
                 "price": 7.99,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/items/tiramisu.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/items/tiramisu.png?raw=true",
+                "ingredients": [
+                    {"name": "Mascarpone Cheese"},
+                    {"name": "Ladyfingers"},
+                    {"name": "Coffee"},
+                    {"name": "Cocoa Powder"}
+                ]
             },
             {
                 "name": "Cannoli",
+                "description": "150g",
                 "price": 6.99,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/items/cannoli.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/items/cannoli.png?raw=true",
+                "ingredients": [
+                    {"name": "Cannoli Shells"},
+                    {"name": "Ricotta Cheese"},
+                    {"name": "Sugar"}
+                ]
             },
             {
                 "name": "Cheesecake",
+                "description": "200g",
                 "price": 6.99,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/items/cheesecake.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/items/cheesecake.png?raw=true",
+                "ingredients": [
+                    {"name": "Cream Cheese"},
+                    {"name": "Graham Cracker Crust"},
+                    {"name": "Sugar"}
+                ]
             },
             {
                 "name": "Panna Cotta",
+                "description": "150g",
                 "price": 8.99,
-                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/items/panna_cotta.png?raw=true"
+                "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/items/panna_cotta.png?raw=true",
+                "ingredients": [
+                    {"name": "Heavy Cream"},
+                    {"name": "Sugar"},
+                    {"name": "Vanilla Extract"}
+                ]
             }
         ]
     }

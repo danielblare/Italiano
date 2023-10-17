@@ -12,7 +12,7 @@ struct MenuItemView: View {
     @State private var item: MenuItem
     
     init(item: MenuItem) {
-        self.item = item
+        self._item = .init(wrappedValue: item)
     }
     
     var body: some View {
@@ -52,22 +52,24 @@ struct MenuItemView: View {
                         }
                     }
                     
-                    GroupBox {
-                        Text("Options:")
-                            .foregroundStyle(Color.palette.oliveGreen)
-                            .font(.asset.extra)
+                    if !item.options.isEmpty {
+                        GroupBox {
+                            Text("Options:")
+                                .foregroundStyle(Color.palette.oliveGreen)
+                                .font(.asset.extra)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            ForEach(item.options) { option in
+                                let binding = Binding<Option> { option } set: {
+                                    guard let index = item.options.firstIndex(of: option) else { return }
+                                    item.options[index] = $0
+                                }
+                                VStack {
+                                    OptionView(option: binding)
+                                }
+                            }
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        HStack {
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.palette.lightGreen)
-                                .frame(width: 25, height: 25)
-                                
-                            Text("Gluten free base")
-                                .font(.asset.menuItem)
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-
                     }
                 }
                 .multilineTextAlignment(.leading)

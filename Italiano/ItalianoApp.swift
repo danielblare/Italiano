@@ -14,6 +14,8 @@ typealias Offer = SchemaV1.Offer
 typealias Location = SchemaV1.Location
 typealias MenuSection = SchemaV1.MenuSection
 typealias MenuItem = SchemaV1.MenuItem
+typealias Ingredient = SchemaV1.Ingredient
+typealias Option = SchemaV1.Option
 
 @main
 struct ItalianoApp: App {

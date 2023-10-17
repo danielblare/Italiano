@@ -54,9 +54,10 @@ struct MenuSectionView: View {
     @State var routeManager: RouteManager = RouteManager()
     @State var cacheManager: CacheManager = CacheManager()
     
-    return NavigationStack {
-        SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
+        NavigationStack {
             MenuSectionView(section: .dummy)
+                .navigationDestination(for: Route.self) { $0 }
         }
         .environment(routeManager)
         .environment(cacheManager)

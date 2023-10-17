@@ -91,8 +91,8 @@ struct OfferView: View {
     @State var routeManager: RouteManager = RouteManager()
     @State var cacheManager: CacheManager = CacheManager()
 
-    return NavigationStack {
-        SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
+        NavigationStack {
             OfferView(offer: .dummy)
         }
         .environment(routeManager)

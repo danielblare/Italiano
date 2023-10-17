@@ -23,7 +23,7 @@ struct ContentView: View {
                 MapView()
                     .tag(1)
                     .tabItem { Label("Map", systemImage: "map") }
-                MenuView()
+                MenuView(sections: (try? JSONDecoder.decode(from: "Menu", type: [MenuSection].self)) ?? [])
                     .tag(2)
                     .tabItem { Label("Menu", systemImage: "list.clipboard") }
                 Text("Account View")
@@ -40,7 +40,7 @@ struct ContentView: View {
     @State var routeManager: RouteManager = RouteManager()
 
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self),
-                            items: try! JSONDecoder.decode(from: "Offers", type: [Offer].self) + (try! JSONDecoder.decode(from: "Locations", type: [Location].self)) + (try! JSONDecoder.decode(from: "Menu", type: [MenuSection].self))) {
+                            items: try! JSONDecoder.decode(from: "Offers", type: [Offer].self) + (try! JSONDecoder.decode(from: "Locations", type: [Location].self))) {
         ContentView()
             .environment(cacheManager)
             .environment(routeManager)

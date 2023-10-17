@@ -12,7 +12,11 @@ struct MenuView: View {
     
     @Environment(RouteManager.self) private var routeManager
     
-    @Query(sort: \MenuSection.name, order: .reverse) private var sections: [MenuSection]
+    private let sections: [MenuSection]
+    
+    init(sections: [MenuSection]) {
+        self.sections = sections.sorted { $0.name > $1.name }
+    }
     
     var body: some View {
         ScrollView {
@@ -45,9 +49,9 @@ struct MenuView: View {
     @State var routeManager: RouteManager = RouteManager()
     @Bindable var man = routeManager
 
-    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: try! JSONDecoder.decode(from: "Menu", type: [MenuSection].self)) {
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
         NavigationStack(path: $man.routes) {
-            MenuView()
+            MenuView(sections: try! JSONDecoder.decode(from: "Menu", type: [MenuSection].self))
                 .navigationDestination(for: Route.self) { $0 }
         }
         .environment(cacheManager)

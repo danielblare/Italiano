@@ -7,16 +7,18 @@
 
 import SwiftUI
 import MapKit
-import SwiftData
-import Observation
 
 /// Map tab view
 struct MapView: View {
     @State private var viewModel: MapViewModel = MapViewModel()
-    @Query private var locations: [Location]
+    private let locations: [Location]
+    
+    init(locations: [Location]) {
+        self.locations = locations
+    }
     
     /// Location selected by user on the map
-    @State var selectedLocation: Location?
+    @State private var selectedLocation: Location?
     
     /// Default map camera position
     @State private var cameraPosition: MapCameraPosition = .region(MKCoordinateRegion(center: CLLocationCoordinate2DMake(53.3498, -6.2603), latitudinalMeters: 20000, longitudinalMeters: 20000))
@@ -110,15 +112,12 @@ struct MapView: View {
 #Preview {
     @State var cacheManager: CacheManager = CacheManager()
     @State var routeManager: RouteManager = RouteManager()
-
+    
     @Bindable var man = routeManager
-    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self),
-                            items: try! JSONDecoder.decode(from: "Locations", type: [Location].self)) {
-        NavigationStack(path: $man.routes) {
-            MapView()
-                .navigationDestination(for: Route.self) { $0 }
-        }
-            .environment(cacheManager)
-            .environment(routeManager)
+    return NavigationStack(path: $man.routes) {
+        MapView(locations: try! JSONDecoder.decode(from: "Locations", type: [Location].self))
+            .navigationDestination(for: Route.self) { $0 }
     }
+    .environment(cacheManager)
+    .environment(routeManager)
 }

@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import Observation
 
 /// A utility class for managing caching operations.
 @Observable final class CacheManager {

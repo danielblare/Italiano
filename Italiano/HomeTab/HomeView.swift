@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct HomeView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @Environment(RouteManager.self) private var routeManager
 
-    @Query private var offers: [Offer]
+    private let offers: [Offer]
+    
+    init(offers: [Offer]) {
+        self.offers = offers
+    }
     
     var body: some View {
         ScrollView {
@@ -60,14 +63,11 @@ struct HomeView: View {
     @State var cacheManager: CacheManager = CacheManager()
     @State var routeManager: RouteManager = RouteManager()
     @Bindable var man = routeManager
-
-    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self),
-                     items: try! JSONDecoder.decode(from: "Offers", type: [Offer].self)) {
-        NavigationStack(path: $man.routes) {
-            HomeView()
-                .navigationDestination(for: Route.self) { $0 }
-        }
-        .environment(cacheManager)
-        .environment(routeManager)
+    
+    return NavigationStack(path: $man.routes) {
+        HomeView(offers: try! JSONDecoder.decode(from: "Offers", type: [Offer].self))
+            .navigationDestination(for: Route.self) { $0 }
     }
+    .environment(cacheManager)
+    .environment(routeManager)
 }

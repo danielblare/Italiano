@@ -7,7 +7,6 @@
 
 import Foundation
 import MapKit
-import Observation
 
 @Observable
 final class MapViewModel {

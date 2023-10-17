@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import SwiftData
-import Observation
 
 // MARK: SwiftData Models
 typealias Offer = SchemaV1.Offer

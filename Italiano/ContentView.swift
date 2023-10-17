@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import SwiftData
-import Observation
 
 struct ContentView: View {
     
@@ -17,10 +15,10 @@ struct ContentView: View {
         @Bindable var routeManager = routeManager
         NavigationStack(path: $routeManager.routes) {
             TabView(selection: .constant(2)) {
-                HomeView()
+                HomeView(offers: (try? JSONDecoder.decode(from: "Offers", type: [Offer].self)) ?? [])
                     .tabItem { Label("Home", systemImage: "house") }
                     .tag(0)
-                MapView()
+                MapView(locations: (try? JSONDecoder.decode(from: "Locations", type: [Location].self)) ?? [])
                     .tag(1)
                     .tabItem { Label("Map", systemImage: "map") }
                 MenuView(sections: (try? JSONDecoder.decode(from: "Menu", type: [MenuSection].self)) ?? [])
@@ -39,8 +37,7 @@ struct ContentView: View {
     @State var cacheManager: CacheManager = CacheManager()
     @State var routeManager: RouteManager = RouteManager()
 
-    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self),
-                            items: try! JSONDecoder.decode(from: "Offers", type: [Offer].self) + (try! JSONDecoder.decode(from: "Locations", type: [Location].self))) {
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
         ContentView()
             .environment(cacheManager)
             .environment(routeManager)

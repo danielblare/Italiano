@@ -12,17 +12,16 @@ import MapKit
 enum SchemaV1: VersionedSchema {
     
     static var models: [any PersistentModel.Type] {
-        [Offer.self, Location.self]
+        []
     }
     
     static var versionIdentifier: Schema.Version = .init(1, 0, 0)
 }
 
 extension SchemaV1 {
-    
-    @Model
-    final class Offer: Decodable {
-        @Attribute(.unique)
+        
+    struct Offer: Decodable, Identifiable, Hashable, Equatable {
+        var id: String { title }
         let title: String
         let text: String
         
@@ -60,14 +59,11 @@ extension SchemaV1 {
             self.image = try container.decode(URL.self, forKey: .image)
         }
         
-        static var dummy: Offer { 
-            Offer(title: "Taste of Tuscany", text: "Transport your taste buds to Tuscany with our rustic antipasto platter. Enjoy olives, cured meats, and fresh mozzarella, perfectly complemented by a bottle of red wine.", offerText: "Special Offer: Free bottle of wine with orders over $50!", badge: "50% OFF", promoCode: "1DIA4N49", image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/taste_of_tuscany.png?raw=true")!)
-        }
+        static var dummy = Offer(title: "Taste of Tuscany", text: "Transport your taste buds to Tuscany with our rustic antipasto platter. Enjoy olives, cured meats, and fresh mozzarella, perfectly complemented by a bottle of red wine.", offerText: "Special Offer: Free bottle of wine with orders over $50!", badge: "50% OFF", promoCode: "1DIA4N49", image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/taste_of_tuscany.png?raw=true")!)
     }
     
-    @Model
-    final class Location: Decodable {
-        @Attribute(.unique)
+    struct Location: Decodable, Identifiable, Hashable, Equatable {
+        var id: String { name }
         let name: String
         let info: String
         let image: URL
@@ -100,9 +96,7 @@ extension SchemaV1 {
             self.coordinate = try container.decode(CLLocationCoordinate2D.self, forKey: .coordinate)
         }
         
-        static var dummy: Location {
-            Location(name: "Apex Business Cntr, Blackthorn Rd", info: "Nestled in the heart of the business district, our Apex location offers a modern Italian dining experience with a stunning view of the city skyline", schedule: "10am - 8pm", image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/taste_of_tuscany.png?raw=true")!, coordinate: CLLocationCoordinate2D(latitude: 53.342025, longitude: -6.267628))
-        }
+        static var dummy = Location(name: "Apex Business Cntr, Blackthorn Rd", info: "Nestled in the heart of the business district, our Apex location offers a modern Italian dining experience with a stunning view of the city skyline", schedule: "10am - 8pm", image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/taste_of_tuscany.png?raw=true")!, coordinate: CLLocationCoordinate2D(latitude: 53.342025, longitude: -6.267628))
     }
     
     struct MenuSection: Decodable, Identifiable, Equatable, Hashable {

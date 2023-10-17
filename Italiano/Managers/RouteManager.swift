@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Observation
 
 enum Route: Hashable {
     case offer(_ offer: Offer)

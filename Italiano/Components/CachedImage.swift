@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Observation
 
 /// Tries to fetch image from cache. If it's not there just downloads image and caches it for future
 struct CachedImage: View {

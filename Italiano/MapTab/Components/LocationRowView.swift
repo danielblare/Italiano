@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Observation
 
 /// Row view representing location on the map with description and ETA travel distance/time
 struct LocationRowView: View {
@@ -93,13 +92,10 @@ struct LocationRowView: View {
     @State var routeManager: RouteManager = RouteManager()
     @State var cacheManager: CacheManager = CacheManager()
 
-    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self),
-                            items: try! JSONDecoder.decode(from: "Locations", type: [Location].self)) {
-        NavigationStack {
-            LocationRowView(directionManager: DirectionManager.shared, location: .dummy, isSelected: false)
-                .padding()
-        }
-        .environment(routeManager)
-        .environment(cacheManager)
+    return NavigationStack {
+        LocationRowView(directionManager: DirectionManager.shared, location: .dummy, isSelected: false)
+            .padding()
     }
+    .environment(routeManager)
+    .environment(cacheManager)
 }

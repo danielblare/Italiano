@@ -5,7 +5,7 @@
         "items": [
             {
                 "name": "Margherita",
-                "description": "30 cm, 8 pcs",
+                "info": "30 cm, 8 pcs",
                 "price": 10.99,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/margherita.png?raw=true",
                 "ingredients": [
@@ -20,7 +20,7 @@
             },
             {
                 "name": "Pepperoni",
-                "description": "30 cm, 8 pcs",
+                "info": "30 cm, 8 pcs",
                 "price": 12.99,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/pepperoni.png?raw=true",
                 "ingredients": [
@@ -35,7 +35,7 @@
             },
             {
                 "name": "Vegetarian",
-                "description": "30 cm, 8 pcs",
+                "info": "30 cm, 8 pcs",
                 "price": 11.99,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/vegetarian.png?raw=true",
                 "ingredients": [
@@ -52,7 +52,7 @@
             },
             {
                 "name": "Supreme",
-                "description": "30 cm, 8 pcs",
+                "info": "30 cm, 8 pcs",
                 "price": 14.99,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/supreme.png?raw=true",
                 "ingredients": [
@@ -70,7 +70,7 @@
             },
             {
                 "name": "Mushroom",
-                "description": "30 cm, 8 pcs",
+                "info": "30 cm, 8 pcs",
                 "price": 11.99,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/mushroom.png?raw=true",
                 "ingredients": [
@@ -91,7 +91,7 @@
         "items": [
             {
                 "name": "Spaghetti Carbonara",
-                "description": "170g",
+                "info": "170g",
                 "price": 13.99,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/items/spaghetti_carbonara.png?raw=true",
                 "ingredients": [
@@ -107,7 +107,7 @@
             },
             {
                 "name": "Fettuccine Alfredo",
-                "description": "170g",
+                "info": "170g",
                 "price": 14.99,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/items/fettuccine_alfredo.png?raw=true",
                 "ingredients": [
@@ -123,7 +123,7 @@
             },
             {
                 "name": "Lasagna",
-                "description": "170g",
+                "info": "170g",
                 "price": 15.99,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/items/lasagna.png?raw=true",
                 "ingredients": [
@@ -140,7 +140,7 @@
             },
             {
                 "name": "Spaghetti Bolognese",
-                "description": "170g",
+                "info": "170g",
                 "price": 12.99,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pasta/items/spaghetti_bolognese.png?raw=true",
                 "ingredients": [
@@ -161,7 +161,7 @@
         "items": [
             {
                 "name": "Soda",
-                "description": "500ml",
+                "info": "500ml",
                 "price": 1.99,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/soda.png?raw=true",
                 "ingredients": [
@@ -173,7 +173,7 @@
             },
             {
                 "name": "Water",
-                "description": "500ml",
+                "info": "500ml",
                 "price": 0.99,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/water.png?raw=true",
                 "ingredients": [
@@ -182,7 +182,7 @@
             },
             {
                 "name": "Wine",
-                "description": "1.5L",
+                "info": "1.5L",
                 "price": 15.99,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/wine.png?raw=true",
                 "ingredients": [
@@ -191,7 +191,7 @@
             },
             {
                 "name": "Iced Tea",
-                "description": "500ml",
+                "info": "500ml",
                 "price": 2.49,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/iced_tea.png?raw=true",
                 "ingredients": [
@@ -205,7 +205,7 @@
             },
             {
                 "name": "Lemonade",
-                "description": "500ml",
+                "info": "500ml",
                 "price": 2.49,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/drinks/items/lemonade.png?raw=true",
                 "ingredients": [
@@ -226,7 +226,7 @@
         "items": [
             {
                 "name": "Tiramisu",
-                "description": "150g",
+                "info": "150g",
                 "price": 7.99,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/items/tiramisu.png?raw=true",
                 "ingredients": [
@@ -241,7 +241,7 @@
             },
             {
                 "name": "Cannoli",
-                "description": "150g",
+                "info": "150g",
                 "price": 6.99,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/items/cannoli.png?raw=true",
                 "ingredients": [
@@ -252,7 +252,7 @@
             },
             {
                 "name": "Cheesecake",
-                "description": "200g",
+                "info": "200g",
                 "price": 6.99,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/items/cheesecake.png?raw=true",
                 "ingredients": [
@@ -263,7 +263,7 @@
             },
             {
                 "name": "Panna Cotta",
-                "description": "150g",
+                "info": "150g",
                 "price": 8.99,
                 "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/desserts/items/panna_cotta.png?raw=true",
                 "ingredients": [

@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct HomeView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @Environment(RouteManager.self) private var routeManager
 
+    // Temp
+    @Query private var cartItems: [CartItem]
+    
     private let offers: [Offer]
     
     init(offers: [Offer]) {
@@ -21,6 +25,19 @@ struct HomeView: View {
         ScrollView {
             if !offers.isEmpty {
                 OffersSection
+            }
+            if !cartItems.isEmpty {
+                VStack {
+                    ForEach(cartItems) { item in
+                        HStack {
+                            Text(item.item.name)
+                                
+                            Text("\(item.quantity)")
+                        }
+                    }
+                }
+            } else {
+                ContentUnavailableView("Cart is Empty", systemImage: "cart")
             }
         }
     }
@@ -64,10 +81,12 @@ struct HomeView: View {
     @State var routeManager: RouteManager = RouteManager()
     @Bindable var man = routeManager
     
-    return NavigationStack(path: $man.routes) {
-        HomeView(offers: try! JSONDecoder.decode(from: "Offers", type: [Offer].self))
-            .navigationDestination(for: Route.self) { $0 }
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItem.dummy]) {
+        NavigationStack(path: $man.routes) {
+            HomeView(offers: try! JSONDecoder.decode(from: "Offers", type: [Offer].self))
+                .navigationDestination(for: Route.self) { $0 }
+        }
+        .environment(cacheManager)
+        .environment(routeManager)
     }
-    .environment(cacheManager)
-    .environment(routeManager)
 }

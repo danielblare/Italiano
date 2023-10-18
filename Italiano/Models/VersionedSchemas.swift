@@ -30,6 +30,10 @@ extension SchemaV1 {
             self.quantity = quantity
         }
         
+        var totalPrice: Double {
+            Double(quantity) * item.price
+        }
+        
         static var dummy: CartItem {
             CartItem(item: MenuItem.dummy, quantity: 2)
         }

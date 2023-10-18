@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import Observation
 
 enum Route: Hashable {
     case offer(_ offer: Offer)
     case menuSection(_ section: MenuSection)
     case menuItem(_ item: MenuItem)
+    case cart
 }
 
 // MARK: Route View
@@ -23,6 +25,8 @@ extension Route: View {
             MenuSectionView(section: section)
         case .menuItem(let item):
             MenuItemView(item: item)
+        case .cart:
+            CartView()
         }
     }
 }

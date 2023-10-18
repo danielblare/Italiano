@@ -6,8 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MenuItemRowView: View {
+    @Environment(CartManager.self) private var cartManager
+    @Environment(\.modelContext) private var context
+    
+    @Query private var cartItems: [CartItem]
     let item: MenuItem
     
     var body: some View {
@@ -25,7 +30,7 @@ struct MenuItemRowView: View {
                     .foregroundStyle(Color.palette.oliveGreen)
                 
                 Button {
-                    
+                    cartManager.addToCart(item: item, cart: cartItems, context: context)
                 } label: {
                     Text("Add to cart")
                         .font(.asset.mainText)
@@ -50,8 +55,13 @@ struct MenuItemRowView: View {
 }
 
 #Preview {
-    SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
+    @State var cacheManager: CacheManager = CacheManager()
+    @State var cartManager: CartManager = CartManager()
+
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
         MenuItemRowView(item: .dummy)
             .padding()
     }
+    .environment(cacheManager)
+    .environment(cartManager)
 }

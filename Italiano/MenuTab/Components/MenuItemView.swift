@@ -9,10 +9,12 @@ import SwiftUI
 import SwiftData
 
 struct MenuItemView: View {
+    @Environment(CartManager.self) private var cartManager
     @Environment(\.modelContext) private var context
-    @State private var item: MenuItem
     
     @Query private var cartItems: [CartItem]
+
+    @State private var item: MenuItem
 
     init(item: MenuItem) {
         self._item = .init(wrappedValue: item)
@@ -78,13 +80,7 @@ struct MenuItemView: View {
                 .multilineTextAlignment(.leading)
                 
                 Button {
-                    print(item)
-                    if let index = cartItems.firstIndex(where: { $0.item == item }) {
-                        cartItems[index].quantity += 1
-                    } else {
-                        let newItem = CartItem(item: item)
-                        context.insert(newItem)
-                    }
+                    cartManager.addToCart(item: item, cart: cartItems, context: context)
                 } label: {
                     Text("Add to cart")
                         .font(.asset.buttonText)
@@ -101,9 +97,11 @@ struct MenuItemView: View {
 
 #Preview {
     @State var cacheManager: CacheManager = CacheManager()
-    
+    @State var cartManager: CartManager = CartManager()
+
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
         MenuItemView(item: .dummy)
             .environment(cacheManager)
+            .environment(cartManager)
     }
 }

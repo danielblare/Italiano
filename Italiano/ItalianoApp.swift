@@ -18,6 +18,7 @@ struct ItalianoApp: App {
     
     @State private var cacheManager: CacheManager = CacheManager()
     @State private var routeManager: RouteManager = RouteManager()
+    @State private var cartManager: CartManager = CartManager()
 
     var body: some Scene {
         WindowGroup {
@@ -25,6 +26,7 @@ struct ItalianoApp: App {
         }
         .environment(cacheManager)
         .environment(routeManager)
+        .environment(cartManager)
         .modelContainer(try! DataContainer.create(createDefaults: &firstLaunch))
     }
 }

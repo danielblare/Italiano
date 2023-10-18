@@ -14,9 +14,9 @@ struct MenuSectionView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Text(section.name)
-                    .font(.asset.heading1)
-                    .foregroundStyle(Color.palette.oliveGreen)
+//                Text(section.name)
+//                    .font(.asset.heading1)
+//                    .foregroundStyle(Color.palette.oliveGreen)
                 
                 Button {
                     
@@ -45,8 +45,10 @@ struct MenuSectionView: View {
                 .padding(.horizontal)
                 
             }
-            .padding()
+            .padding(.horizontal)
         }
+        .navigationTitle(section.name)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

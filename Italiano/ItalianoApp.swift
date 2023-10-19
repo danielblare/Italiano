@@ -13,6 +13,11 @@ typealias CartItem = SchemaV1.CartItem
 @main
 struct ItalianoApp: App {
     
+    init() {
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(.palette.oliveGreen)]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(.palette.oliveGreen)]
+    }
+    
     /// Indicates whether user launched app first time
     @AppStorage("firstLaunch") private var firstLaunch: Bool = true
     

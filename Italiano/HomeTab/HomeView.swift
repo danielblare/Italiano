@@ -26,18 +26,8 @@ struct HomeView: View {
             if !offers.isEmpty {
                 OffersSection
             }
-            if !cartItems.isEmpty {
-                VStack {
-                    ForEach(cartItems) { item in
-                        HStack {
-                            Text(item.item.name)
-                                
-                            Text("\(item.quantity)")
-                        }
-                    }
-                }
-            } else {
-                ContentUnavailableView("Cart is Empty", systemImage: "cart")
+            Button("Cart") {
+                routeManager.push(to: .cart)
             }
         }
     }

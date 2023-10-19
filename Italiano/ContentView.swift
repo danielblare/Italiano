@@ -25,7 +25,7 @@ struct ContentView: View {
     @Environment(RouteManager.self) private var routeManager
     @Environment(CartManager.self) private var cartManager
     
-    @State private var tabSelection: Tab = .menu
+    @State private var tabSelection: Tab = .home
 
     var body: some View {
         @Bindable var routeManager = routeManager
@@ -42,7 +42,8 @@ struct ContentView: View {
                     .tabItem { Label("Menu", systemImage: "list.clipboard") }
                     .tag(Tab.menu)
                 Text("Account View")
-                    .tabItem { Label("Acount", systemImage: "person") }
+                    .tabItem { Label("Account", systemImage: "person") }
+                    .tag(Tab.account)
                 
             }
             .navigationDestination(for: Route.self) { $0 }
@@ -60,10 +61,15 @@ struct ContentView: View {
     @State var cartManager: CartManager = CartManager()
     @State var routeManager: RouteManager = RouteManager()
 
-    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItem.dummy]) {
         ContentView()
             .environment(cacheManager)
             .environment(routeManager)
             .environment(cartManager)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    routeManager.push(to: .cart)
+                }
+            }
     }
 }

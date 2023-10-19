@@ -84,6 +84,7 @@ struct OfferView: View {
 
         }
         .navigationTitle(offer.title)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

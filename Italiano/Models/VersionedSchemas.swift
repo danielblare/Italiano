@@ -196,7 +196,7 @@ struct MenuItem: Codable, Identifiable, Equatable, Hashable {
         try container.encode(options, forKey: .options)
     }
     
-    static let dummy = MenuItem(name: "Margherita", info: "30 cm, 8 pcs", price: 10.99, image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/margherita.png?raw=true")!, ingredients: [.dummy], options: [.dummy])
+    static let dummy = MenuItem(name: "Margherita", info: "30 cm, 8 pcs", price: 10.99, image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/margherita.png?raw=true")!, ingredients: [.dummy], options: [Option(name: "Cheese", value: true), Option(name: "Milk", value: true), Option(name: "Long test", value: true), Option(name: "Test", value: true)])
 }
 
 struct Ingredient: Codable, Identifiable, Equatable, Hashable {

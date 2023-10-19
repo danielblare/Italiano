@@ -9,24 +9,32 @@ import SwiftUI
 import SwiftData
 
 struct CartView: View {
+    @Environment(\.modelContext) private var context
     
     @Query private var items: [CartItem]
     
     var body: some View {
         VStack {
-            List {
-                if items.isEmpty {
-                    ContentUnavailableView("Cart is Empty", systemImage: "cart")
-                        .padding(.vertical)
-                        .listRowSeparator(.hidden)
-                } else {
-                    ForEach(items) {
-                        CartRowView(item: $0)
-                    }
+            if items.isEmpty {
+                ContentUnavailableView("Cart is Empty", systemImage: "cart")
                     .listRowSeparator(.hidden)
+            } else {
+                List {
+                    ForEach(items) { item in
+                        NavigationLink(value: Route.cartItemOverview(item)) {
+                            CartRowView(item: item)
+                        }
+                    }
+                    .onDelete {
+                        guard let index = $0.first else { return }
+                        withAnimation {
+                            context.delete(items[index])
+                        }
+                    }
+//                    .listRowSeparator(.hidden)
                 }
+                .listStyle(.inset)
             }
-            .listStyle(.inset)
             
             VStack {
                 Divider()
@@ -66,7 +74,7 @@ struct CartView: View {
             .padding(.horizontal)
         }
         .navigationTitle("Cart")
-//        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -76,6 +84,7 @@ struct CartView: View {
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItem.dummy]) {
         NavigationStack {
             CartView()
+                .navigationDestination(for: Route.self) { $0 }
         }
     }
     .environment(cacheManager)

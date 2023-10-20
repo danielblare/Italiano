@@ -11,6 +11,8 @@
 		BB03F2802ADC6C6C005238C5 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB03F27F2ADC6C6C005238C5 /* Double.swift */; };
 		BB0419682AD895090016D51C /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0419672AD895090016D51C /* MapViewModel.swift */; };
 		BB04196A2AD895290016D51C /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0419692AD895290016D51C /* CLLocation.swift */; };
+		BB3745CA2AE31B11000E342B /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3745C92AE31B11000E342B /* Line.swift */; };
+		BB3745CD2AE31B38000E342B /* DeliveryOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3745CC2AE31B38000E342B /* DeliveryOption.swift */; };
 		BB54B1482AD48920006151A6 /* CachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB54B1472AD48920006151A6 /* CachedImage.swift */; };
 		BB54B14A2AD48A09006151A6 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB54B1492AD48A09006151A6 /* CacheManager.swift */; };
 		BB6976022ACF32E000FD0753 /* ItalianoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6976012ACF32E000FD0753 /* ItalianoApp.swift */; };
@@ -76,6 +78,8 @@
 		BB03F27F2ADC6C6C005238C5 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		BB0419672AD895090016D51C /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		BB0419692AD895290016D51C /* CLLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocation.swift; sourceTree = "<group>"; };
+		BB3745C92AE31B11000E342B /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		BB3745CC2AE31B38000E342B /* DeliveryOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryOption.swift; sourceTree = "<group>"; };
 		BB54B1472AD48920006151A6 /* CachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImage.swift; sourceTree = "<group>"; };
 		BB54B1492AD48A09006151A6 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		BB6975FE2ACF32E000FD0753 /* Italiano.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Italiano.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,6 +153,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB3745CB2AE31B2C000E342B /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				BB3745CC2AE31B38000E342B /* DeliveryOption.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		BB6975F52ACF32E000FD0753 = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +197,7 @@
 				BB830B672AD1AD3C009CA51A /* HomeTab */,
 				BB6976312ACF338700FD0753 /* Utilities */,
 				BB6976302ACF338400FD0753 /* Managers */,
+				BB3745CB2AE31B2C000E342B /* Enums */,
 				BB69762F2ACF337F00FD0753 /* Extensions */,
 				BB69762E2ACF337C00FD0753 /* Models */,
 				BB69760A2ACF32E100FD0753 /* Preview Content */,
@@ -302,6 +315,7 @@
 				BBAF51C52AE05FD000091282 /* Cart */,
 				BB830B7E2AD1FAC6009CA51A /* Offer */,
 				BB54B1472AD48920006151A6 /* CachedImage.swift */,
+				BB3745C92AE31B11000E342B /* Line.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -528,6 +542,7 @@
 				BB54B14A2AD48A09006151A6 /* CacheManager.swift in Sources */,
 				BBAF51CD2AE0751800091282 /* CartRowView.swift in Sources */,
 				BBAF51C22AE05C8F00091282 /* CartManager.swift in Sources */,
+				BB3745CD2AE31B38000E342B /* DeliveryOption.swift in Sources */,
 				BB8E907E2ADF1D3700A2E56E /* OptionView.swift in Sources */,
 				BBFAF0E42ADDC237003C52CF /* MenuItemView.swift in Sources */,
 				BBA1D91A2ADB205000941988 /* MenuSectionView.swift in Sources */,
@@ -536,6 +551,7 @@
 				BB7D80482AD8926C0019E911 /* LocationRowView.swift in Sources */,
 				BB7436B62ADABC3C008FC984 /* MenuView.swift in Sources */,
 				BBF8962E2AD9E26F0076B476 /* TimeInterval.swift in Sources */,
+				BB3745CA2AE31B11000E342B /* Line.swift in Sources */,
 				BB830B632AD18FE7009CA51A /* SwiftDataPreview.swift in Sources */,
 				BBDF3DFB2AD2EC1B00DD56D5 /* RouteManager.swift in Sources */,
 				BB54B1482AD48920006151A6 /* CachedImage.swift in Sources */,

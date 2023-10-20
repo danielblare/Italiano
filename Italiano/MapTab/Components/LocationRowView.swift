@@ -18,6 +18,12 @@ struct LocationRowView: View {
     /// Whether location is selected on the map
     let isSelected: Bool
     
+    init(directionManager: DirectionManager, location: Location, isSelected: Bool = false) {
+        self.directionManager = directionManager
+        self.location = location
+        self.isSelected = isSelected
+    }
+    
     /// ETA distance
     @State private var distance: String?
     /// ETA travel time

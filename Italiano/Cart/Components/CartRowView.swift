@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CartRowView: View {
     let item: CartItem
-    @State var showOptions: Bool = false
     
     var body: some View {
         HStack(alignment: .center) {
@@ -44,27 +43,10 @@ struct CartRowView: View {
                 
                 let selectedOptions = item.item.options.filter({ $0.value })
                 if !selectedOptions.isEmpty {
-                    Button {
-                        showOptions.toggle()
-                    } label: {
-                        HStack {
-                            Text("Options")
-                            
-                            Image(systemName: "chevron.right")
-                                .rotationEffect(.degrees(showOptions ? 90 : 0))
-                        }
+                    Text(selectedOptions.map({ $0.name }).joined(separator: ", "))
                         .font(.asset.menuItem)
-                    }
-                    .buttonStyle(.plain)
-                    
-                    if showOptions {
-                        Text(selectedOptions.map({ $0.name }).joined(separator: ", "))
-                            .font(.asset.menuItem)
-                            .transition(.asymmetric(insertion: .push(from: .trailing), removal: .push(from: .leading)))
-                    }
                 }
             }
-            .animation(.interactiveSpring, value: showOptions)
         }
     }
 }

@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CartItemOverview: View {
     
-    let cartItem: CartItem
+    @Bindable var cartItem: CartItem
     
     init(item: CartItem) {
         self.cartItem = item
@@ -75,12 +76,17 @@ struct CartItemOverview: View {
                 .padding()
             }
             
-            HStack {
-                Text("Qty: \(cartItem.quantity)")
-                
-                Spacer()
-                
-                Text("Total: \(cartItem.totalPrice.formatPrice())")
+            VStack {
+                Stepper("Qty: \(cartItem.quantity)", value: $cartItem.quantity, in: 1...49, step: 1)
+                 
+                HStack {
+                    Text("Total:")
+                    
+                    Spacer()
+                    
+                    Text(cartItem.totalPrice.formatPrice())
+                        .padding(.top)
+                }
             }
             .font(.asset.heading2)
             .padding()

@@ -11,7 +11,6 @@ struct ItemAddedView: View {
     @Environment(RouteManager.self) private var routeManger
     @Environment(\.dismiss) private var dismiss
 
-    @State private var hapticTrigger: Bool = false
     let item: MenuItem
         
     var body: some View {
@@ -55,8 +54,6 @@ struct ItemAddedView: View {
             
             Spacer()
         }
-        .sensoryFeedback(.success, trigger: hapticTrigger)
-        .onAppear { hapticTrigger.toggle() }
     }
     
     private var ViewCartButton: some View {

@@ -86,14 +86,16 @@ struct Offer: Codable, Identifiable, Hashable, Equatable {
 struct Location: Codable, Identifiable, Hashable, Equatable {
     var id: String { name }
     let name: String
+    let address: String
     let info: String
     let image: URL
     let schedule: String
     
     let coordinate: CLLocationCoordinate2D
     
-    init(name: String, info: String, schedule: String, image: URL, coordinate: CLLocationCoordinate2D) {
+    init(name: String, address: String, info: String, schedule: String, image: URL, coordinate: CLLocationCoordinate2D) {
         self.name = name
+        self.address = address
         self.info = info
         self.schedule = schedule
         self.coordinate = coordinate
@@ -102,6 +104,7 @@ struct Location: Codable, Identifiable, Hashable, Equatable {
     
     enum CodingKeys: String, CodingKey {
         case name
+        case address
         case info = "description"
         case schedule
         case image
@@ -111,15 +114,16 @@ struct Location: Codable, Identifiable, Hashable, Equatable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.name = try container.decode(String.self, forKey: .name)
+        self.address = try container.decode(String.self, forKey: .address)
         self.info = try container.decode(String.self, forKey: .info)
         self.schedule = try container.decode(String.self, forKey: .schedule)
         self.image = try container.decode(URL.self, forKey: .image)
         self.coordinate = try container.decode(CLLocationCoordinate2D.self, forKey: .coordinate)
     }
     
-    static let empty = Location(name: "", info: "", schedule: "", image: URL(fileURLWithPath: ""), coordinate: CLLocationCoordinate2DMake(0, 0))
+    static let empty = Location(name: "", address: "", info: "", schedule: "", image: URL(fileURLWithPath: ""), coordinate: CLLocationCoordinate2DMake(0, 0))
     
-    static let dummy = Location(name: "Apex Business Cntr, Blackthorn Rd", info: "Nestled in the heart of the business district, our Apex location offers a modern Italian dining experience with a stunning view of the city skyline", schedule: "10am - 8pm", image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/taste_of_tuscany.png?raw=true")!, coordinate: CLLocationCoordinate2D(latitude: 53.342025, longitude: -6.267628))
+    static let dummy = Location(name: "Apex Business Center", address: "Apex Business Cntr, Blackthorn Rd", info: "Nestled in the heart of the business district, our Apex location offers a modern Italian dining experience with a stunning view of the city skyline", schedule: "10am - 8pm", image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/taste_of_tuscany.png?raw=true")!, coordinate: CLLocationCoordinate2D(latitude: 53.342025, longitude: -6.267628))
 }
 
 struct MenuSection: Codable, Identifiable, Equatable, Hashable {

@@ -1,6 +1,7 @@
 [
     {
-        "name": "Apex Business Cntr, Blackthorn Rd",
+        "name": "Apex Business Center",
+        "address": "123 Blackthorn Road, Apex Business Center, Dublin, Ireland",
         "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/apex_business_cntr.png?raw=true",
         "schedule": "10am - 11pm",
         "coordinate": {
@@ -11,6 +12,7 @@
     },
     {
         "name": "O'Connell Street",
+        "address": "456 O'Connell Street, Dublin, Ireland",
         "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/oconnell_street.png?raw=true",
         "schedule": "10am - 11pm",
         "coordinate": {
@@ -21,6 +23,7 @@
     },
     {
         "name": "Temple Bar",
+        "address": "789 Temple Bar, Dublin, Ireland",
         "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/temple_bar.png?raw=true",
         "schedule": "10am - 11pm",
         "coordinate": {
@@ -31,6 +34,7 @@
     },
     {
         "name": "Merrion Square",
+        "address": "321 Merrion Square, Dublin, Ireland",
         "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/merrion_square.png?raw=true",
         "schedule": "10am - 11pm",
         "coordinate": {
@@ -41,6 +45,7 @@
     },
     {
         "name": "St. Stephen's Green",
+        "address": "555 St. Stephen's Green, Dublin, Ireland",
         "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/st_stephens_green.png?raw=true",
         "schedule": "10am - 11pm",
         "coordinate": {
@@ -51,6 +56,7 @@
     },
     {
         "name": "Ranelagh",
+        "address": "987 Ranelagh, Dublin, Ireland",
         "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/ranelagh.png?raw=true",
         "schedule": "10am - 8pm",
         "coordinate": {
@@ -61,6 +67,7 @@
     },
     {
         "name": "Drumcondra",
+        "address": "456 Drumcondra, Dublin, Ireland",
         "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/drumcondra.png?raw=true",
         "schedule": "4pm - 11pm",
         "coordinate": {
@@ -71,6 +78,7 @@
     },
     {
         "name": "Sandyford",
+        "address": "789 Sandyford, Dublin, Ireland",
         "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/sandyford.png?raw=true",
         "schedule": "10am - 11pm",
         "coordinate": {
@@ -81,8 +89,9 @@
     },
     {
         "name": "Blanchardstown",
-        "schedule": "2pm - 11pm",
+        "address": "101 Blanchardstown, Dublin, Ireland",
         "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/blanchardstown.png?raw=true",
+        "schedule": "2pm - 11pm",
         "coordinate": {
             "latitude": 53.390208,
             "longitude": -6.395439
@@ -91,8 +100,9 @@
     },
     {
         "name": "Tallaght",
-        "schedule": "2pm - 11pm",
+        "address": "222 Tallaght, Dublin, Ireland",
         "image": "https://github.com/stuffeddanny/Italiano_files/blob/main/locations/tallaght.png?raw=true",
+        "schedule": "2pm - 11pm",
         "coordinate": {
             "latitude": 53.287732,
             "longitude": -6.369242

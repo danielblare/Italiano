@@ -14,10 +14,10 @@ struct ContentView: View {
         
         var title: String {
             switch self {
-            case .home: return "Home"
-            case .map: return "Map"
-            case .menu: return "Menu"
-            case .account: return "Account"
+            case .home: "Home"
+            case .map: "Map"
+            case .menu: "Menu"
+            case .account: "Account"
             }
         }
     }

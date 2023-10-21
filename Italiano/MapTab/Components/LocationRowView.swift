@@ -68,6 +68,11 @@ struct LocationRowView: View {
                         .multilineTextAlignment(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
+                    Text(location.address)
+                        .foregroundStyle(Color.palette.neutralDark)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top)
+
                     Button {
                         directionManager.openInMaps(location)
                     } label: {

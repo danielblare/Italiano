@@ -64,7 +64,14 @@ struct CartView: View {
     }
     
     private var ProceedButton: some View {
-        NavigationLink(value: 1) {
+        let address = {
+            switch deliveryOption {
+            case .delivery: return deliveryAddress
+            case .pickup: return pickupLocation.address
+            }
+        }()
+        
+        return NavigationLink(value: Route.cardDetails(deliveryOption: deliveryOption, address: address)) {
             Text("Proceed")
                 .font(.asset.buttonText)
                 .padding(.horizontal, 30)

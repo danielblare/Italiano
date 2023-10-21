@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum DeliveryOption: String, Codable {
+enum DeliveryOption: String {
     case delivery
     case pickup
     
@@ -20,8 +20,8 @@ enum DeliveryOption: String, Codable {
     
     var price: Double {
         switch self {
-        case .delivery: return 15
-        case .pickup: return 0
+        case .delivery: 15
+        case .pickup: 0
         }
     }
 }

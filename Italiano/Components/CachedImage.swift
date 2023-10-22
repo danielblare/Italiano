@@ -10,8 +10,9 @@ import SwiftUI
 /// Tries to fetch image from cache. If it's not there just downloads image and caches it for future
 struct CachedImage: View {
     
-    @Environment(CacheManager.self) private var manager: CacheManager
-    
+    /// Dependency injection
+    @Environment(Dependencies.self) private var dependencies
+
     let url: URL
     @State private var image: UIImage?
     
@@ -31,6 +32,7 @@ struct CachedImage: View {
             }
         }
         .task {
+            let manager = dependencies.cacheManager
             let key = url.relativePath
             
             if let savedImage = manager.getFrom(manager.imagesCache, forKey: key) {
@@ -47,9 +49,9 @@ struct CachedImage: View {
 }
 
 #Preview {
-    @State var manager = CacheManager()
-    
+    @State var dependencies = Dependencies()
+
     return CachedImage(url: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/taste_of_tuscany.png?raw=true")!)
         .frame(width: 300, height: 300)
-        .environment(manager)
+        .environment(dependencies)
 }

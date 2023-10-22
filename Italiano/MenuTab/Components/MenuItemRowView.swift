@@ -9,7 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct MenuItemRowView: View {
-    @Environment(CartManager.self) private var cartManager
+    /// Dependency injection
+    @Environment(Dependencies.self) private var dependencies
     @Environment(\.modelContext) private var context
     
     @Query private var cartItems: [CartItem]
@@ -30,7 +31,7 @@ struct MenuItemRowView: View {
                     .foregroundStyle(Color.palette.oliveGreen)
                 
                 Button {
-                    cartManager.addToCart(item: item, cart: cartItems, context: context)
+                    dependencies.cartManager.addToCart(item: item, cart: cartItems, context: context)
                 } label: {
                     Text("Add to cart")
                         .font(.asset.mainText)
@@ -55,13 +56,11 @@ struct MenuItemRowView: View {
 }
 
 #Preview {
-    @State var cacheManager: CacheManager = CacheManager()
-    @State var cartManager: CartManager = CartManager()
+    @State var dependencies = Dependencies()
 
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
         MenuItemRowView(item: .dummy)
             .padding()
     }
-    .environment(cacheManager)
-    .environment(cartManager)
+    .environment(dependencies)
 }

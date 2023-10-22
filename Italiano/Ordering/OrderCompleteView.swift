@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct OrderCompleteView: View {
+    /// Dependency injection
+    @Environment(Dependencies.self) private var dependencies
     @Environment(\.dismiss) private var dismiss
-    @Environment(RouteManager.self) private var routeManger
 
     var body: some View {
         VStack(spacing: 20) {
@@ -37,7 +38,7 @@ struct OrderCompleteView: View {
     
     private var ProceedButton: some View {
         Button {
-            routeManger.reset()
+            dependencies.routeManager.reset()
             dismiss.callAsFunction()
         } label: {
             Text("Main screen")
@@ -52,10 +53,8 @@ struct OrderCompleteView: View {
 }
 
 #Preview {
-    @State var cartManager = CartManager()
-    @State var routeManager = RouteManager()
-    
+    @State var dependencies = Dependencies()
+
     return OrderCompleteView()
-        .environment(cartManager)
-        .environment(routeManager)
+        .environment(dependencies)
 }

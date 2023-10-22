@@ -89,15 +89,13 @@ struct OfferView: View {
 }
 
 #Preview {
-    @State var routeManager: RouteManager = RouteManager()
-    @State var cacheManager: CacheManager = CacheManager()
+    @State var dependencies = Dependencies()
 
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
         NavigationStack {
             OfferView(offer: .dummy)
         }
-        .environment(routeManager)
-        .environment(cacheManager)
+        .environment(dependencies)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

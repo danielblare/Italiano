@@ -78,7 +78,7 @@ struct CartItemOverview: View {
             
             VStack {
                 Stepper("Qty: \(cartItem.quantity)", value: $cartItem.quantity, in: 1...49, step: 1)
-                 
+                
                 HStack {
                     Text("Total:")
                     
@@ -90,7 +90,7 @@ struct CartItemOverview: View {
             }
             .font(.asset.heading2)
             .padding()
-
+            
         }
         .navigationTitle(item.name)
         .navigationBarTitleDisplayMode(.inline)
@@ -98,12 +98,12 @@ struct CartItemOverview: View {
 }
 
 #Preview {
-    @State var cacheManager: CacheManager = CacheManager()
-
+    @State var dependencies = Dependencies()
+    
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
         NavigationStack {
             CartItemOverview(item: .dummy)
         }
-            .environment(cacheManager)
+        .environment(dependencies)
     }
 }

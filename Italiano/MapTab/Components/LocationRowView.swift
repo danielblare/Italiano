@@ -100,13 +100,11 @@ struct LocationRowView: View {
 }
 
 #Preview {
-    @State var routeManager: RouteManager = RouteManager()
-    @State var cacheManager: CacheManager = CacheManager()
+    @State var dependencies = Dependencies()
 
     return NavigationStack {
         LocationRowView(directionManager: DirectionManager.shared, location: .dummy, isSelected: false)
             .padding()
     }
-    .environment(routeManager)
-    .environment(cacheManager)
+    .environment(dependencies)
 }

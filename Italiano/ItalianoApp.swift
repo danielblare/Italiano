@@ -6,9 +6,24 @@
 //
 
 import SwiftUI
+import Observation
 
 // MARK: SwiftData Models
 typealias CartItem = SchemaV1.CartItem
+
+@Observable
+final class Dependencies {
+    let cacheManager: CacheManager
+    let routeManager: RouteManager
+    let cartManager: CartManager
+    
+    init() {
+        self.cacheManager = CacheManager()
+        self.routeManager = RouteManager()
+        self.cartManager = CartManager()
+        
+    }
+}
 
 @main
 struct ItalianoApp: App {
@@ -21,17 +36,13 @@ struct ItalianoApp: App {
     /// Indicates whether user launched app first time
     @AppStorage("firstLaunch") private var firstLaunch: Bool = true
     
-    @State private var cacheManager: CacheManager = CacheManager()
-    @State private var routeManager: RouteManager = RouteManager()
-    @State private var cartManager: CartManager = CartManager()
+    @State private var dependencies: Dependencies = Dependencies()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .environment(cacheManager)
-        .environment(routeManager)
-        .environment(cartManager)
+        .environment(dependencies)
         .modelContainer(try! DataContainer.create(createDefaults: &firstLaunch))
     }
 }

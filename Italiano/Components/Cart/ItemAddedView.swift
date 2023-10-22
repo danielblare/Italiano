@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ItemAddedView: View {
-    @Environment(RouteManager.self) private var routeManger
+    /// Dependency injection
+    @Environment(Dependencies.self) private var dependencies
     @Environment(\.dismiss) private var dismiss
 
     let item: MenuItem
@@ -58,7 +59,7 @@ struct ItemAddedView: View {
     
     private var ViewCartButton: some View {
         Button {
-            routeManger.push(to: .cart)
+            dependencies.routeManager.push(to: .cart)
             dismiss.callAsFunction()
         } label: {
             Text("View cart")
@@ -91,14 +92,12 @@ struct ItemAddedView: View {
 }
 
 #Preview {
-    @State var cacheManager = CacheManager()
-    @State var routeManager = RouteManager()
-    
+    @State var dependencies = Dependencies()
+
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
         NavigationStack {
             ItemAddedView(item: .dummy)
         }
     }
-    .environment(cacheManager)
-    .environment(routeManager)
+    .environment(dependencies)
 }

@@ -9,8 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct OrderConfirmationView: View {
-    @Environment(RouteManager.self) private var routeManager
-    @Environment(CartManager.self) private var cartManager
+    /// Dependency injection
+    @Environment(Dependencies.self) private var dependencies
 
     @Query private var cartItems: [CartItem]
     
@@ -70,7 +70,7 @@ struct OrderConfirmationView: View {
     
     private var BackButton: some View {
         Button {
-            routeManager.back()
+            dependencies.routeManager.back()
         } label: {
             Text("Back")
                 .font(.asset.buttonText)
@@ -88,7 +88,7 @@ struct OrderConfirmationView: View {
     
     private var ConfirmButton: some View {
         Button {
-            cartManager.showOrderComplete = true
+            dependencies.cartManager.showOrderComplete = true
         } label: {
             Text("Confirm")
                 .font(.asset.buttonText)
@@ -187,17 +187,13 @@ struct OrderConfirmationView: View {
 }
 
 #Preview {
-    @State var cacheManager = CacheManager()
-    @State var cartManager = CartManager()
-    @State var routeManager = RouteManager()
-    
+    @State var dependencies = Dependencies()
+
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItem.dummy]) {
         NavigationStack {
             OrderConfirmationView(info: .dummy)
                 .navigationDestination(for: Route.self) { $0 }
         }
-        .environment(cacheManager)
-        .environment(routeManager)
-        .environment(cartManager)
+        .environment(dependencies)
     }
 }

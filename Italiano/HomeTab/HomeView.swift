@@ -9,25 +9,16 @@ import SwiftUI
 import SwiftData
 
 struct HomeView: View {
+    /// Dependency injection
+    @Environment(Dependencies.self) private var dependencies
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    @Environment(RouteManager.self) private var routeManager
 
-    // Temp
-    @Query private var cartItems: [CartItem]
-    
-    private let offers: [Offer]
-    
-    init(offers: [Offer]) {
-        self.offers = offers
-    }
+    private let offers: [Offer] = (try? JSONDecoder.decode(from: "Offers", type: [Offer].self)) ?? []
     
     var body: some View {
         ScrollView {
             if !offers.isEmpty {
                 OffersSection
-            }
-            Button("Cart") {
-                routeManager.push(to: .cart)
             }
         }
     }
@@ -67,16 +58,14 @@ struct HomeView: View {
 }
 
 #Preview {
-    @State var cacheManager: CacheManager = CacheManager()
-    @State var routeManager: RouteManager = RouteManager()
-    @Bindable var man = routeManager
+    @State var dependencies = Dependencies()
+    @Bindable var routeManager = dependencies.routeManager
     
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItem.dummy]) {
-        NavigationStack(path: $man.routes) {
-            HomeView(offers: try! JSONDecoder.decode(from: "Offers", type: [Offer].self))
+        NavigationStack(path: $routeManager.routes) {
+            HomeView()
                 .navigationDestination(for: Route.self) { $0 }
         }
-        .environment(cacheManager)
-        .environment(routeManager)
+        .environment(dependencies)
     }
 }

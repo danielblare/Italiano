@@ -9,42 +9,39 @@ import SwiftUI
 
 struct ContentView: View {
     
+    /// Tab view tabs
     enum Tab {
-        case home, map, menu, account
+        case home, map, menu
         
         var title: String {
             switch self {
             case .home: "Home"
             case .map: "Map"
             case .menu: "Menu"
-            case .account: "Account"
             }
         }
     }
     
-    @Environment(RouteManager.self) private var routeManager
-    @Environment(CartManager.self) private var cartManager
+    /// Dependency injection
+    @Environment(Dependencies.self) private var dependencies
     
+    /// Currently selected tab
     @State private var tabSelection: Tab = .home
 
     var body: some View {
-        @Bindable var routeManager = routeManager
-        @Bindable var cartManager = cartManager
+        @Bindable var routeManager = dependencies.routeManager
+        @Bindable var cartManager = dependencies.cartManager
         NavigationStack(path: $routeManager.routes) {
             TabView(selection: $tabSelection) {
-                HomeView(offers: (try? JSONDecoder.decode(from: "Offers", type: [Offer].self)) ?? [])
+                HomeView()
                     .tabItem { Label("Home", systemImage: "house") }
                     .tag(Tab.home)
-                MapView(locations: (try? JSONDecoder.decode(from: "Locations", type: [Location].self)) ?? [])
+                MapView()
                     .tabItem { Label("Map", systemImage: "map") }
                     .tag(Tab.map)
-                MenuView(sections: (try? JSONDecoder.decode(from: "Menu", type: [MenuSection].self)) ?? [])
+                MenuView()
                     .tabItem { Label("Menu", systemImage: "list.clipboard") }
                     .tag(Tab.menu)
-                Text("Account View")
-                    .tabItem { Label("Account", systemImage: "person") }
-                    .tag(Tab.account)
-                
             }
             .navigationDestination(for: Route.self) { $0 }
             .navigationTitle(tabSelection.title)
@@ -63,18 +60,14 @@ struct ContentView: View {
 }
 
 #Preview {
-    @State var cacheManager: CacheManager = CacheManager()
-    @State var cartManager: CartManager = CartManager()
-    @State var routeManager: RouteManager = RouteManager()
+    @State var dependencies = Dependencies()
 
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItem.dummy]) {
         ContentView()
-            .environment(cacheManager)
-            .environment(routeManager)
-            .environment(cartManager)
+            .environment(dependencies)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    routeManager.push(to: .cart)
+                    dependencies.routeManager.push(to: .cart)
                 }
             }
     }

@@ -10,12 +10,10 @@ import MapKit
 
 /// Map tab view
 struct MapView: View {
-    @State private var viewModel: MapViewModel = MapViewModel()
-    private let locations: [Location]
     
-    init(locations: [Location]) {
-        self.locations = locations
-    }
+    @State private var viewModel: MapViewModel = MapViewModel()
+    
+    private let locations: [Location] = (try? JSONDecoder.decode(from: "Locations", type: [Location].self)) ?? []
     
     /// Location selected by user on the map
     @State private var selectedLocation: Location?
@@ -110,14 +108,12 @@ struct MapView: View {
 
 
 #Preview {
-    @State var cacheManager: CacheManager = CacheManager()
-    @State var routeManager: RouteManager = RouteManager()
-    
-    @Bindable var man = routeManager
-    return NavigationStack(path: $man.routes) {
-        MapView(locations: try! JSONDecoder.decode(from: "Locations", type: [Location].self))
+    @State var dependencies = Dependencies()
+    @Bindable var routeManager = dependencies.routeManager
+
+    return NavigationStack(path: $routeManager.routes) {
+        MapView()
             .navigationDestination(for: Route.self) { $0 }
     }
-    .environment(cacheManager)
-    .environment(routeManager)
+    .environment(dependencies)
 }

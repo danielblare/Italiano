@@ -19,7 +19,9 @@ struct PaymentMethodView: View {
         self.deliveryInfo = info
     }
     
-    @Environment(RouteManager.self) private var routeManager
+    /// Dependency injection
+    @Environment(Dependencies.self) private var dependencies
+    
     @Query private var items: [CartItem]
     
     @AppStorage("paymentMethod") private var selectedMethod: PaymentMethod = .creditCard
@@ -75,7 +77,7 @@ struct PaymentMethodView: View {
     
     private var BackButton: some View {
         Button {
-            routeManager.back()
+            dependencies.routeManager.back()
         } label: {
             Text("Back")
                 .font(.asset.buttonText)
@@ -93,7 +95,7 @@ struct PaymentMethodView: View {
     
     private var ProceedButton: some View {
         Button {
-            routeManager.push(to: .orderConfirmation(info: deliveryInfo))
+            dependencies.routeManager.push(to: .orderConfirmation(info: deliveryInfo))
         } label: {
             Text("Proceed")
                 .font(.asset.buttonText)
@@ -270,13 +272,13 @@ struct PaymentMethodView: View {
 }
 
 #Preview {
-    @State var routeManager: RouteManager = RouteManager()
-    
+    @State var dependencies = Dependencies()
+
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItem.dummy]) {
         NavigationStack {
             PaymentMethodView(info: .dummy)
                 .navigationDestination(for: Route.self) { $0 }
         }
-        .environment(routeManager)
+        .environment(dependencies)
     }
 }

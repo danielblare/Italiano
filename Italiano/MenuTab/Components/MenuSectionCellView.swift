@@ -27,8 +27,11 @@ struct MenuSectionCellView: View {
 }
 
 #Preview {
-    SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
+    @State var dependencies = Dependencies()
+
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
         MenuSectionCellView(section: .dummy)
     }
     .frame(width: 100, height: 100)
+    .environment(dependencies)
 }

@@ -245,13 +245,13 @@ struct CartView: View {
 }
 
 #Preview {
-    @State var cacheManager = CacheManager()
-    
+    @State var dependencies = Dependencies()
+
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItem.dummy]) {
         NavigationStack {
             CartView()
                 .navigationDestination(for: Route.self) { $0 }
         }
     }
-    .environment(cacheManager)
+    .environment(dependencies)
 }

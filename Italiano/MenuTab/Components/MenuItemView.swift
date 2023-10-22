@@ -9,7 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct MenuItemView: View {
-    @Environment(CartManager.self) private var cartManager
+    /// Dependency injection
+    @Environment(Dependencies.self) private var dependencies
     @Environment(\.modelContext) private var context
     
     @Query private var cartItems: [CartItem]
@@ -80,7 +81,7 @@ struct MenuItemView: View {
                 .multilineTextAlignment(.leading)
                 
                 Button {
-                    cartManager.addToCart(item: item, cart: cartItems, context: context)
+                    dependencies.cartManager.addToCart(item: item, cart: cartItems, context: context)
                 } label: {
                     Text("Add to cart")
                         .font(.asset.buttonText)
@@ -96,12 +97,10 @@ struct MenuItemView: View {
 }
 
 #Preview {
-    @State var cacheManager: CacheManager = CacheManager()
-    @State var cartManager: CartManager = CartManager()
+    @State var dependencies = Dependencies()
 
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
         MenuItemView(item: .dummy)
-            .environment(cacheManager)
-            .environment(cartManager)
+            .environment(dependencies)
     }
 }

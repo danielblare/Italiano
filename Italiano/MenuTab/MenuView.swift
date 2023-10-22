@@ -9,12 +9,12 @@ import SwiftUI
 
 struct MenuView: View {
     
-    @Environment(RouteManager.self) private var routeManager
-    
+    @Environment(Dependencies.self) private var dependencies
+
     private let sections: [MenuSection]
     
-    init(sections: [MenuSection]) {
-        self.sections = sections.sorted { $0.name > $1.name }
+    init() {
+        self.sections = (try? JSONDecoder.decode(from: "Menu", type: [MenuSection].self)) ?? [].sorted { $0.name > $1.name }
     }
     
     var body: some View {
@@ -44,17 +44,15 @@ struct MenuView: View {
 }
 
 #Preview {
-    @State var cacheManager: CacheManager = CacheManager()
-    @State var routeManager: RouteManager = RouteManager()
-    @Bindable var man = routeManager
+    @State var dependencies = Dependencies()
+    @Bindable var routeManager = dependencies.routeManager
 
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
-        NavigationStack(path: $man.routes) {
-            MenuView(sections: try! JSONDecoder.decode(from: "Menu", type: [MenuSection].self))
+        NavigationStack(path: $routeManager.routes) {
+            MenuView()
                 .navigationDestination(for: Route.self) { $0 }
         }
-        .environment(cacheManager)
-        .environment(routeManager)
+        .environment(dependencies)
     }
     
 }

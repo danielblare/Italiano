@@ -52,10 +52,10 @@ struct CartRowView: View {
 }
 
 #Preview {
-    @State var cacheManager = CacheManager()
-    
+    @State var dependencies = Dependencies()
+
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
         CartRowView(item: .dummy)
     }
-    .environment(cacheManager)
+    .environment(dependencies)
 }

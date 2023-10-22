@@ -49,16 +49,14 @@ struct MenuSectionView: View {
 }
 
 #Preview {
-    @State var routeManager: RouteManager = RouteManager()
-    @State var cacheManager: CacheManager = CacheManager()
-    
+    @State var dependencies = Dependencies()
+
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
         NavigationStack {
             MenuSectionView(section: .dummy)
                 .navigationDestination(for: Route.self) { $0 }
         }
-        .environment(routeManager)
-        .environment(cacheManager)
+        .environment(dependencies)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

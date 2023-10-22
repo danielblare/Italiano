@@ -70,15 +70,16 @@ struct CartView: View {
             case .pickup: return pickupLocation.address
             }
         }()
+        let info = DeliveryInfo(option: deliveryOption, address: address)
         
-        return NavigationLink(value: Route.cardDetails(deliveryOption: deliveryOption, address: address)) {
+        return NavigationLink(value: Route.cardDetails(info: info)) {
             Text("Proceed")
                 .font(.asset.buttonText)
                 .padding(.horizontal, 30)
         }
         .buttonStyle(.borderedProminent)
         .tint(.palette.tomatoRed)
-        .disabled({
+        .disabled(items.isEmpty || {
             switch deliveryOption {
             case .delivery:
                 return deliveryAddress.isEmpty
@@ -107,7 +108,7 @@ struct CartView: View {
                         }
                     }
                 }
-                .listStyle(.inset)
+                .listStyle(.plain)
             }
         }
     }

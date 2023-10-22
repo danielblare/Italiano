@@ -13,11 +13,7 @@ struct MenuSectionView: View {
     
     var body: some View {
         ScrollView {
-            VStack {
-//                Text(section.name)
-//                    .font(.asset.heading1)
-//                    .foregroundStyle(Color.palette.oliveGreen)
-                
+            VStack {                
                 Button {
                     
                 } label: {

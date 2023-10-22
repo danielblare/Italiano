@@ -53,6 +53,9 @@ struct ContentView: View {
         .fullScreenCover(item: $cartManager.addedToCartItem) {
             ItemAddedView(item: $0)
         }
+        .fullScreenCover(isPresented: $cartManager.showOrderComplete) {
+            OrderCompleteView()
+        }
         .sensoryFeedback(.success, trigger: cartManager.addedToCartItem) { _, newValue in
             newValue != nil
         }

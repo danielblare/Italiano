@@ -41,6 +41,13 @@ extension SchemaV1 {
     
 }
 
+struct DeliveryInfo: Equatable, Hashable {
+    let option: DeliveryOption
+    let address: String
+    
+    static let dummy = DeliveryInfo(option: .delivery, address: "Test address")
+}
+
 struct Offer: Codable, Identifiable, Hashable, Equatable {
     var id: String { title }
     let title: String

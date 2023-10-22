@@ -1,5 +1,5 @@
 //
-//  CardDetailsInputView.swift
+//  PaymentMethodView.swift
 //  Italiano
 //
 //  Created by Daniel on 10/21/23.
@@ -8,35 +8,25 @@
 import SwiftUI
 import SwiftData
 
-enum PaymentMethod: String, CaseIterable, Identifiable {
-    var id: String { rawValue }
-    case applePay
-    case payPal
-    case creditCard
-    
-    var buttonText: String {
-        switch self {
-        case .applePay: "Pay with Apple Pay"
-        case .payPal: "Pay with PayPal"
-        case .creditCard: "Pay with credit/debit card"
-        }
-    }
-}
-
-struct CardDetailsInputView: View {
+struct PaymentMethodView: View {
     enum Field {
         case number, expiration, cvv
     }
     
-    let deliveryOption: DeliveryOption
-    let address: String
+    let deliveryInfo: DeliveryInfo
     
+    init(info: DeliveryInfo) {
+        self.deliveryInfo = info
+    }
+    
+    @Environment(RouteManager.self) private var routeManager
     @Query private var items: [CartItem]
     
     @AppStorage("paymentMethod") private var selectedMethod: PaymentMethod = .creditCard
     
     @FocusState private var focused: Field?
     
+    // Card details
     @State private var cardNumber: String = ""
     @State private var expirationDate: String = ""
     @State private var cvv: String = ""
@@ -50,7 +40,7 @@ struct CardDetailsInputView: View {
                     .padding(.vertical)
                 
                 Group {
-                    ButtonsSection
+                    MethodSelector
                         .padding(.bottom)
                     
                     switch selectedMethod {
@@ -61,6 +51,13 @@ struct CardDetailsInputView: View {
                     case .creditCard:
                         CardDetailsForm
                     }
+                    
+                    HStack {
+                        BackButton
+                        
+                        ProceedButton
+                    }
+                    .padding(.top, 30)
                 }
                 .padding(.horizontal)
             }
@@ -70,6 +67,50 @@ struct CardDetailsInputView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
+    private func validateCardDetails() -> Bool {
+        let sanitizedCardNumber = cardNumber.filter({ "0123456789".contains($0) })
+        
+        return sanitizedCardNumber.count == 16 && expirationDate.count == 5 && cvv.count == 3
+    }
+    
+    private var BackButton: some View {
+        Button {
+            routeManager.back()
+        } label: {
+            Text("Back")
+                .font(.asset.buttonText)
+                .padding(.vertical, 5)
+                .frame(maxWidth: 200)
+        }
+        .buttonStyle(.borderedProminent)
+        .tint(.clear)
+        .background {
+            RoundedRectangle(cornerRadius: 8)
+                .strokeBorder()
+        }
+        .foregroundStyle(Color.palette.tomatoRed)
+    }
+    
+    private var ProceedButton: some View {
+        Button {
+            routeManager.push(to: .orderConfirmation(info: deliveryInfo))
+        } label: {
+            Text("Proceed")
+                .font(.asset.buttonText)
+                .padding(.vertical, 5)
+                .frame(maxWidth: 200)
+        }
+        .buttonStyle(.borderedProminent)
+        .tint(.palette.tomatoRed)
+        .disabled(focused != nil)
+        .disabled({
+            switch selectedMethod {
+            case .applePay, .payPal: false
+            case .creditCard: !validateCardDetails()
+            }
+        }())
+    }
+
     private var CardDetailsForm: some View {
         VStack(spacing: 15) {
             HStack {
@@ -78,17 +119,22 @@ struct CardDetailsInputView: View {
                     .imageScale(.large)
                     .padding(.leading)
                 
-                TextField("Card Number",
-                          text: .init {
+                TextField("Card Number", text: .init {
                     cardNumber
                 } set: { value in
-                    cardNumber = value
-                },
-                          prompt: Text("4444 1111 3333 2222"))
-                .onSubmit { focused = .expiration }
-                .focused($focused, equals: .number)
-                .padding([.vertical, .trailing])
-                .textContentType(.creditCardNumber)
+                    let sanitizedValue = value.filter { "0123456789".contains($0) }
+                    let spaceSeparatedValue = sanitizedValue
+                        .enumerated()
+                        .map { (index, char) in
+                            return (index > 0 && index % 4 == 0 && char != " ") ? " " + String(char) : String(char)
+                        }
+                        .joined()
+                    cardNumber = spaceSeparatedValue.prefix(19).description
+                }, prompt: Text("4444 1111 3333 2222"))
+                    .onSubmit { focused = .expiration }
+                    .focused($focused, equals: .number)
+                    .textContentType(.creditCardNumber)
+                    .padding([.vertical, .trailing])
             }
             .background {
                 RoundedRectangle(cornerRadius: 4)
@@ -96,8 +142,20 @@ struct CardDetailsInputView: View {
             }
             
             HStack(spacing: 20) {
-                TextField("Expiration Date", text: $expirationDate, prompt: Text("12/24"))
-                    .onSubmit { focused = .cvv }
+                TextField("Expiration Date", text: .init {
+                    expirationDate
+                } set: { value in
+                    let sanitizedValue = value.filter { "0123456789".contains($0) }
+                    
+                    if sanitizedValue.count >= 3 {
+                        let month = sanitizedValue.prefix(2)
+                        let year = sanitizedValue.suffix(2)
+                        expirationDate = "\(month)/\(year)"
+                    } else {
+                        expirationDate = sanitizedValue
+                    }
+                }, prompt: Text("12/24"))
+                .onSubmit { focused = .cvv }
                     .focused($focused, equals: .expiration)
                     .multilineTextAlignment(.center)
                     .textContentType(.creditCardExpiration)
@@ -111,7 +169,12 @@ struct CardDetailsInputView: View {
                     Text("CVV")
                         .padding(.leading)
                     
-                    TextField("CVV", text: $expirationDate, prompt: Text("123"))
+                    TextField("CVV", text: .init {
+                        cvv
+                    } set: { value in
+                        let sanitizedValue = value.filter { "0123456789".contains($0) }
+                        cvv = sanitizedValue.prefix(3).description
+                    }, prompt: Text("123"))
                         .focused($focused, equals: .cvv)
                         .multilineTextAlignment(.center)
                         .textContentType(.creditCardSecurityCode)
@@ -128,7 +191,7 @@ struct CardDetailsInputView: View {
         .font(.asset.menuItem)
     }
     
-    private var ButtonsSection: some View {
+    private var MethodSelector: some View {
         VStack(spacing: 15) {
             ForEach(PaymentMethod.allCases) { method in
                 Button {
@@ -162,7 +225,7 @@ struct CardDetailsInputView: View {
     
     private var OrderSummary: some View {
         let goods = items.map({ $0.totalPrice }).reduce(0, +)
-        let delivery: Double = items.isEmpty ? 0 : deliveryOption.price
+        let delivery: Double = items.isEmpty ? 0 : deliveryInfo.option.price
         let total = goods + delivery
         return Group {
             Text("Order Summary")
@@ -207,9 +270,13 @@ struct CardDetailsInputView: View {
 }
 
 #Preview {
+    @State var routeManager: RouteManager = RouteManager()
+    
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItem.dummy]) {
         NavigationStack {
-            CardDetailsInputView(deliveryOption: .delivery, address: "TestAddress")
+            PaymentMethodView(info: .dummy)
+                .navigationDestination(for: Route.self) { $0 }
         }
+        .environment(routeManager)
     }
 }

@@ -24,4 +24,11 @@ enum DeliveryOption: String {
         case .pickup: 0
         }
     }
+    
+    var orderConfirmationTitle: Text {
+        switch self {
+        case .delivery: Text("Delivery to:")
+        case .pickup: Text("Pickup from:")
+        }
+    }
 }

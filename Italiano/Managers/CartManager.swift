@@ -12,7 +12,8 @@ import SwiftData
 @Observable final class CartManager {
     
     var addedToCartItem: MenuItem?
-    
+    var showOrderComplete: Bool = false
+
     func addToCart(item: MenuItem, cart: [CartItem], context: ModelContext) {
         if let index = cart.firstIndex(where: { $0.item == item }) {
             cart[index].quantity += 1

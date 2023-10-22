@@ -65,6 +65,7 @@ struct PaymentMethodView: View {
             }
             .padding()
         }
+        .scrollDismissesKeyboard(.interactively)
         .navigationTitle("Card details")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -112,7 +113,7 @@ struct PaymentMethodView: View {
             }
         }())
     }
-
+    
     private var CardDetailsForm: some View {
         VStack(spacing: 15) {
             HStack {
@@ -133,10 +134,10 @@ struct PaymentMethodView: View {
                         .joined()
                     cardNumber = spaceSeparatedValue.prefix(19).description
                 }, prompt: Text("4444 1111 3333 2222"))
-                    .onSubmit { focused = .expiration }
-                    .focused($focused, equals: .number)
-                    .textContentType(.creditCardNumber)
-                    .padding([.vertical, .trailing])
+                .onSubmit { focused = .expiration }
+                .focused($focused, equals: .number)
+                .textContentType(.creditCardNumber)
+                .padding([.vertical, .trailing])
             }
             .background {
                 RoundedRectangle(cornerRadius: 4)
@@ -158,14 +159,14 @@ struct PaymentMethodView: View {
                     }
                 }, prompt: Text("12/24"))
                 .onSubmit { focused = .cvv }
-                    .focused($focused, equals: .expiration)
-                    .multilineTextAlignment(.center)
-                    .textContentType(.creditCardExpiration)
-                    .padding(10)
-                    .background {
-                        RoundedRectangle(cornerRadius: 4)
-                            .strokeBorder(Color.palette.oliveGreen)
-                    }
+                .focused($focused, equals: .expiration)
+                .multilineTextAlignment(.center)
+                .textContentType(.creditCardExpiration)
+                .padding(10)
+                .background {
+                    RoundedRectangle(cornerRadius: 4)
+                        .strokeBorder(Color.palette.oliveGreen)
+                }
                 
                 HStack {
                     Text("CVV")
@@ -177,11 +178,11 @@ struct PaymentMethodView: View {
                         let sanitizedValue = value.filter { "0123456789".contains($0) }
                         cvv = sanitizedValue.prefix(3).description
                     }, prompt: Text("123"))
-                        .focused($focused, equals: .cvv)
-                        .multilineTextAlignment(.center)
-                        .textContentType(.creditCardSecurityCode)
-                        .padding(.trailing)
-                        .padding(.vertical, 10)
+                    .focused($focused, equals: .cvv)
+                    .multilineTextAlignment(.center)
+                    .textContentType(.creditCardSecurityCode)
+                    .padding(.trailing)
+                    .padding(.vertical, 10)
                 }
                 .background {
                     RoundedRectangle(cornerRadius: 4)

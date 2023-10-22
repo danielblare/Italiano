@@ -24,12 +24,7 @@ struct MapView: View {
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
-                VStack {
-                    Text("Map")
-                        .foregroundStyle(Color.palette.oliveGreen)
-                        .font(.asset.heading2)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
+                VStack {                    
                     MapView
                         .id("map")
                         .frame(height: 250)

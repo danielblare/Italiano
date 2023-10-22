@@ -45,7 +45,20 @@ struct ContentView: View {
             }
             .navigationDestination(for: Route.self) { $0 }
             .navigationTitle(tabSelection.title)
-            .toolbar(.hidden, for: .navigationBar)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Italiano")
+                        .font(.asset.heading2)
+                        .fontWeight(.regular)
+                        .foregroundStyle(Color.palette.tomatoRed)
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink(value: Route.cart) {
+                        Image(systemName: "basket")
+                    }
+                }
+            }
         }
         .fullScreenCover(item: $cartManager.addedToCartItem) {
             ItemAddedView(item: $0)
@@ -65,10 +78,10 @@ struct ContentView: View {
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItem.dummy]) {
         ContentView()
             .environment(dependencies)
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    dependencies.routeManager.push(to: .cart)
-                }
-            }
+//            .onAppear {
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+//                    dependencies.routeManager.push(to: .cart)
+//                }
+//            }
     }
 }

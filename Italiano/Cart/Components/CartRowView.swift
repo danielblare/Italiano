@@ -45,6 +45,7 @@ struct CartRowView: View {
                 if !selectedOptions.isEmpty {
                     Text(selectedOptions.map({ $0.name }).joined(separator: ", "))
                         .font(.asset.menuItem)
+                        .foregroundStyle(.secondary)
                 }
             }
         }
@@ -56,6 +57,8 @@ struct CartRowView: View {
 
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
         CartRowView(item: .dummy)
+            .frame(height: 100)
+            .padding()
     }
     .environment(dependencies)
 }

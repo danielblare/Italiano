@@ -74,14 +74,15 @@ struct ContentView: View {
 
 #Preview {
     @State var dependencies = Dependencies()
-
-    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItem.dummy]) {
+    
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self),
+                            items: try! JSONDecoder.decode(from: "Offers", type: [Offer].self) + (try! JSONDecoder.decode(from: "Locations", type: [Location].self)) + (try! JSONDecoder.decode(from: "Menu", type: [MenuSection].self))) {
         ContentView()
             .environment(dependencies)
-//            .onAppear {
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-//                    dependencies.routeManager.push(to: .cart)
-//                }
-//            }
+        //            .onAppear {
+        //                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        //                    dependencies.routeManager.push(to: .cart)
+        //                }
+        //            }
     }
 }

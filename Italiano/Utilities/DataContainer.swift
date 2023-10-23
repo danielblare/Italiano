@@ -18,7 +18,24 @@ actor DataContainer {
         let configuration = ModelConfiguration()
         let container = try ModelContainer(for: schema, configurations: configuration)
         if createDefaults {
+            if let offers = try? JSONDecoder.decode(from: "Offers", type: [Offer].self) {
+                offers.forEach { offer in
+                    container.mainContext.insert(offer)
+                }
+            }
             
+            if let locations = try? JSONDecoder.decode(from: "Locations", type: [Location].self) {
+                locations.forEach { location in
+                    container.mainContext.insert(location)
+                }
+            }
+
+            if let menuSections = try? JSONDecoder.decode(from: "Menu", type: [MenuSection].self) {
+                menuSections.forEach { section in
+                    container.mainContext.insert(section)
+                }
+            }
+
             createDefaults = false
         }
         

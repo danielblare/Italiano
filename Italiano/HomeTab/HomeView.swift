@@ -13,17 +13,56 @@ struct HomeView: View {
     @Environment(Dependencies.self) private var dependencies
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
-    private let offers: [Offer] = (try? JSONDecoder.decode(from: "Offers", type: [Offer].self)) ?? []
+    @Query private let offers: [Offer]
     
     var body: some View {
         ScrollView {
-            if !offers.isEmpty {
-                OffersSection
-            }
+            OffersSection
+            
+            RecentOrdersSection
         }
     }
     
-    var OffersSection: some View {
+    private var RecentOrdersSection: some View {
+        VStack {
+            Text("Recent offers")
+                .foregroundStyle(Color.palette.oliveGreen)
+                .font(.asset.heading2)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
+            
+            if offers.isEmpty {
+                Text("There are no recent orders")
+                    .multilineTextAlignment(.center)
+                    .padding()
+            } else {
+                ScrollView(.horizontal) {
+                    let spacing: CGFloat = 15
+                    HStack(spacing: spacing) {
+                        ForEach(offers) { offer in
+//                            NavigationLink(value: Route.offer(offer)) {
+//                                if UIDevice.current.userInterfaceIdiom == .phone {
+//                                    OfferCellView(offer: offer)
+//                                        .containerRelativeFrame(.horizontal, count: verticalSizeClass == .regular ? 3 : 6, spacing: spacing)
+//                                } else {
+//                                    OfferCellView(offer: offer)
+//                                        .frame(width: 100)
+//                                }
+//                            }
+//                            .buttonStyle(.plain)
+                        }
+                    }
+                    .scrollTargetLayout()
+                }
+                .contentMargins(.horizontal, 20, for: .scrollContent)
+                .scrollTargetBehavior(.viewAligned)
+                .scrollIndicators(.hidden)
+            }
+        }
+        .padding(.vertical)
+    }
+    
+    private var OffersSection: some View {
         VStack {
             Text("Special offers")
                 .foregroundStyle(Color.palette.oliveGreen)
@@ -31,27 +70,34 @@ struct HomeView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
             
-            ScrollView(.horizontal) {
-                let spacing: CGFloat = 15
-                HStack(spacing: spacing) {
-                    ForEach(offers) { offer in
-                        NavigationLink(value: Route.offer(offer)) {
-                            if UIDevice.current.userInterfaceIdiom == .phone {
-                                OfferCellView(offer: offer)
-                                    .containerRelativeFrame(.horizontal, count: verticalSizeClass == .regular ? 3 : 6, spacing: spacing)
-                            } else {
-                                OfferCellView(offer: offer)
-                                    .frame(width: 100)
+            if offers.isEmpty {
+                Text("There are no special offers at the moment")
+                    .font(.asset.extra)
+                    .multilineTextAlignment(.center)
+                    .padding()
+            } else {
+                ScrollView(.horizontal) {
+                    let spacing: CGFloat = 15
+                    HStack(spacing: spacing) {
+                        ForEach(offers) { offer in
+                            NavigationLink(value: Route.offer(offer)) {
+                                if UIDevice.current.userInterfaceIdiom == .phone {
+                                    OfferCellView(offer: offer)
+                                        .containerRelativeFrame(.horizontal, count: verticalSizeClass == .regular ? 3 : 6, spacing: spacing)
+                                } else {
+                                    OfferCellView(offer: offer)
+                                        .frame(width: 100)
+                                }
                             }
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
                     }
+                    .scrollTargetLayout()
                 }
-                .scrollTargetLayout()
+                .contentMargins(.horizontal, 20, for: .scrollContent)
+                .scrollTargetBehavior(.viewAligned)
+                .scrollIndicators(.hidden)
             }
-            .contentMargins(.horizontal, 20, for: .scrollContent)
-            .scrollTargetBehavior(.viewAligned)
-            .scrollIndicators(.hidden)
         }
         .padding(.vertical)
     }
@@ -61,7 +107,7 @@ struct HomeView: View {
     @State var dependencies = Dependencies()
     @Bindable var routeManager = dependencies.routeManager
     
-    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItem.dummy]) {
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: try! JSONDecoder.decode(from: "Offers", type: [Offer].self)) {
         NavigationStack(path: $routeManager.routes) {
             HomeView()
                 .navigationDestination(for: Route.self) { $0 }

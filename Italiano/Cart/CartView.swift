@@ -11,13 +11,11 @@ import SwiftData
 struct CartView: View {
     @Environment(\.modelContext) private var context
     
-    private let locations: [Location]
+    @Query(sort: \Location.name) private let locations: [Location]
     @Query private var items: [CartItem]
     @AppStorage("deliveryOption") private var deliveryOption: DeliveryOption = .delivery
     
     init() {
-        let locations = try! JSONDecoder.decode(from: "Locations", type: [Location].self)
-        self.locations = locations
         if let loc1 = locations.first {
             _pickupLocation = .init(wrappedValue: loc1)
         }
@@ -247,7 +245,7 @@ struct CartView: View {
 #Preview {
     @State var dependencies = Dependencies()
 
-    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItem.dummy]) {
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItem.dummy] + (try! JSONDecoder.decode(from: "Locations", type: [Location].self))) {
         NavigationStack {
             CartView()
                 .navigationDestination(for: Route.self) { $0 }

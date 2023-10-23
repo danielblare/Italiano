@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum DeliveryOption: String {
+enum DeliveryOption: String, Codable {
     case delivery
     case pickup
     

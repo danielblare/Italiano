@@ -7,13 +7,14 @@
 
 import SwiftUI
 import MapKit
+import SwiftData
 
 /// Map tab view
 struct MapView: View {
     
     @State private var viewModel: MapViewModel = MapViewModel()
     
-    private let locations: [Location] = (try? JSONDecoder.decode(from: "Locations", type: [Location].self)) ?? []
+    @Query(sort: \Location.name) private let locations: [Location]
     
     /// Location selected by user on the map
     @State private var selectedLocation: Location?
@@ -106,9 +107,11 @@ struct MapView: View {
     @State var dependencies = Dependencies()
     @Bindable var routeManager = dependencies.routeManager
 
-    return NavigationStack(path: $routeManager.routes) {
-        MapView()
-            .navigationDestination(for: Route.self) { $0 }
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: try! JSONDecoder.decode(from: "Locations", type: [Location].self)) {
+        NavigationStack(path: $routeManager.routes) {
+            MapView()
+                .navigationDestination(for: Route.self) { $0 }
+        }
+        .environment(dependencies)
     }
-    .environment(dependencies)
 }

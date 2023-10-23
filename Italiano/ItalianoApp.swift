@@ -10,6 +10,10 @@ import Observation
 
 // MARK: SwiftData Models
 typealias CartItem = SchemaV1.CartItem
+typealias Order = SchemaV1.Order
+typealias Offer = SchemaV1.Offer
+typealias Location = SchemaV1.Location
+typealias MenuSection = SchemaV1.MenuSection
 
 @Observable
 final class Dependencies {

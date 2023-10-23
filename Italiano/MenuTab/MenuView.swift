@@ -6,17 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MenuView: View {
     
     @Environment(Dependencies.self) private var dependencies
 
-    private let sections: [MenuSection]
-    
-    init() {
-        self.sections = (try? JSONDecoder.decode(from: "Menu", type: [MenuSection].self)) ?? [].sorted { $0.name > $1.name }
-    }
-    
+    @Query(sort: \MenuSection.name, order: .reverse) private let sections: [MenuSection]
+
     var body: some View {
         ScrollView {
             Text("Savor Authentic Italian\nFlavors at Italiano\nExplore Our Menu!")
@@ -47,7 +44,7 @@ struct MenuView: View {
     @State var dependencies = Dependencies()
     @Bindable var routeManager = dependencies.routeManager
 
-    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: try! JSONDecoder.decode(from: "Menu", type: [MenuSection].self)) {
         NavigationStack(path: $routeManager.routes) {
             MenuView()
                 .navigationDestination(for: Route.self) { $0 }

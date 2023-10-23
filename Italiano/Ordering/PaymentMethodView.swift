@@ -9,9 +9,6 @@ import SwiftUI
 import SwiftData
 
 struct PaymentMethodView: View {
-    enum Field {
-        case number, expiration, cvv
-    }
     
     let deliveryInfo: DeliveryInfo
     
@@ -25,13 +22,9 @@ struct PaymentMethodView: View {
     @Query private var items: [CartItem]
     
     @AppStorage("paymentMethod") private var selectedMethod: PaymentMethod = .creditCard
+    @AppStorage("defaultCardDetails") private var cardDetails: CardDetails = .init()
     
-    @FocusState private var focused: Field?
-    
-    // Card details
-    @State private var cardNumber: String = ""
-    @State private var expirationDate: String = ""
-    @State private var cvv: String = ""
+    @FocusState private var focused: CardDetails.Field?
     
     var body: some View {
         ScrollView {
@@ -70,12 +63,6 @@ struct PaymentMethodView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    private func validateCardDetails() -> Bool {
-        let sanitizedCardNumber = cardNumber.filter({ "0123456789".contains($0) })
-        
-        return sanitizedCardNumber.count == 16 && expirationDate.count == 5 && cvv.count == 3
-    }
-    
     private var BackButton: some View {
         Button {
             dependencies.routeManager.back()
@@ -109,7 +96,7 @@ struct PaymentMethodView: View {
         .disabled({
             switch selectedMethod {
             case .applePay, .payPal: false
-            case .creditCard: !validateCardDetails()
+            case .creditCard: !cardDetails.validate()
             }
         }())
     }
@@ -123,7 +110,7 @@ struct PaymentMethodView: View {
                     .padding(.leading)
                 
                 TextField("Card Number", text: .init {
-                    cardNumber
+                    cardDetails.number
                 } set: { value in
                     let sanitizedValue = value.filter { "0123456789".contains($0) }
                     let spaceSeparatedValue = sanitizedValue
@@ -132,7 +119,7 @@ struct PaymentMethodView: View {
                             return (index > 0 && index % 4 == 0 && char != " ") ? " " + String(char) : String(char)
                         }
                         .joined()
-                    cardNumber = spaceSeparatedValue.prefix(19).description
+                    cardDetails.number = spaceSeparatedValue.prefix(19).description
                 }, prompt: Text("4444 1111 3333 2222"))
                 .onSubmit { focused = .expiration }
                 .focused($focused, equals: .number)
@@ -141,21 +128,21 @@ struct PaymentMethodView: View {
             }
             .background {
                 RoundedRectangle(cornerRadius: 4)
-                    .strokeBorder(Color.palette.oliveGreen)
+                    .strokeBorder(cardDetails.validate(field: .number) ? Color.palette.oliveGreen : Color.palette.tomatoRed)
             }
             
             HStack(spacing: 20) {
                 TextField("Expiration Date", text: .init {
-                    expirationDate
+                    cardDetails.expiration
                 } set: { value in
                     let sanitizedValue = value.filter { "0123456789".contains($0) }
                     
                     if sanitizedValue.count >= 3 {
                         let month = sanitizedValue.prefix(2)
                         let year = sanitizedValue.suffix(2)
-                        expirationDate = "\(month)/\(year)"
+                        cardDetails.expiration = "\(month)/\(year)"
                     } else {
-                        expirationDate = sanitizedValue
+                        cardDetails.expiration = sanitizedValue
                     }
                 }, prompt: Text("12/24"))
                 .onSubmit { focused = .cvv }
@@ -165,7 +152,7 @@ struct PaymentMethodView: View {
                 .padding(10)
                 .background {
                     RoundedRectangle(cornerRadius: 4)
-                        .strokeBorder(Color.palette.oliveGreen)
+                        .strokeBorder(cardDetails.validate(field: .expiration) ? Color.palette.oliveGreen : Color.palette.tomatoRed)
                 }
                 
                 HStack {
@@ -173,10 +160,10 @@ struct PaymentMethodView: View {
                         .padding(.leading)
                     
                     TextField("CVV", text: .init {
-                        cvv
+                        cardDetails.cvv
                     } set: { value in
                         let sanitizedValue = value.filter { "0123456789".contains($0) }
-                        cvv = sanitizedValue.prefix(3).description
+                        cardDetails.cvv = sanitizedValue.prefix(3).description
                     }, prompt: Text("123"))
                     .focused($focused, equals: .cvv)
                     .multilineTextAlignment(.center)
@@ -186,7 +173,7 @@ struct PaymentMethodView: View {
                 }
                 .background {
                     RoundedRectangle(cornerRadius: 4)
-                        .strokeBorder(Color.palette.oliveGreen)
+                        .strokeBorder(cardDetails.validate(field: .cvv) ? Color.palette.oliveGreen : Color.palette.tomatoRed)
                 }
             }
         }

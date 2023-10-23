@@ -11,6 +11,7 @@ import SwiftData
 struct OrderConfirmationView: View {
     /// Dependency injection
     @Environment(Dependencies.self) private var dependencies
+    @Environment(\.modelContext) private var context
 
     @Query private var cartItems: [CartItem]
     
@@ -88,7 +89,7 @@ struct OrderConfirmationView: View {
     
     private var ConfirmButton: some View {
         Button {
-            dependencies.cartManager.showOrderComplete = true
+            dependencies.cartManager.placeOrder(cart: cartItems, deliveryInfo: deliveryInfo, context: context)
         } label: {
             Text("Confirm")
                 .font(.asset.buttonText)

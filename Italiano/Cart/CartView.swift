@@ -15,12 +15,6 @@ struct CartView: View {
     @Query private var items: [CartItem]
     @AppStorage("deliveryOption") private var deliveryOption: DeliveryOption = .delivery
     
-    init() {
-        if let loc1 = locations.first {
-            _pickupLocation = .init(wrappedValue: loc1)
-        }
-    }
-    
     @State private var deliveryAddress: String = ""
     @State private var pickupLocation: Location = .empty
     
@@ -52,13 +46,18 @@ struct CartView: View {
                 OrderSummary
                 
                 ProceedButton
-                
+                    .padding(.bottom)
             }
             .padding(.horizontal)
         }
         .navigationTitle("Cart")
         .navigationBarTitleDisplayMode(.inline)
         .sensoryFeedback(.selection, trigger: deliveryOption)
+        .onAppear {
+            if let location = locations.first {
+                pickupLocation = location
+            }
+        }
     }
     
     private var ProceedButton: some View {

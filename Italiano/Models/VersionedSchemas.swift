@@ -21,12 +21,16 @@ enum SchemaV1: VersionedSchema {
 extension SchemaV1 {
     @Model
     final class Order {
-        let items: [CartItem]
+        let items: [CartItemModel]
         let deliveryInfo: DeliveryInfo
         let date: Date
         
+        var totalPrice: Double {
+            items.map({ $0.totalPrice }).reduce(0, +) + deliveryInfo.option.price
+        }
+        
         init(items: [CartItem], deliveryInfo: DeliveryInfo, date: Date = .now) {
-            self.items = items
+            self.items = items.map({ .init(from: $0) })
             self.deliveryInfo = deliveryInfo
             self.date = date
         }
@@ -35,7 +39,7 @@ extension SchemaV1 {
             Order(items: [.dummy], deliveryInfo: .dummy)
         }
     }
-    
+        
     @Model
     final class CartItem {
         let item: MenuItem
@@ -177,105 +181,4 @@ extension SchemaV1 {
             MenuSection(name: "Pizza", image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/section_image.png?raw=true")!, items: [.dummy])
         }
     }
-}
-
-struct DeliveryInfo: Equatable, Hashable, Codable {
-    let option: DeliveryOption
-    let address: String
-    
-    static let dummy = DeliveryInfo(option: .delivery, address: "Test address")
-}
-
-struct MenuItem: Codable, Identifiable, Equatable, Hashable {
-    var id: String { name }
-    let name: String
-    let info: String
-    let price: Double
-    let image: URL
-    let ingredients: [Ingredient]
-    var options: [Option]
-    
-    enum CodingKeys: String, CodingKey {
-        case name
-        case price
-        case image
-        case info
-        case ingredients
-        case options
-    }
-    
-    init(name: String, info: String, price: Double, image: URL, ingredients: [Ingredient], options: [Option] = []) {
-        self.name = name
-        self.info = info
-        self.price = price
-        self.image = image
-        self.ingredients = ingredients
-        self.options = options
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.decode(String.self, forKey: .name)
-        self.info = try container.decode(String.self, forKey: .info)
-        self.price = try container.decode(Double.self, forKey: .price)
-        self.image = try container.decode(URL.self, forKey: .image)
-        self.ingredients = try container.decode([Ingredient].self, forKey: .ingredients)
-        self.options = try container.decodeIfPresent([Option].self, forKey: .options) ?? []
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .name)
-        try container.encode(info, forKey: .info)
-        try container.encode(price, forKey: .price)
-        try container.encode(image, forKey: .image)
-        try container.encode(ingredients, forKey: .ingredients)
-        try container.encode(options, forKey: .options)
-    }
-    
-    static let dummy = MenuItem(name: "Margherita", info: "30 cm, 8 pcs", price: 10.99, image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/items/margherita.png?raw=true")!, ingredients: [.dummy], options: [Option(name: "Cheese", value: true), Option(name: "Milk", value: true), Option(name: "Long test", value: true), Option(name: "Test", value: true)])
-}
-
-struct Ingredient: Codable, Identifiable, Equatable, Hashable {
-    var id: String { name }
-    let name: String
-    
-    init(name: String) {
-        self.name = name
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case name
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.decode(String.self, forKey: .name)
-    }
-    
-    static let dummy = Ingredient(name: "Cheese")
-}
-
-struct Option: Codable, Identifiable, Equatable, Hashable {
-    var id: String { name }
-    let name: String
-    var value: Bool
-    
-    init(name: String, value: Bool = false) {
-        self.name = name
-        self.value = value
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case name
-        case value
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.decode(String.self, forKey: .name)
-        self.value = try container.decodeIfPresent(Bool.self, forKey: .value) ?? false
-    }
-    
-    static let dummy = Option(name: "Cheese")
 }

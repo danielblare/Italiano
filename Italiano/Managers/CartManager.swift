@@ -10,7 +10,6 @@ import Observation
 import SwiftData
 
 @Observable final class CartManager {
-    
     var addedToCartItem: MenuItem?
     var showOrderComplete: Bool = false
 
@@ -22,5 +21,15 @@ import SwiftData
             context.insert(newItem)
         }
         addedToCartItem = item
+    }
+    
+    func placeOrder(cart: [CartItem], deliveryInfo: DeliveryInfo, context: ModelContext) {
+        let order = Order(items: cart, deliveryInfo: deliveryInfo)
+        context.insert(order)
+        cart.forEach { item in
+            context.delete(item)
+        }
+        
+        showOrderComplete = true
     }
 }

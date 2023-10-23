@@ -55,21 +55,19 @@ struct CartItemOverview: View {
                             }
                         }
                         
-                        if !item.options.isEmpty {
+                        let selectedOptions = item.options.filter({ $0.value })
+                        if !selectedOptions.isEmpty {
                             GroupBox {
                                 Text("Options:")
                                     .foregroundStyle(Color.palette.oliveGreen)
                                     .font(.asset.extra)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 
-                                ForEach(item.options) { option in
-                                    VStack {
-                                        OptionView(option: .constant(option))
-                                    }
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                                Text(selectedOptions.map({ $0.name }).joined(separator: ", "))
+                                    .font(.asset.menuItem)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                             }
-                        }
+                        }                        
                     }
                     .multilineTextAlignment(.leading)
                 }

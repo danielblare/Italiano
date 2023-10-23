@@ -14,6 +14,7 @@ typealias Order = SchemaV1.Order
 typealias Offer = SchemaV1.Offer
 typealias Location = SchemaV1.Location
 typealias MenuSection = SchemaV1.MenuSection
+typealias FavoriteItem = SchemaV1.FavoriteItem
 
 @Observable
 final class Dependencies {

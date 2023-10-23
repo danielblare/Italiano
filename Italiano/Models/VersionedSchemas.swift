@@ -12,7 +12,7 @@ import MapKit
 enum SchemaV1: VersionedSchema {
     
     static var models: [any PersistentModel.Type] {
-        [CartItem.self, Order.self, Offer.self, Location.self, MenuSection.self]
+        [CartItem.self, Order.self, Offer.self, Location.self, MenuSection.self, FavoriteItem.self]
     }
     
     static var versionIdentifier: Schema.Version = .init(1, 0, 0)
@@ -179,6 +179,19 @@ extension SchemaV1 {
         
         static var dummy: MenuSection {
             MenuSection(name: "Pizza", image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/menu/pizza/section_image.png?raw=true")!, items: [.dummy])
+        }
+    }
+    
+    @Model
+    final class FavoriteItem {
+        let item: MenuItem
+        
+        init(item: MenuItem) {
+            self.item = item
+        }
+        
+        static var dummy: FavoriteItem {
+            FavoriteItem(item: .dummy)
         }
     }
 }

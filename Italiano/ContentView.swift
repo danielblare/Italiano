@@ -76,7 +76,7 @@ struct ContentView: View {
     @State var dependencies = Dependencies()
     
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self),
-                            items: try! JSONDecoder.decode(from: "Offers", type: [Offer].self) + (try! JSONDecoder.decode(from: "Locations", type: [Location].self)) + (try! JSONDecoder.decode(from: "Menu", type: [MenuSection].self)) + [Order.dummy]) {
+                            items: try! JSONDecoder.decode(from: "Offers", type: [Offer].self) + (try! JSONDecoder.decode(from: "Locations", type: [Location].self)) + (try! JSONDecoder.decode(from: "Menu", type: [MenuSection].self)) + [Order.dummy] + [FavoriteItem.dummy]) {
         ContentView()
             .environment(dependencies)
         //            .onAppear {

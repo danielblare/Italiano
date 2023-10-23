@@ -14,9 +14,10 @@ struct MenuItemView: View {
     @Environment(\.modelContext) private var context
     
     @Query private var cartItems: [CartItem]
+    @Query private let favorites: [FavoriteItem]
 
     @State private var item: MenuItem
-
+    
     init(item: MenuItem) {
         self._item = .init(wrappedValue: item)
     }
@@ -93,6 +94,20 @@ struct MenuItemView: View {
             }
             .padding()
         }
+        .navigationTitle(item.name)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                let favorite = favorites.first(where: { $0.item == item })
+                Button {
+                    if let favorite { context.delete(favorite) } else { context.insert(FavoriteItem(item: item)) }
+                } label: {
+                    Image(systemName: "star")
+                        .foregroundStyle(Color.yellow)
+                        .symbolVariant(favorite != nil ? .fill : .none)
+                }
+            }
+        }
     }
 }
 
@@ -100,7 +115,9 @@ struct MenuItemView: View {
     @State var dependencies = Dependencies()
 
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
-        MenuItemView(item: .dummy)
+        NavigationStack {
+            MenuItemView(item: .dummy)
+        }
             .environment(dependencies)
     }
 }

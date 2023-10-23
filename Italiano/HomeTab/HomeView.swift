@@ -15,15 +15,52 @@ struct HomeView: View {
 
     @Query private let offers: [Offer]
     @Query(sort: \Order.date, order: .reverse) private let orders: [Order]
-
+    @Query private let favorites: [FavoriteItem]
+    
     var body: some View {
         ScrollView {
             OffersSection
             
             RecentOrdersSection
+            
+            FavoriteSection
         }
     }
     
+    private var FavoriteSection: some View {
+        VStack {
+            if !favorites.isEmpty {
+                Text("Favorites")
+                    .foregroundStyle(Color.palette.oliveGreen)
+                    .font(.asset.heading2)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+                
+                ScrollView(.horizontal) {
+                    let spacing: CGFloat = 15
+                    HStack(spacing: spacing) {
+                        ForEach(favorites) { favorite in
+                            NavigationLink(value: Route.menuItem(favorite.item)) {
+                                if UIDevice.current.userInterfaceIdiom == .phone {
+                                    FavoriteItemCellView(item: favorite)
+                                        .containerRelativeFrame(.horizontal, count: verticalSizeClass == .regular ? 4 : 7, spacing: spacing)
+                                } else {
+                                    FavoriteItemCellView(item: favorite)
+                                        .frame(width: 100)
+                                }
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .scrollTargetLayout()
+                }
+                .contentMargins(.horizontal, 20, for: .scrollContent)
+                .scrollTargetBehavior(.viewAligned)
+                .scrollIndicators(.hidden)
+            }
+        }
+    }
+
     private var RecentOrdersSection: some View {
         VStack {
             Text("Recent offers")
@@ -48,7 +85,7 @@ struct HomeView: View {
                                         .containerRelativeFrame(.horizontal, count: verticalSizeClass == .regular ? 3 : 6, spacing: spacing)
                                 } else {
                                     RecentOrderCellView(order: order)
-                                        .frame(width: 100)
+                                        .frame(width: 150)
                                 }
                             }
                             .buttonStyle(.plain)
@@ -61,7 +98,6 @@ struct HomeView: View {
                 .scrollIndicators(.hidden)
             }
         }
-        .padding(.vertical)
     }
     
     private var OffersSection: some View {
@@ -88,7 +124,7 @@ struct HomeView: View {
                                         .containerRelativeFrame(.horizontal, count: verticalSizeClass == .regular ? 3 : 6, spacing: spacing)
                                 } else {
                                     OfferCellView(offer: offer)
-                                        .frame(width: 100)
+                                        .frame(width: 150)
                                 }
                             }
                             .buttonStyle(.plain)
@@ -101,7 +137,6 @@ struct HomeView: View {
                 .scrollIndicators(.hidden)
             }
         }
-        .padding(.vertical)
     }
 }
 
@@ -109,7 +144,7 @@ struct HomeView: View {
     @State var dependencies = Dependencies()
     @Bindable var routeManager = dependencies.routeManager
     
-    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: try! JSONDecoder.decode(from: "Offers", type: [Offer].self) + [Order.dummy, Order(items: [.dummy], deliveryInfo: .dummy, date: .distantFuture)]) {
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: try! JSONDecoder.decode(from: "Offers", type: [Offer].self) + [Order.dummy, Order(items: [.dummy], deliveryInfo: .dummy, date: .distantFuture)] + [FavoriteItem.dummy]) {
         NavigationStack(path: $routeManager.routes) {
             HomeView()
                 .navigationDestination(for: Route.self) { $0 }

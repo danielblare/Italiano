@@ -18,12 +18,13 @@ struct FavoriteItemCellView: View {
             
             
             VStack {
-                Text(item.item.name)
-                    .lineLimit(2)
-                
                 let selectedOptions = item.item.options.filter({ $0.value })
+                Text(item.item.name)
+                    .lineLimit(selectedOptions.isEmpty ? 2 : 1, reservesSpace: true)
+                
                 if !selectedOptions.isEmpty {
-                    Text("options")
+                    Text("w/ options")
+                        .lineLimit(1)
                         .foregroundStyle(Color.palette.neutralDark)
                 }
             }

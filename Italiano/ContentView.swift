@@ -8,43 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    /// Tab view tabs
-    enum Tab {
-        case home, map, menu
         
-        var title: String {
-            switch self {
-            case .home: "Home"
-            case .map: "Map"
-            case .menu: "Menu"
-            }
-        }
-    }
-    
     /// Dependency injection
     @Environment(Dependencies.self) private var dependencies
-    
-    /// Currently selected tab
-    @State private var tabSelection: Tab = .home
 
     var body: some View {
         @Bindable var routeManager = dependencies.routeManager
         @Bindable var cartManager = dependencies.cartManager
         NavigationStack(path: $routeManager.routes) {
-            TabView(selection: $tabSelection) {
+            TabView(selection: $routeManager.tabSelection) {
                 HomeView()
                     .tabItem { Label("Home", systemImage: "house") }
-                    .tag(Tab.home)
+                    .tag(RouteManager.Tab.home)
                 MapView()
                     .tabItem { Label("Map", systemImage: "map") }
-                    .tag(Tab.map)
+                    .tag(RouteManager.Tab.map)
                 MenuView()
                     .tabItem { Label("Menu", systemImage: "list.clipboard") }
-                    .tag(Tab.menu)
+                    .tag(RouteManager.Tab.menu)
             }
             .navigationDestination(for: Route.self) { $0 }
-            .navigationTitle(tabSelection.title)
+            .navigationTitle(routeManager.tabSelection.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {

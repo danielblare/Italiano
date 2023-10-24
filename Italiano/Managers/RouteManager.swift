@@ -44,6 +44,20 @@ extension Route: View {
 
 // MARK: Route Manager
 @Observable final class RouteManager {
+    /// Tab view tabs
+    enum Tab {
+        case home, map, menu
+        
+        var title: String {
+            switch self {
+            case .home: "Home"
+            case .map: "Map"
+            case .menu: "Menu"
+            }
+        }
+    }
+
+    var tabSelection: Tab = .home
     var routes = [Route]()
     
     func push(to route: Route) {
@@ -55,6 +69,7 @@ extension Route: View {
     
     func reset() {
         routes = []
+        tabSelection = .home
     }
     
     func back() {

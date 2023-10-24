@@ -63,7 +63,7 @@ struct HomeView: View {
 
     private var RecentOrdersSection: some View {
         VStack {
-            Text("Recent offers")
+            Text("Recent orders")
                 .foregroundStyle(Color.palette.oliveGreen)
                 .font(.asset.heading2)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -79,7 +79,7 @@ struct HomeView: View {
                     let spacing: CGFloat = 15
                     HStack(spacing: spacing) {
                         ForEach(orders) { order in
-                            NavigationLink(value: Route.cart) {
+                            NavigationLink(value: Route.recentOrder(order: order)) {
                                 if UIDevice.current.userInterfaceIdiom == .phone {
                                     RecentOrderCellView(order: order)
                                         .containerRelativeFrame(.horizontal, count: verticalSizeClass == .regular ? 3 : 6, spacing: spacing)

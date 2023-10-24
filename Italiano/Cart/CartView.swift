@@ -12,7 +12,7 @@ struct CartView: View {
     @Environment(\.modelContext) private var context
     
     @Query(sort: \Location.name) private let locations: [Location]
-    @Query private var items: [CartItem]
+    @Query private var items: [CartItemSwiftData]
     @AppStorage("deliveryOption") private var deliveryOption: DeliveryOption = .delivery
     
     @State private var deliveryAddress: String = ""
@@ -24,7 +24,7 @@ struct CartView: View {
             
             VStack {
                 GreenDivider
-                    .padding(.vertical)
+                    .padding(.bottom)
                 
                 Group {
                     DeliveryOptionSelector
@@ -244,7 +244,8 @@ struct CartView: View {
 #Preview {
     @State var dependencies = Dependencies()
 
-    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItem.dummy] + (try! JSONDecoder.decode(from: "Locations", type: [Location].self))) {
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [
+        .dummy] + (try! JSONDecoder.decode(from: "Locations", type: [Location].self))) {
         NavigationStack {
             CartView()
                 .navigationDestination(for: Route.self) { $0 }

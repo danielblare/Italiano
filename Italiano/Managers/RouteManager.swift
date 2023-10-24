@@ -12,9 +12,10 @@ enum Route: Hashable {
     case offer(_ offer: Offer)
     case menuSection(_ section: MenuSection)
     case menuItem(_ item: MenuItem)
-    case cart, cartItemOverview(_ item: CartItem)
+    case cart, cartItemOverview(_ item: CartItemSwiftData)
     case cardDetails(info: DeliveryInfo)
     case orderConfirmation(info: DeliveryInfo)
+    case recentOrder(order: Order)
 }
 
 // MARK: Route View
@@ -35,6 +36,8 @@ extension Route: View {
             PaymentMethodView(info: info)
         case .orderConfirmation(let info):
             OrderConfirmationView(info: info)
+        case .recentOrder(let order):
+            RecentOrderView(order: order)
         }
     }
 }

@@ -47,6 +47,20 @@ final class JSONTests: XCTestCase {
         
         XCTAssertThrowsError(try JSONDecoder.decode(from: "JSONLocationsTests", type: [Int].self), "Decoding wrong type doesn't fail")
     }
+    
+    func testSuccessfulDecodingMenu() {
+        let fileName = "JSONMenuTests"
+        var result: [MenuSection] = []
+        
+        
+        XCTAssertNoThrow(result = try JSONDecoder.decode(from: fileName, type: [MenuSection].self), "Function shouldn't throw")
+        XCTAssertEqual(result.count, 4, "Data was not decoded correctly")
+    }
 
+    func testFailingDecodingMenu() {
+        XCTAssertThrowsError(try JSONDecoder.decode(from: "WrongName", type: [MenuSection].self), "Decoding from wrong file doesn't fail")
+        
+        XCTAssertThrowsError(try JSONDecoder.decode(from: "JSONMenuTests", type: [Int].self), "Decoding wrong type doesn't fail")
+    }
 
 }

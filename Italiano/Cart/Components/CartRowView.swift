@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CartRowView: View {
-    let item: CartItem
+    let item: any CartItem
     
     var body: some View {
         HStack(alignment: .center) {
@@ -56,7 +56,7 @@ struct CartRowView: View {
     @State var dependencies = Dependencies()
 
     return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self)) {
-        CartRowView(item: .dummy)
+        CartRowView(item: CartItemSwiftData.dummy)
             .frame(height: 100)
             .padding()
     }

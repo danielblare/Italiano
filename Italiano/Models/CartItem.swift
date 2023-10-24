@@ -7,11 +7,17 @@
 
 import Foundation
 
-struct CartItemModel: Codable {
+protocol CartItem {
+    var item: MenuItem { get }
+    var quantity: Int { get set }
+    var totalPrice: Double { get }
+}
+
+struct CartItemModel: CartItem, Codable, Hashable, Equatable {
     let item: MenuItem
     var quantity: Int
     
-    init(from model: CartItem) {
+    init(from model: CartItemSwiftData) {
         self.init(item: model.item, quantity: model.quantity)
     }
     
@@ -24,7 +30,7 @@ struct CartItemModel: Codable {
         Double(quantity) * item.price
     }
     
-    static var dummy: CartItem {
-        CartItem(item: MenuItem.dummy, quantity: 2)
+    static var dummy: CartItemSwiftData {
+        CartItemSwiftData(item: MenuItem.dummy, quantity: 2)
     }
 }

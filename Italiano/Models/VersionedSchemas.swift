@@ -12,7 +12,7 @@ import MapKit
 enum SchemaV1: VersionedSchema {
     
     static var models: [any PersistentModel.Type] {
-        [CartItem.self, Order.self, Offer.self, Location.self, MenuSection.self, FavoriteItem.self]
+        [CartItemSwiftData.self, Order.self, Offer.self, Location.self, MenuSection.self, FavoriteItem.self]
     }
     
     static var versionIdentifier: Schema.Version = .init(1, 0, 0)
@@ -29,7 +29,7 @@ extension SchemaV1 {
             items.map({ $0.totalPrice }).reduce(0, +) + deliveryInfo.option.price
         }
         
-        init(items: [CartItem], deliveryInfo: DeliveryInfo, date: Date = .now) {
+        init(items: [CartItemSwiftData], deliveryInfo: DeliveryInfo, date: Date = .now) {
             self.items = items.map({ .init(from: $0) })
             self.deliveryInfo = deliveryInfo
             self.date = date
@@ -41,7 +41,7 @@ extension SchemaV1 {
     }
         
     @Model
-    final class CartItem {
+    final class CartItemSwiftData: CartItem {
         let item: MenuItem
         var quantity: Int
         
@@ -54,8 +54,8 @@ extension SchemaV1 {
             Double(quantity) * item.price
         }
         
-        static var dummy: CartItem {
-            CartItem(item: MenuItem.dummy, quantity: 2)
+        static var dummy: CartItemSwiftData {
+            CartItemSwiftData(item: MenuItem.dummy, quantity: 2)
         }
     }
     

@@ -19,7 +19,7 @@ struct PaymentMethodView: View {
     /// Dependency injection
     @Environment(Dependencies.self) private var dependencies
     
-    @Query private var items: [CartItem]
+    @Query private var items: [CartItemSwiftData]
     
     @AppStorage("paymentMethod") private var selectedMethod: PaymentMethod = .creditCard
     @AppStorage("defaultCardDetails") private var cardDetails: CardDetails = .init()
@@ -262,7 +262,7 @@ struct PaymentMethodView: View {
 #Preview {
     @State var dependencies = Dependencies()
 
-    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItem.dummy]) {
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItemSwiftData.dummy]) {
         NavigationStack {
             PaymentMethodView(info: .dummy)
                 .navigationDestination(for: Route.self) { $0 }

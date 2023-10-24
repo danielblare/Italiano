@@ -13,7 +13,7 @@ struct MenuItemRowView: View {
     @Environment(Dependencies.self) private var dependencies
     @Environment(\.modelContext) private var context
     
-    @Query private var cartItems: [CartItem]
+    @Query private var cartItems: [CartItemSwiftData]
     let item: MenuItem
     
     var body: some View {

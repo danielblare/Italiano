@@ -10,9 +10,9 @@ import SwiftData
 
 struct CartItemOverview: View {
     
-    @Bindable var cartItem: CartItem
+    @Bindable var cartItem: CartItemSwiftData
     
-    init(item: CartItem) {
+    init(item: CartItemSwiftData) {
         self.cartItem = item
     }
     

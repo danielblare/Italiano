@@ -9,7 +9,7 @@ import SwiftUI
 import Observation
 
 // MARK: SwiftData Models
-typealias CartItem = SchemaV1.CartItem
+typealias CartItemSwiftData = SchemaV1.CartItemSwiftData
 typealias Order = SchemaV1.Order
 typealias Offer = SchemaV1.Offer
 typealias Location = SchemaV1.Location

@@ -13,7 +13,7 @@ struct MenuItemView: View {
     @Environment(Dependencies.self) private var dependencies
     @Environment(\.modelContext) private var context
     
-    @Query private var cartItems: [CartItem]
+    @Query private var cartItems: [CartItemSwiftData]
     @Query private let favorites: [FavoriteItem]
 
     @State private var item: MenuItem

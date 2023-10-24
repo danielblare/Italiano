@@ -20,7 +20,7 @@ final class RouteManagerTests: XCTestCase {
         routerManager = nil
     }
     
-    func testRoutesIsEmptyOnInitialisation() {
+    func testRoutesIsEmptyOnInit() {
         XCTAssertEqual(routerManager.routes.count, 0, "Path should be empty")
     }
     

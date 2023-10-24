@@ -6,30 +6,85 @@
 //
 
 import XCTest
+import SwiftData
+@testable import Italiano
 
 final class CartManagerTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    private var cartManager: CartManager!
+    private var container: ModelContainer!
+
+    override func setUp() {
+        cartManager = CartManager()
+        
+        let schema = Schema(versionedSchema: SchemaV1.self)
+        let configuration = ModelConfiguration()
+        let container = try! ModelContainer(for: schema, configurations: configuration)
+        
+        self.container = container
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    override func tearDown() {
+        cartManager = nil
+        container.deleteAllData()
+        container = nil
+    }
+    
+    func testSameItemAdding() {
+        let context: ModelContext = .init(container)
+
+        // Creating Cart
+        let menuItem = MenuItem.dummy
+        let cart: [CartItemSwiftData] = [CartItemSwiftData(item: menuItem)]
+        
+        // Adding item
+        cartManager.addToCart(item: menuItem, cart: cart, context: context)
+        
+        // Checking for an item
+        XCTAssertEqual(cartManager.addedToCartItem, menuItem)
+        XCTAssertEqual(cart.first?.quantity, 2)
+    }
+    
+    func testDifferentItemAdding() throws {
+        let context: ModelContext = .init(container)
+
+        // Creating Cart
+        let menuItem1 = MenuItem.dummy
+        let menuItem2 = MenuItem(name: "Name2", info: "info2", price: 1, image: MenuItem.dummy.image, ingredients: [])
+        let cart: [CartItemSwiftData] = [CartItemSwiftData(item: menuItem1)]
+        cart.forEach { context.insert($0) }
+        
+        // Adding item
+        cartManager.addToCart(item: menuItem2, cart: cart, context: context)
+        
+        let updatedCart = try context.fetch(FetchDescriptor<CartItemSwiftData>())
+
+        // Checking for an item
+        XCTAssertEqual(cartManager.addedToCartItem, menuItem2)
+        XCTAssertEqual(updatedCart.count, 2)
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testOrderPlacement() throws {
+        let context: ModelContext = .init(container)
+        
+        let cartItem = CartItemSwiftData.dummy
+        
+        // Adding item to the cart
+        context.insert(cartItem)
+        
+        // Placing order
+        try cartManager.placeOrder(deliveryInfo: .dummy, context: context)
+        
+        // Checking if cart is empty
+        let updatedCart = try context.fetch(FetchDescriptor<CartItemSwiftData>())
+        XCTAssertTrue(updatedCart.isEmpty)
+        
+        // Checking if there is an order
+        let orders = try context.fetch(FetchDescriptor<Order>())
+        XCTAssertEqual(orders.count, 1)
+        
+        // Checking if screen appeared
+        XCTAssertTrue(cartManager.showOrderComplete)
     }
-
 }

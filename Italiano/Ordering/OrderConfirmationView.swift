@@ -13,7 +13,7 @@ struct OrderConfirmationView: View {
     @Environment(Dependencies.self) private var dependencies
     @Environment(\.modelContext) private var context
 
-    @Query private var cartItems: [CartItem]
+    @Query private var cartItems: [CartItemSwiftData]
     
     let deliveryInfo: DeliveryInfo
     
@@ -35,8 +35,7 @@ struct OrderConfirmationView: View {
             
             VStack {
                 GreenDivider
-                    .padding(.vertical)
-                
+
                 deliveryInfo.option.orderConfirmationTitle
                     .foregroundStyle(Color.palette.neutralDark)
                     .font(.asset.heading2)
@@ -89,7 +88,7 @@ struct OrderConfirmationView: View {
     
     private var ConfirmButton: some View {
         Button {
-            dependencies.cartManager.placeOrder(cart: cartItems, deliveryInfo: deliveryInfo, context: context)
+            try? dependencies.cartManager.placeOrder(deliveryInfo: deliveryInfo, context: context)
         } label: {
             Text("Confirm")
                 .font(.asset.buttonText)
@@ -102,7 +101,7 @@ struct OrderConfirmationView: View {
     
     private var OrderSummary: some View {
         let goods = cartItems.map({ $0.totalPrice }).reduce(0, +)
-        let delivery: Double = cartItems.isEmpty ? 0 : deliveryInfo.option.price
+        let delivery: Double = deliveryInfo.option.price
         let total = goods + delivery
         return Group {
             Text("Order Summary")
@@ -190,7 +189,7 @@ struct OrderConfirmationView: View {
 #Preview {
     @State var dependencies = Dependencies()
 
-    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItem.dummy]) {
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [CartItemSwiftData.dummy]) {
         NavigationStack {
             OrderConfirmationView(info: .dummy)
                 .navigationDestination(for: Route.self) { $0 }

@@ -15,6 +15,7 @@ struct ContentView: View {
     var body: some View {
         @Bindable var routeManager = dependencies.routeManager
         @Bindable var cartManager = dependencies.cartManager
+        
         NavigationStack(path: $routeManager.routes) {
             TabView(selection: $routeManager.tabSelection) {
                 HomeView()
@@ -27,16 +28,19 @@ struct ContentView: View {
                     .tabItem { Label("Menu", systemImage: "list.clipboard") }
                     .tag(RouteManager.Tab.menu)
             }
+            // Nav settings
             .navigationDestination(for: Route.self) { $0 }
             .navigationTitle(routeManager.tabSelection.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                // Nav title replacement
                 ToolbarItem(placement: .principal) {
                     Text("Italiano")
                         .font(.asset.heading2)
                         .fontWeight(.regular)
                         .foregroundStyle(Color.palette.tomatoRed)
                 }
+                // Basket button
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink(value: Route.cart) {
                         Image(systemName: "basket")
@@ -44,15 +48,11 @@ struct ContentView: View {
                 }
             }
         }
-        .fullScreenCover(item: $cartManager.addedToCartItem) {
-            ItemAddedView(item: $0)
-        }
-        .fullScreenCover(isPresented: $cartManager.showOrderComplete) {
-            OrderCompleteView()
-        }
-        .sensoryFeedback(.success, trigger: cartManager.addedToCartItem) { _, newValue in
-            newValue != nil
-        }
+        .fullScreenCover(item: $cartManager.addedToCartItem) { ItemAddedView(item: $0) }
+        .fullScreenCover(isPresented: $cartManager.showOrderComplete) { OrderCompleteView() }
+        
+        // Triggering haptics when item is added to cart
+        .sensoryFeedback(.success, trigger: cartManager.addedToCartItem) { _, newValue in newValue != nil }
     }
 }
 
@@ -63,10 +63,5 @@ struct ContentView: View {
                             items: try! JSONDecoder.decode(from: "Offers", type: [Offer].self) + (try! JSONDecoder.decode(from: "Locations", type: [Location].self)) + (try! JSONDecoder.decode(from: "Menu", type: [MenuSection].self)) + [Order.dummy] + [FavoriteItem.dummy]) {
         ContentView()
             .environment(dependencies)
-        //            .onAppear {
-        //                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-        //                    dependencies.routeManager.push(to: .cart)
-        //                }
-        //            }
     }
 }

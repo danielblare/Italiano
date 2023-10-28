@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Simple line view
 struct Line: Shape {
     func path(in rect: CGRect) -> Path {
         Path { path in

@@ -12,8 +12,10 @@ import SwiftData
 /// Map tab view
 struct MapView: View {
     
+    /// View model
     @State private var viewModel: MapViewModel = MapViewModel()
     
+    /// Locations fetched
     @Query(sort: \Location.name) private let locations: [Location]
     
     /// Location selected by user on the map
@@ -46,7 +48,7 @@ struct MapView: View {
                             .padding()
                     } else {
                         ForEach(sortedLocations) { location in
-                            LocationRowView(directionManager: .shared, location: location, isSelected: selectedLocation == location)
+                            LocationRowView(location: location, isSelected: selectedLocation == location)
                                 .padding(.vertical, 4)
                                 .onTapGesture {
                                     if selectedLocation == location {

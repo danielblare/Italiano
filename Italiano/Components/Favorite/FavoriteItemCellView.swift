@@ -7,7 +7,10 @@
 
 import SwiftUI
 
+/// Cell View for favorite item
 struct FavoriteItemCellView: View {
+    
+    /// Favorite item passed in
     let item: FavoriteItem
     
     var body: some View {
@@ -18,7 +21,9 @@ struct FavoriteItemCellView: View {
             
             
             VStack {
+                // Fetching only selected options for MenuItem
                 let selectedOptions = item.item.options.filter({ $0.value })
+                
                 Text(item.item.name)
                     .lineLimit(selectedOptions.isEmpty ? 2 : 1, reservesSpace: true)
                 

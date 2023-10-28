@@ -7,13 +7,16 @@
 
 import SwiftUI
 
-/// Tries to fetch image from cache. If it's not there just downloads image and caches it for future
+/// Image view which fetches data from cache if present or downloads it and saves to the cache if not
 struct CachedImage: View {
     
     /// Dependency injection
     @Environment(Dependencies.self) private var dependencies
 
+    /// URL for the image
     let url: URL
+    
+    /// Main Image returned by the view
     @State private var image: UIImage?
     
     init(url: URL) {
@@ -33,16 +36,18 @@ struct CachedImage: View {
         }
         .task {
             let manager = dependencies.cacheManager
+            let cache = manager.imagesCache
+            
+            /// Generates key under which image will be cached
             let key = url.relativePath
             
-            if let savedImage = manager.getFrom(manager.imagesCache, forKey: key) {
+            if let savedImage = manager.getFrom(cache, forKey: key) { // Tries to get image from cache
                 self.image = savedImage
-            } else {
-                if let data = try? await URLSession.shared.data(from: url).0,
-                   let image = UIImage(data: data) {
-                    self.image = image
-                    manager.addTo(manager.imagesCache, forKey: key, value: image)
-                }
+            } else if let data = try? await URLSession.shared.data(from: url).0, // Tries to get data from the url
+                      let image = UIImage(data: data) {
+                self.image = image
+                // Adding image to the cache
+                manager.addTo(cache, forKey: key, value: image)
             }
         }
     }

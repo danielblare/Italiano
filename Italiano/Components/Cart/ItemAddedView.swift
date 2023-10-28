@@ -7,11 +7,14 @@
 
 import SwiftUI
 
+/// Screen to display "Item has been added" to user
 struct ItemAddedView: View {
+    
     /// Dependency injection
     @Environment(Dependencies.self) private var dependencies
     @Environment(\.dismiss) private var dismiss
 
+    /// Menu Item passed in
     let item: MenuItem
         
     var body: some View {
@@ -57,6 +60,7 @@ struct ItemAddedView: View {
         }
     }
     
+    /// View Cart Button, leads user to the cart screen
     private var ViewCartButton: some View {
         Button {
             dependencies.routeManager.push(to: .cart)
@@ -76,6 +80,7 @@ struct ItemAddedView: View {
         .foregroundStyle(Color.palette.tomatoRed)
     }
     
+    /// Continue Button dismissing current view
     private var ContinueButton: some View {
         Button {
             dismiss.callAsFunction()

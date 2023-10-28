@@ -8,8 +8,10 @@
 import SwiftUI
 import SwiftData
 
+/// Page for payment method entry
 struct PaymentMethodView: View {
     
+    /// Delivery info entered by user
     let deliveryInfo: DeliveryInfo
     
     init(info: DeliveryInfo) {
@@ -19,11 +21,15 @@ struct PaymentMethodView: View {
     /// Dependency injection
     @Environment(Dependencies.self) private var dependencies
     
+    /// Cart items for order summary
     @Query private var items: [CartItemSwiftData]
     
+    /// Payment method stored for convenience
     @AppStorage("paymentMethod") private var selectedMethod: PaymentMethod = .creditCard
+    /// Card details stored for convenience
     @AppStorage("defaultCardDetails") private var cardDetails: CardDetails = .init()
     
+    /// Focused field
     @FocusState private var focused: CardDetails.Field?
     
     var body: some View {
@@ -63,6 +69,7 @@ struct PaymentMethodView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
+    /// Button to go to the previous screen
     private var BackButton: some View {
         Button {
             dependencies.routeManager.back()
@@ -81,6 +88,7 @@ struct PaymentMethodView: View {
         .foregroundStyle(Color.palette.tomatoRed)
     }
     
+    /// Button to continue to the next screen
     private var ProceedButton: some View {
         Button {
             dependencies.routeManager.push(to: .orderConfirmation(info: deliveryInfo))
@@ -101,6 +109,7 @@ struct PaymentMethodView: View {
         }())
     }
     
+    /// Form for entering card details
     private var CardDetailsForm: some View {
         VStack(spacing: 15) {
             HStack {
@@ -181,6 +190,7 @@ struct PaymentMethodView: View {
         .font(.asset.menuItem)
     }
     
+    /// Payment method selector
     private var MethodSelector: some View {
         VStack(spacing: 15) {
             ForEach(PaymentMethod.allCases) { method in
@@ -213,6 +223,7 @@ struct PaymentMethodView: View {
         .animation(.snappy, value: selectedMethod)
     }
     
+    /// Order summary information
     private var OrderSummary: some View {
         let goods = items.map({ $0.totalPrice }).reduce(0, +)
         let delivery: Double = items.isEmpty ? 0 : deliveryInfo.option.price
@@ -251,6 +262,7 @@ struct PaymentMethodView: View {
         .foregroundStyle(Color.palette.neutralDark)
     }
     
+    /// Custom divider
     private var GreenDivider: some View {
         Divider()
             .frame(height: 1.5)

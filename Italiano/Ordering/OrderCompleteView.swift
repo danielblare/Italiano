@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Screen indicating that order has been placed
 struct OrderCompleteView: View {
     /// Dependency injection
     @Environment(Dependencies.self) private var dependencies
@@ -36,6 +37,7 @@ struct OrderCompleteView: View {
         .padding()
     }
     
+    /// Button to dismiss the view and reset nav route
     private var ProceedButton: some View {
         Button {
             dependencies.routeManager.reset()

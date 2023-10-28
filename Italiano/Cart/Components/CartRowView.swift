@@ -7,7 +7,10 @@
 
 import SwiftUI
 
+/// Row view of a cart item
 struct CartRowView: View {
+    
+    /// Item passed in
     let item: any CartItem
     
     var body: some View {

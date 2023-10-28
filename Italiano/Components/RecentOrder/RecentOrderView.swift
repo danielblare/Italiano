@@ -7,7 +7,10 @@
 
 import SwiftUI
 
+/// Full page with recent order info
 struct RecentOrderView: View {
+    
+    /// Order passed in
     let order: Order
     
     var body: some View {
@@ -43,6 +46,7 @@ struct RecentOrderView: View {
         }
     }
     
+    /// Field displaying pickup location selected
     private var PickupLocation: some View {
         HStack {
             Image(systemName: "mappin.and.ellipse")
@@ -62,6 +66,7 @@ struct RecentOrderView: View {
         }
     }
     
+    /// Field displaying delivery address entered
     private var DeliveryAddress: some View {
         HStack {
             Image(systemName: "location")
@@ -82,12 +87,14 @@ struct RecentOrderView: View {
         }
     }
     
+    /// Custom Divider
     private var GreenDivider: some View {
         Divider()
             .frame(height: 1.5)
             .overlay(Color.palette.lightGreen)
     }
     
+    /// Order summary showing order date, prices, total etc
     private var OrderSummary: some View {
         let goods = order.items.map({ $0.totalPrice }).reduce(0, +)
         let delivery: Double = order.deliveryInfo.option.price

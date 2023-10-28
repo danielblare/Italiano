@@ -8,13 +8,19 @@
 import SwiftUI
 import SwiftData
 
+/// Order confirmation view displaying order summary before final confirmation
 struct OrderConfirmationView: View {
+    
     /// Dependency injection
     @Environment(Dependencies.self) private var dependencies
+    
+    /// Model context
     @Environment(\.modelContext) private var context
 
+    /// Cart items
     @Query private var cartItems: [CartItemSwiftData]
     
+    /// Delivery info entered by the user
     let deliveryInfo: DeliveryInfo
     
     init(info: DeliveryInfo) {
@@ -68,6 +74,7 @@ struct OrderConfirmationView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
+    /// Back button going back on the route manager
     private var BackButton: some View {
         Button {
             dependencies.routeManager.back()
@@ -86,6 +93,7 @@ struct OrderConfirmationView: View {
         .foregroundStyle(Color.palette.tomatoRed)
     }
     
+    /// Confirm button placing the order
     private var ConfirmButton: some View {
         Button {
             try? dependencies.cartManager.placeOrder(deliveryInfo: deliveryInfo, context: context)
@@ -99,6 +107,7 @@ struct OrderConfirmationView: View {
         .tint(.palette.tomatoRed)
     }
     
+    /// Order summary information
     private var OrderSummary: some View {
         let goods = cartItems.map({ $0.totalPrice }).reduce(0, +)
         let delivery: Double = deliveryInfo.option.price
@@ -140,6 +149,7 @@ struct OrderConfirmationView: View {
         .foregroundStyle(Color.palette.neutralDark)
     }
 
+    /// Displaying pickup location selected by user
     private var PickupLocation: some View {
         HStack {
             Image(systemName: "mappin.and.ellipse")
@@ -159,6 +169,7 @@ struct OrderConfirmationView: View {
         }
     }
     
+    /// Displaying delivery address entered by user
     private var DeliveryAddress: some View {
         HStack {
             Image(systemName: "location")
@@ -179,6 +190,7 @@ struct OrderConfirmationView: View {
         }
     }
 
+    /// Custom divider
     private var GreenDivider: some View {
         Divider()
             .frame(height: 1.5)

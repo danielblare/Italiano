@@ -12,6 +12,7 @@ import MapKit
 final class MapViewModel {
     let locationManager: CLLocationManager = CLLocationManager()
         
+    /// Checked user's location authorization status
     func checkLocationAuthorization() {
         switch locationManager.authorizationStatus {
         case .notDetermined:

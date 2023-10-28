@@ -8,14 +8,23 @@
 import SwiftUI
 import SwiftData
 
+/// Cart view displaying items user added to cart and info about them
 struct CartView: View {
+    /// Model context
     @Environment(\.modelContext) private var context
     
+    /// Locations fetched for pickup location selection
     @Query(sort: \Location.name) private let locations: [Location]
-    @Query private var items: [CartItemSwiftData]
-    @AppStorage("deliveryOption") private var deliveryOption: DeliveryOption = .delivery
     
+    /// Cart items to display
+    @Query private var items: [CartItemSwiftData]
+    
+    /// Delivery option selected by the user stored for convenience
+    @AppStorage("deliveryOption") private var deliveryOption: DeliveryOption = .delivery
+
+    /// Delivery address text field
     @State private var deliveryAddress: String = ""
+    /// Pickup location selection
     @State private var pickupLocation: Location = .empty
     
     var body: some View {
@@ -60,6 +69,7 @@ struct CartView: View {
         }
     }
     
+    /// Proceed button navigates to the next screen
     private var ProceedButton: some View {
         let address = {
             switch deliveryOption {
@@ -86,6 +96,7 @@ struct CartView: View {
         }())
     }
     
+    /// List of items in user's cart
     private var ItemsList: some View {
         Group {
             if items.isEmpty {
@@ -110,6 +121,7 @@ struct CartView: View {
         }
     }
     
+    /// Order summary information
     private var OrderSummary: some View {
         let goods = items.map({ $0.totalPrice }).reduce(0, +)
         let delivery: Double = items.isEmpty ? 0 : deliveryOption.price
@@ -151,6 +163,7 @@ struct CartView: View {
         .foregroundStyle(Color.palette.neutralDark)
     }
     
+    /// Pickup location selector
     private var PickupLocationSelector: some View {
         Group {
             if locations.isEmpty {
@@ -178,6 +191,7 @@ struct CartView: View {
         .font(.asset.menuItem)
     }
     
+    /// Text field for user's delivery address entry
     private var DeliveryAddressField: some View {
         HStack {
             Image(systemName: "location")
@@ -197,6 +211,7 @@ struct CartView: View {
         }
     }
     
+    /// Selector for delivery option
     private var DeliveryOptionSelector: some View {
         HStack {
             VStack(spacing: 0) {
@@ -234,6 +249,7 @@ struct CartView: View {
         .font(.asset.heading2)
     }
     
+    /// Custom divider
     private var GreenDivider: some View {
         Divider()
             .frame(height: 1.5)

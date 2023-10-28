@@ -8,8 +8,10 @@
 import SwiftUI
 import SwiftData
 
+/// Overview for a cart item allowing to change some details
 struct CartItemOverview: View {
     
+    /// Cart item passed in
     @Bindable var cartItem: CartItemSwiftData
     
     init(item: CartItemSwiftData) {

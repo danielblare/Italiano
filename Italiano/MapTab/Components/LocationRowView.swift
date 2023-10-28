@@ -10,6 +10,7 @@ import SwiftUI
 /// Row view representing location on the map with description and ETA travel distance/time
 struct LocationRowView: View {
     
+    /// Manager for directions building
     let directionManager: DirectionManager
     
     /// Passed in location
@@ -18,7 +19,7 @@ struct LocationRowView: View {
     /// Whether location is selected on the map
     let isSelected: Bool
     
-    init(directionManager: DirectionManager, location: Location, isSelected: Bool = false) {
+    init(directionManager: DirectionManager = .shared, location: Location, isSelected: Bool = false) {
         self.directionManager = directionManager
         self.location = location
         self.isSelected = isSelected
@@ -89,7 +90,6 @@ struct LocationRowView: View {
         .background {
             RoundedRectangle(cornerRadius: 16)
                 .strokeBorder(Color.palette.oliveGreen, lineWidth: 0.5)
-//                .shadow(color: .palette.lightGreen.opacity(1), radius: 3, x: 1, y: 1)
         }
         .task {
             guard let ETA = try? await DirectionManager.shared.getETA(to: location.coordinate) else { return }

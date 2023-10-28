@@ -7,10 +7,13 @@
 
 import SwiftUI
 
+/// Cell View for recent order
 struct RecentOrderCellView: View {
     
+    /// Order passed in
     let order: Order
     
+    /// Date formatted to look like `Oct 11`
     private var formattedDate: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d"

@@ -166,7 +166,7 @@ struct CartView: View {
                     .padding()
             } else {
                 Picker(selection: $pickupLocation) {
-                    ForEach(locations + [.empty]) { location in
+                    ForEach([Location.empty] + locations) { location in
                         Text(location.name)
                             .tag(location)
                     }

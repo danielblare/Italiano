@@ -25,11 +25,14 @@ struct HomeView: View {
     
     var body: some View {
         ScrollView {
-            OffersSection
-            
-            RecentOrdersSection
-            
-            FavoriteSection
+            VStack(spacing: 15) {
+                OffersSection
+                
+                RecentOrdersSection
+                
+                FavoriteSection
+            }
+            .padding(.top)
         }
     }
     
@@ -157,6 +160,8 @@ struct HomeView: View {
         NavigationStack(path: $routeManager.routes) {
             HomeView()
                 .navigationDestination(for: Route.self) { $0 }
+                .navigationTitle("Italiano")
+                .navigationBarTitleDisplayMode(.inline)
         }
         .environment(dependencies)
     }

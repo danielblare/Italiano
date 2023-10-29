@@ -15,8 +15,21 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="12M-98-27z">
+                                <rect key="frame" x="107" y="423" width="200" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="H0E-0b-cWS"/>
+                                    <constraint firstAttribute="width" constant="200" id="XJP-5s-dp6"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" name="Beige"/>
+                        <constraints>
+                            <constraint firstItem="12M-98-27z" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="RVq-fv-l3D"/>
+                            <constraint firstItem="12M-98-27z" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="qm5-SV-Pex"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -25,6 +38,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="logo" width="331" height="72"/>
         <namedColor name="Beige">
             <color red="1" green="0.95294117647058818" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

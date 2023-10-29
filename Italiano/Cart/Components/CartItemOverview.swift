@@ -19,45 +19,45 @@ struct CartItemOverview: View {
     }
     
     var body: some View {
-        let item = cartItem.item
+        let menuItem = cartItem.item
         VStack {
             ScrollView {
                 VStack() {
-                    CachedImage(url: item.image)
+                    CachedImage(url: menuItem.image)
                         .scaledToFill()
                         .frame(width: 250, height: 250)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                         .padding(.bottom)
                     
                     Group {
-                        Text(item.name)
+                        Text(menuItem.name)
                             .font(.asset.heading1)
                         
-                        Text(item.info)
+                        Text(menuItem.info)
                             .font(.asset.menuItem)
                     }
                     .foregroundStyle(Color.palette.oliveGreen)
                     
-                    Text(item.price.formatPrice())
+                    Text(menuItem.price.formatPrice())
                         .font(.asset.heading2)
                         .foregroundStyle(Color.palette.tomatoRed)
                         .padding(.vertical, 10)
                     
                     Group {
-                        if !item.ingredients.isEmpty {
+                        if !menuItem.ingredients.isEmpty {
                             GroupBox {
                                 Text("Ingredients:")
                                     .foregroundStyle(Color.palette.oliveGreen)
                                     .font(.asset.extra)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 
-                                Text(item.ingredients.map({ $0.name }).joined(separator: ", "))
+                                Text(menuItem.ingredients.map({ $0.name }).joined(separator: ", "))
                                     .font(.asset.menuItem)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
                         }
                         
-                        let selectedOptions = item.options.filter({ $0.value })
+                        let selectedOptions = menuItem.options.filter({ $0.value })
                         if !selectedOptions.isEmpty {
                             GroupBox {
                                 Text("Options:")
@@ -92,8 +92,9 @@ struct CartItemOverview: View {
             .padding()
             
         }
-        .navigationTitle(item.name)
+        .navigationTitle(menuItem.name)
         .navigationBarTitleDisplayMode(.inline)
+        .sensoryFeedback(trigger: cartItem.quantity) { $0 < $1 ? .increase : .decrease}
     }
 }
 

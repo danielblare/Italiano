@@ -18,6 +18,6 @@ extension Color {
         let neutralDark = Color("Neutral_dark")
         let lightGreen = Color("Light_green")
         let dark = Color("Dark")
-        let creamyBeige = Color("Creamy_beige")
+        let creamyBeige = Color("Beige")
     }
 }

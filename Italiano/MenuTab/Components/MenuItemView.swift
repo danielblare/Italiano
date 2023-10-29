@@ -53,52 +53,10 @@ struct MenuItemView: View {
                     .foregroundStyle(Color.palette.tomatoRed)
                     .padding(.vertical, 10)
                 
-                Group {
-                    if !item.ingredients.isEmpty {
-                        GroupBox {
-                            Text("Ingredients:")
-                                .foregroundStyle(Color.palette.oliveGreen)
-                                .font(.asset.extra)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                            Text(item.ingredients.map({ $0.name }).joined(separator: ", "))
-                                .font(.asset.menuItem)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                    }
-                    
-                    if !item.options.isEmpty {
-                        GroupBox {
-                            Text("Options:")
-                                .foregroundStyle(Color.palette.oliveGreen)
-                                .font(.asset.extra)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                            ForEach(item.options) { option in
-                                let binding = Binding<Option> { option } set: {
-                                    guard let index = item.options.firstIndex(of: option) else { return }
-                                    item.options[index] = $0
-                                }
-                                VStack {
-                                    OptionView(option: binding)
-                                }
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                    }
-                }
-                .multilineTextAlignment(.leading)
+                IngredientsAndOptions
                 
-                Button {
-                    dependencies.cartManager.addToCart(item: item, cart: cartItems, context: context)
-                } label: {
-                    Text("Add to cart")
-                        .font(.asset.buttonText)
-                        .padding(.horizontal)
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(.palette.tomatoRed)
-                .padding(.vertical)
+                AddToCartButton
+                    .padding(.vertical)
             }
             .padding()
         }
@@ -116,6 +74,57 @@ struct MenuItemView: View {
                 }
             }
         }
+    }
+    
+    private var AddToCartButton: some View {
+        Button {
+            dependencies.cartManager.addToCart(item: item, cart: cartItems, context: context)
+        } label: {
+            Text("Add to cart")
+                .font(.asset.buttonText)
+                .padding(.horizontal)
+        }
+        .buttonStyle(.borderedProminent)
+        .tint(.palette.tomatoRed)
+    }
+    
+    /// Ingredients and options section
+    private var IngredientsAndOptions: some View {
+        Group {
+            if !item.ingredients.isEmpty {
+                GroupBox {
+                    Text("Ingredients:")
+                        .foregroundStyle(Color.palette.oliveGreen)
+                        .font(.asset.extra)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text(item.ingredients.map({ $0.name }).joined(separator: ", "))
+                        .font(.asset.menuItem)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+            
+            if !item.options.isEmpty {
+                GroupBox {
+                    Text("Options:")
+                        .foregroundStyle(Color.palette.oliveGreen)
+                        .font(.asset.extra)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    ForEach(item.options) { option in
+                        let binding = Binding<Option> { option } set: {
+                            guard let index = item.options.firstIndex(of: option) else { return }
+                            item.options[index] = $0
+                        }
+                        VStack {
+                            OptionView(option: binding)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+        }
+        .multilineTextAlignment(.leading)
     }
 }
 

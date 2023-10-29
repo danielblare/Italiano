@@ -40,6 +40,16 @@ struct OfferView: View {
                 .padding(.horizontal)
             }
             
+            PromoSection
+            
+        }
+        .navigationTitle(offer.title)
+        .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    /// Promo code section
+    private var PromoSection: some View {
+        Group {
             let promoCode = offer.promoCode.uppercased()
             Text("Promo Code")
                 .font(.asset.extra)
@@ -79,12 +89,8 @@ struct OfferView: View {
             
             Text("Click to copy")
                 .font(.asset.menuItem)
-                .foregroundStyle(.secondary)
-
-
+                .foregroundStyle(.secondary)   
         }
-        .navigationTitle(offer.title)
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

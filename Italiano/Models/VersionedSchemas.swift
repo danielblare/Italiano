@@ -163,7 +163,7 @@ extension SchemaV1 {
             self.coordinate = try container.decode(CLLocationCoordinate2D.self, forKey: .coordinate)
         }
         
-        static let empty = Location(name: "", address: "", info: "", schedule: "", image: URL(fileURLWithPath: ""), coordinate: CLLocationCoordinate2DMake(0, 0))
+        static let empty = Location(name: "Select Location", address: "", info: "", schedule: "", image: URL(fileURLWithPath: ""), coordinate: CLLocationCoordinate2DMake(0, 0))
         
         static var dummy: Location {
             Location(name: "Apex Business Center", address: "Apex Business Cntr, Blackthorn Rd", info: "Nestled in the heart of the business district, our Apex location offers a modern Italian dining experience with a stunning view of the city skyline", schedule: "10am - 8pm", image: URL(string: "https://github.com/stuffeddanny/Italiano_files/blob/main/offers/taste_of_tuscany.png?raw=true")!, coordinate: CLLocationCoordinate2D(latitude: 53.342025, longitude: -6.267628))

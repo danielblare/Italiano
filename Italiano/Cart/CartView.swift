@@ -62,11 +62,6 @@ struct CartView: View {
         .navigationTitle("Cart")
         .navigationBarTitleDisplayMode(.inline)
         .sensoryFeedback(.selection, trigger: deliveryOption)
-        .onAppear {
-            if let location = locations.first {
-                pickupLocation = location
-            }
-        }
     }
     
     /// Proceed button navigates to the next screen
@@ -171,7 +166,7 @@ struct CartView: View {
                     .padding()
             } else {
                 Picker(selection: $pickupLocation) {
-                    ForEach(locations) { location in
+                    ForEach(locations + [.empty]) { location in
                         Text(location.name)
                             .tag(location)
                     }
@@ -260,8 +255,7 @@ struct CartView: View {
 #Preview {
     @State var dependencies = Dependencies()
 
-    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: [
-        .dummy] + (try! JSONDecoder.decode(from: "Locations", type: [Location].self))) {
+    return SwiftDataPreview(preview: PreviewContainer(schema: SchemaV1.self), items: try! JSONDecoder.decode(from: "Locations", type: [Location].self)) {
         NavigationStack {
             CartView()
                 .navigationDestination(for: Route.self) { $0 }

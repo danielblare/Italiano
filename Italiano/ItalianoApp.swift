@@ -50,6 +50,7 @@ struct ItalianoApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .preferredColorScheme(.light)
         }
         // Inserting dependencies
         .environment(dependencies)

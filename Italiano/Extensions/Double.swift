@@ -8,6 +8,8 @@
 import Foundation
 
 extension Double {
+    
+    /// Formats value as a price looking like `$10.99`
     func formatPrice() -> String {
         let currencyFormatter = NumberFormatter()
         currencyFormatter.numberStyle = .currency

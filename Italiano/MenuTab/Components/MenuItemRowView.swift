@@ -8,12 +8,19 @@
 import SwiftUI
 import SwiftData
 
+/// Row view for menu item
 struct MenuItemRowView: View {
+    
     /// Dependency injection
     @Environment(Dependencies.self) private var dependencies
+    
+    /// Model context
     @Environment(\.modelContext) private var context
     
+    /// Cart items to modify when adding to the cart
     @Query private var cartItems: [CartItemSwiftData]
+    
+    /// Menu item passed in
     let item: MenuItem
     
     var body: some View {

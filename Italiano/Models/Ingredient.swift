@@ -7,8 +7,11 @@
 
 import Foundation
 
+/// Ingredient model
 struct Ingredient: Codable, Identifiable, Equatable, Hashable {
     var id: String { name }
+    
+    /// Name of ingredient
     let name: String
     
     init(name: String) {

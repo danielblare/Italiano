@@ -8,13 +8,19 @@
 import SwiftUI
 import SwiftData
 
+/// Home view page displaying relevant information
 struct HomeView: View {
     /// Dependency injection
     @Environment(Dependencies.self) private var dependencies
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
+    /// Offers available for user
     @Query private let offers: [Offer]
+    
+    /// Orders placed by the user
     @Query(sort: \Order.date, order: .reverse) private let orders: [Order]
+    
+    /// User's favorite items
     @Query private let favorites: [FavoriteItem]
     
     var body: some View {
@@ -27,6 +33,7 @@ struct HomeView: View {
         }
     }
     
+    /// Section displaying favorite items
     private var FavoriteSection: some View {
         VStack {
             if !favorites.isEmpty {
@@ -61,6 +68,7 @@ struct HomeView: View {
         }
     }
 
+    /// Section displaying recent orders
     private var RecentOrdersSection: some View {
         VStack {
             Text("Recent orders")
@@ -100,6 +108,7 @@ struct HomeView: View {
         }
     }
     
+    /// Section displaying offers
     private var OffersSection: some View {
         VStack {
             Text("Special offers")

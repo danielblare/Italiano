@@ -10,13 +10,8 @@ import XCTest
 
 final class JSONTests: XCTestCase {
     
-    override func setUp() {
-        
-    }
-    
-    override class func tearDown() {
-        
-    }
+    override func setUp() { }
+    override class func tearDown() { }
 
     func testSuccessfulDecodingOffersList() {
         let fileName = "JSONOffersTests"

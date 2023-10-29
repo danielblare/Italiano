@@ -8,8 +8,10 @@
 import SwiftUI
 import SwiftData
 
+/// View for menu item option with ability to select/unselect it
 struct OptionView: View {
     
+    /// Option passed in
     @Binding var option: Option
     
     var body: some View {

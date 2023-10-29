@@ -26,7 +26,7 @@ struct OfferView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .padding(.top)
                     
-                    Text(offer.offerText)
+                    Text(offer.offerDescription)
                         .font(.asset.heading2)
                         .foregroundStyle(Color.palette.oliveGreen)
                         .padding(.vertical)

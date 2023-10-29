@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+/// Cell view for menu section
 struct MenuSectionCellView: View {
     
+    /// Menu section passed in
     let section: MenuSection
     
     var body: some View {

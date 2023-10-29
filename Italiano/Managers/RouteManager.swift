@@ -8,6 +8,7 @@
 import SwiftUI
 import Observation
 
+/// Route value for navigation path
 enum Route: Hashable {
     case offer(_ offer: Offer)
     case menuSection(_ section: MenuSection)
@@ -57,9 +58,13 @@ extension Route: View {
         }
     }
 
+    /// Selected tab in TabView
     var tabSelection: Tab = .home
+    
+    /// Navigation path
     var routes = [Route]()
     
+    /// Pushing navigation to the `route` only if it's not in path already
     func push(to route: Route) {
         guard !routes.contains(route) else {
             return
@@ -67,11 +72,13 @@ extension Route: View {
         routes.append(route)
     }
     
+    /// Resets navigation path to the root and selects home tab
     func reset() {
         routes = []
         tabSelection = .home
     }
     
+    /// Removes last components from navigation path navigating user to the previous screen
     func back() {
         _ = routes.popLast()
     }

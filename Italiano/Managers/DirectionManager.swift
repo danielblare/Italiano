@@ -9,11 +9,13 @@ import Foundation
 import MapKit
 
 actor DirectionManager {
+    
+    /// Shared instance
     static let shared = DirectionManager()
     
     private init() {}
     
-    /// Gets ETA to coordinate
+    /// Gets ETA to `coordinate`
     func getETA(to coordinate: CLLocationCoordinate2D) async throws -> MKDirections.ETAResponse {
         let request = MKDirections.Request()
         request.source = MKMapItem.forCurrentLocation()
@@ -26,7 +28,7 @@ actor DirectionManager {
         return try await directions.calculateETA()
     }
     
-    /// Opens location in Apple Maps
+    /// Opens `location` in Apple Maps
     nonisolated func openInMaps(_ location: Location) {
         let placemark = MKPlacemark(coordinate: location.coordinate)
         let mapItem = MKMapItem(placemark: placemark)

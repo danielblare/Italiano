@@ -7,9 +7,13 @@
 
 import Foundation
 
+/// Option model
 struct Option: Codable, Identifiable, Equatable, Hashable {
     var id: String { name }
+    
+    /// Option name
     let name: String
+    /// Is option selectedd
     var value: Bool
     
     init(name: String, value: Bool = false) {

@@ -12,6 +12,7 @@ import SwiftData
 struct PreviewContainer {
     let container: ModelContainer!
     
+    /// Initializing with Persistent model types
     init(_ types: [any PersistentModel.Type], isStoredInMemoryOnly: Bool = true) {
         
         let schema = Schema(types)
@@ -19,6 +20,7 @@ struct PreviewContainer {
         self.container = try! ModelContainer(for: schema, configurations: [configuration])
     }
     
+    /// Initializing with versioned schema
     init(schema: VersionedSchema.Type, isStoredInMemoryOnly: Bool = true) {
         let schema = Schema(versionedSchema: schema)
         let configuration = ModelConfiguration(isStoredInMemoryOnly: isStoredInMemoryOnly)

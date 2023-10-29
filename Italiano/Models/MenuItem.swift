@@ -7,23 +7,25 @@
 
 import Foundation
 
-//protocol Test: Codable, Identifiable, Equatable, Hashable {
-//    var id: String { get }
-//    var name: String { get }
-//    var info: String { get }
-//    var price: Double { get }
-//    var image: URL { get }
-//    var ingredients: [Ingredient] { get }
-//    var options: [Option] { get set }
-//}
-
+/// Manu item model
 struct MenuItem: Codable, Identifiable, Equatable, Hashable {
     var id: String { name }
+    /// Name of item
     let name: String
+    
+    /// Info about item
     let info: String
+    
+    /// Price of item
     let price: Double
+    
+    /// Image of item
     let image: URL
+    
+    /// Ingredients in item
     let ingredients: [Ingredient]
+    
+    /// Options available for this item
     var options: [Option]
     
     enum CodingKeys: String, CodingKey {

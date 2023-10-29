@@ -7,10 +7,14 @@
 
 import Foundation
 
+/// Card details model
 struct CardDetails: RawRepresentable {
+    
+    /// Fields for card details entering
     enum Field: CaseIterable {
         case number, expiration, cvv
         
+        /// Validates field in `input`
         func validate(input: CardDetails) -> Bool {
             switch self {
             case .number: input.number.filter({ "0123456789".contains($0) }).count == 16
@@ -20,10 +24,16 @@ struct CardDetails: RawRepresentable {
         }
     }
     
+    /// Card number
     var number: String
+    
+    /// Card expiration date
     var expiration: String
+    
+    /// Card CVV code
     var cvv: String
     
+    /// Validates `field`
     func validate(field: Field? = nil) -> Bool {
         if let field {
             return field.validate(input: self)

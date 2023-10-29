@@ -7,17 +7,12 @@
 
 import SwiftUI
 
+/// Delivery option
 enum DeliveryOption: String, Codable {
     case delivery
     case pickup
     
-    var data: Any.Type {
-        switch self {
-        case .delivery: String.self
-        case .pickup: Location.self
-        }
-    }
-    
+    /// Price for delivery option
     var price: Double {
         switch self {
         case .delivery: 15
@@ -25,6 +20,7 @@ enum DeliveryOption: String, Codable {
         }
     }
     
+    /// Title for order confirmation screen
     var orderConfirmationTitle: Text {
         switch self {
         case .delivery: Text("Delivery to:")

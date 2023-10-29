@@ -8,10 +8,13 @@
 import SwiftUI
 import SwiftData
 
+/// Menu page displaying menu sections
 struct MenuView: View {
     
+    /// Dependency injection
     @Environment(Dependencies.self) private var dependencies
 
+    /// Menu sections
     @Query(sort: \MenuSection.name, order: .reverse) private let sections: [MenuSection]
 
     var body: some View {

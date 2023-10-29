@@ -8,14 +8,22 @@
 import SwiftUI
 import SwiftData
 
+/// View of menu item
 struct MenuItemView: View {
+    
     /// Dependency injection
     @Environment(Dependencies.self) private var dependencies
+    
+    /// Model context
     @Environment(\.modelContext) private var context
     
+    /// Cart items to modify when adding item to cart
     @Query private var cartItems: [CartItemSwiftData]
+    
+    /// Favorite items
     @Query private let favorites: [FavoriteItem]
 
+    /// Item to be added to the cart that can be modified
     @State private var item: MenuItem
     
     init(item: MenuItem) {

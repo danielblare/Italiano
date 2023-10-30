@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Observation
+import SwiftData
 
 // MARK: SwiftData Models
 typealias CartItemSwiftData = SchemaV1.CartItemSwiftData
@@ -34,15 +35,42 @@ final class Dependencies {
 @main
 struct ItalianoApp: App {
     
+    private let modelContainer: ModelContainer
+    
     init() {
         
         // Setting navigation text attributes color
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(.palette.oliveGreen)]
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(.palette.oliveGreen)]
+        
+        /// Indicates whether user launched app first time
+        @AppStorage("firstLaunch") var firstLaunch: Bool = true
+        
+        modelContainer = try! DataContainer.create(createDefaults: &firstLaunch)
+        
+        if ProcessInfo.processInfo.arguments.contains("-UITest_cleanCart"),
+        let cartItems = try? modelContainer.mainContext.fetch(FetchDescriptor<CartItemSwiftData>()) {
+            for item in cartItems {
+                modelContainer.mainContext.delete(item)
+            }
+        }
+        
+        if ProcessInfo.processInfo.arguments.contains("-UITest_cleanFavorites"),
+        let favorites = try? modelContainer.mainContext.fetch(FetchDescriptor<FavoriteItem>()) {
+            for item in favorites {
+                modelContainer.mainContext.delete(item)
+            }
+        }
+        
+        if ProcessInfo.processInfo.arguments.contains("-UITest_cleanOrders"),
+        let orders = try? modelContainer.mainContext.fetch(FetchDescriptor<Order>()) {
+            for item in orders {
+                modelContainer.mainContext.delete(item)
+            }
+        }
+
+
     }
-    
-    /// Indicates whether user launched app first time
-    @AppStorage("firstLaunch") private var firstLaunch: Bool = true
     
     /// Dependency injection
     @State private var dependencies: Dependencies = Dependencies()
@@ -55,6 +83,6 @@ struct ItalianoApp: App {
         // Inserting dependencies
         .environment(dependencies)
         // Creating model container
-        .modelContainer(try! DataContainer.create(createDefaults: &firstLaunch))
+        .modelContainer(modelContainer)
     }
 }

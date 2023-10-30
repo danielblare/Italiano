@@ -42,6 +42,7 @@ struct MenuItemView: View {
                 Group {
                     Text(item.name)
                         .font(.asset.heading1)
+                        .accessibilityIdentifier("name")
                     
                     Text(item.info)
                         .font(.asset.menuItem)
@@ -86,6 +87,7 @@ struct MenuItemView: View {
         }
         .buttonStyle(.borderedProminent)
         .tint(.palette.tomatoRed)
+        .accessibilityIdentifier("AddToCart")
     }
     
     /// Ingredients and options section

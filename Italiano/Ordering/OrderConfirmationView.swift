@@ -103,6 +103,7 @@ struct OrderConfirmationView: View {
                 .padding(.vertical, 5)
                 .frame(maxWidth: 200)
         }
+        .accessibilityIdentifier("Confirm")
         .buttonStyle(.borderedProminent)
         .tint(.palette.tomatoRed)
     }
@@ -158,6 +159,7 @@ struct OrderConfirmationView: View {
                 .padding(.leading)
             
             Text(deliveryInfo.address)
+                .accessibilityIdentifier("Address")
                 .foregroundStyle(Color.palette.neutralDark)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding([.vertical, .trailing])
@@ -179,6 +181,7 @@ struct OrderConfirmationView: View {
                 .padding(.leading)
             
             Text(deliveryInfo.address)
+                .accessibilityIdentifier("Address")
                 .foregroundStyle(Color.palette.neutralDark)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding([.vertical, .trailing])

@@ -48,6 +48,7 @@ struct OrderCompleteView: View {
                 .padding(.vertical, 5)
                 .frame(maxWidth: 200)
         }
+        .accessibilityIdentifier("MainScreen")
         .buttonStyle(.borderedProminent)
         .tint(.palette.tomatoRed)
     }

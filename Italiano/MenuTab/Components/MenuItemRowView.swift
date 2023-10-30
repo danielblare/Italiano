@@ -52,6 +52,7 @@ struct MenuItemRowView: View {
             
             Image(systemName: "chevron.right")
                 .foregroundStyle(Color.palette.lightGreen)
+                .accessibilityIdentifier("chevron")
         }
         .padding()
         .background {

@@ -77,7 +77,10 @@ struct CartItemOverview: View {
             }
             
             VStack {
-                Stepper("Qty: \(cartItem.quantity)", value: $cartItem.quantity, in: 1...49, step: 1)
+                Stepper(value: $cartItem.quantity, in: 1...49, step: 1) {
+                    Text("Qty: \(cartItem.quantity)")
+                        .accessibilityIdentifier("Qty")
+                }
                 
                 HStack {
                     Text("Total:")

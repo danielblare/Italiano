@@ -40,6 +40,7 @@ struct CartRowView: View {
                     Spacer()
                     
                     Text("Qty: \(item.quantity)")
+                        .accessibilityIdentifier("Qty")
                     
                 }
                 .font(.asset.menuItem)

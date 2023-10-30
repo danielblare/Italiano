@@ -34,11 +34,13 @@ struct MenuSectionView: View {
                     .fontWeight(.regular)
                     .foregroundStyle(Color.palette.oliveGreen)
                 
-                ForEach(section.items.sorted(by: { $0.price < $1.price })) { item in
+                let sortedByPrice = section.items.sorted(by: { $0.price < $1.price })
+                ForEach(sortedByPrice) { item in
                     NavigationLink(value: Route.menuItem(item)) {
                         MenuItemRowView(item: item)
                     }
                     .buttonStyle(.plain)
+                    .accessibilityIdentifier("MenuItem \(sortedByPrice.lastIndex(of: item) ?? 0)")
                 }
                 .padding(.horizontal)
                 

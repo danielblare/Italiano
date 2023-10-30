@@ -35,6 +35,7 @@ struct MenuView: View {
                             MenuSectionCellView(section: section)
                                 .frame(width: 150)
                         }
+                        .accessibilityIdentifier("MenuSection \(sections.lastIndex(of: section) ?? 0)")
                     }
                 }
                 .padding()

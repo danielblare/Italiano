@@ -19,13 +19,13 @@ struct ContentView: View {
         NavigationStack(path: $routeManager.routes) {
             TabView(selection: $routeManager.tabSelection) {
                 HomeView()
-                    .tabItem { Label("Home", systemImage: "house") }
+                    .tabItem { Label("Home", systemImage: "house").accessibilityIdentifier("Home") }
                     .tag(RouteManager.Tab.home)
                 MapView()
-                    .tabItem { Label("Map", systemImage: "map") }
+                    .tabItem { Label("Map", systemImage: "map").accessibilityIdentifier("Map") }
                     .tag(RouteManager.Tab.map)
                 MenuView()
-                    .tabItem { Label("Menu", systemImage: "list.clipboard") }
+                    .tabItem { Label("Menu", systemImage: "list.clipboard").accessibilityIdentifier("Menu") }
                     .tag(RouteManager.Tab.menu)
             }
             // Nav settings
@@ -45,6 +45,7 @@ struct ContentView: View {
                     NavigationLink(value: Route.cart) {
                         Image(systemName: "basket")
                     }
+                    .accessibilityIdentifier("cart")
                 }
             }
         }

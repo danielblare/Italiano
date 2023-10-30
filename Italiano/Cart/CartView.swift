@@ -79,6 +79,7 @@ struct CartView: View {
                 .font(.asset.buttonText)
                 .padding(.horizontal, 30)
         }
+        .accessibilityIdentifier("Proceed")
         .buttonStyle(.borderedProminent)
         .tint(.palette.tomatoRed)
         .disabled(items.isEmpty || {
@@ -103,6 +104,7 @@ struct CartView: View {
                         NavigationLink(value: Route.cartItemOverview(item)) {
                             CartRowView(item: item)
                         }
+                        .accessibilityIdentifier("CartItem \(items.lastIndex(of: item) ?? 0)")
                     }
                     .onDelete {
                         guard let index = $0.first else { return }
@@ -169,11 +171,13 @@ struct CartView: View {
                     ForEach([Location.empty] + locations) { location in
                         Text(location.name)
                             .tag(location)
+                            .accessibilityIdentifier("Location \(locations.lastIndex(of: location) ?? -1)")
                     }
                 } label: {
                     Image(systemName: "mappin.and.ellipse")
                         .foregroundStyle(Color.palette.tomatoRed)
                         .imageScale(.large)
+                        .accessibilityIdentifier("PickupSelector")
                 }
                 .pickerStyle(.navigationLink)
                 .padding(12)
@@ -181,6 +185,7 @@ struct CartView: View {
                     RoundedRectangle(cornerRadius: 4)
                         .strokeBorder(Color.palette.oliveGreen)
                 }
+                .accessibilityIdentifier("PickupLocation")
             }
         }
         .font(.asset.menuItem)
@@ -198,6 +203,7 @@ struct CartView: View {
             TextField("Address", text: $deliveryAddress, prompt: Text("Green street, apt. 109, NYC"))
                 .padding([.vertical, .trailing])
                 .textContentType(.fullStreetAddress)
+                .accessibilityIdentifier("Address")
         }
         .font(.asset.menuItem)
         .background {
@@ -211,6 +217,7 @@ struct CartView: View {
         HStack {
             VStack(spacing: 0) {
                 Text("Delivery")
+                    .accessibilityIdentifier("DeliveryOption.delivery")
                 
                 if deliveryOption == .delivery {
                     Line()
@@ -229,7 +236,8 @@ struct CartView: View {
             
             VStack(spacing: 0) {
                 Text("Pick Up")
-                
+                    .accessibilityIdentifier("DeliveryOption.pickup")
+
                 if deliveryOption == .pickup {
                     Line()
                         .stroke(style: .init(lineWidth: 1, dash: [4]))

@@ -60,6 +60,7 @@ struct HomeView: View {
                                 }
                             }
                             .buttonStyle(.plain)
+                            .accessibilityIdentifier("FavoriteItem \(favorites.lastIndex(of: favorite) ?? 0)")
                         }
                     }
                     .scrollTargetLayout()
@@ -100,6 +101,7 @@ struct HomeView: View {
                                 }
                             }
                             .buttonStyle(.plain)
+                            .accessibilityIdentifier("RecentOrder \(orders.lastIndex(of: order) ?? 0)")
                         }
                     }
                     .scrollTargetLayout()
@@ -139,6 +141,7 @@ struct HomeView: View {
                                         .frame(width: 150)
                                 }
                             }
+                            .accessibilityIdentifier("Offer \(offers.lastIndex(of: offer) ?? 0)")
                             .buttonStyle(.plain)
                         }
                     }

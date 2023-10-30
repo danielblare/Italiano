@@ -98,6 +98,7 @@ struct PaymentMethodView: View {
                 .padding(.vertical, 5)
                 .frame(maxWidth: 200)
         }
+        .accessibilityIdentifier("Proceed")
         .buttonStyle(.borderedProminent)
         .tint(.palette.tomatoRed)
         .disabled(focused != nil)
@@ -130,6 +131,7 @@ struct PaymentMethodView: View {
                         .joined()
                     cardDetails.number = spaceSeparatedValue.prefix(19).description
                 }, prompt: Text("4444 1111 3333 2222"))
+                .accessibilityIdentifier("number")
                 .onSubmit { focused = .expiration }
                 .focused($focused, equals: .number)
                 .textContentType(.creditCardNumber)
@@ -154,6 +156,7 @@ struct PaymentMethodView: View {
                         cardDetails.expiration = sanitizedValue
                     }
                 }, prompt: Text("12/24"))
+                .accessibilityIdentifier("expiration")
                 .onSubmit { focused = .cvv }
                 .focused($focused, equals: .expiration)
                 .multilineTextAlignment(.center)
@@ -174,6 +177,7 @@ struct PaymentMethodView: View {
                         let sanitizedValue = value.filter { "0123456789".contains($0) }
                         cardDetails.cvv = sanitizedValue.prefix(3).description
                     }, prompt: Text("123"))
+                    .accessibilityIdentifier("cvv")
                     .focused($focused, equals: .cvv)
                     .multilineTextAlignment(.center)
                     .textContentType(.creditCardSecurityCode)
@@ -202,6 +206,7 @@ struct PaymentMethodView: View {
                         .padding(.vertical, 5)
                         .frame(maxWidth: .infinity)
                 }
+                .accessibilityIdentifier("Method \(method.rawValue)")
                 .buttonStyle(.borderedProminent)
                 .tint(.clear)
                 .background {

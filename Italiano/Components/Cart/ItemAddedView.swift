@@ -78,6 +78,7 @@ struct ItemAddedView: View {
                 .strokeBorder()
         }
         .foregroundStyle(Color.palette.tomatoRed)
+        .accessibilityIdentifier("ViewCart")
     }
     
     /// Continue Button dismissing current view
@@ -93,6 +94,7 @@ struct ItemAddedView: View {
         .buttonStyle(.borderedProminent)
         .padding(.vertical)
         .tint(.palette.tomatoRed)
+        .accessibilityIdentifier("ContinueOrdering")
     }
 }
 

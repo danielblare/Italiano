@@ -77,6 +77,7 @@ struct OfferView: View {
             
                 .animation(.interactiveSpring, value: isCopied)
                 .sensoryFeedback(.selection, trigger: isCopied) { $1 }
+                .accessibilityIdentifier("promo")
                 .onTapGesture {
                     if !isCopied {
                         UIPasteboard.general.string = promoCode

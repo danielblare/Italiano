@@ -58,6 +58,7 @@ struct RecentOrderView: View {
                 .foregroundStyle(Color.palette.neutralDark)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding([.vertical, .trailing])
+                .accessibilityIdentifier("Address")
         }
         .font(.asset.menuItem)
         .background {
@@ -79,6 +80,7 @@ struct RecentOrderView: View {
                 .foregroundStyle(Color.palette.neutralDark)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding([.vertical, .trailing])
+                .accessibilityIdentifier("Address")
         }
         .font(.asset.menuItem)
         .background {
